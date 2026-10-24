@@ -202,3 +202,5 @@ section .wrap > .cols + p, .cols { margin-bottom: 8px; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .todo { background: #3a3110; color: #f2dd8f; }
 }
+.addon { background: var(--surface); border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; font-size: 15px; }
+.addon p { margin: 0; }
