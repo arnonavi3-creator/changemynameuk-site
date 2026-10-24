@@ -1,6 +1,15 @@
 # changemynameuk.com
 
-Waitlist landing page for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
+Website for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
+
+## Pages
+
+- `/` home, `/check/` free name change checker (runs in the browser, sends nothing unless the visitor joins the waitlist), `/pricing/`, `/how-it-works/`, `/free-guide/`
+- `/guides/` and 10 guides under it
+- `/about/`, `/help/`, `/terms/` (draft, noindex), `privacy.html`, `thanks.html`
+- `sitemap.xml` and `robots.txt`
+
+Each page is a folder with an `index.html`, so links end in `/`. The header, footer and free DIY banner are repeated in every page, so change them everywhere at once. Both the home page and the checker post to the same `waitlist` form with the same fields (`source`, `checker_result` and `suggested_plan` are hidden).
 
 ## Deploy on Netlify (free plan)
 
@@ -31,3 +40,4 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 - Add the Paperlight Ltd company number in the footers and privacy notice once registered.
 - Add the ICO registration number to `privacy.html`.
 - Set up the hello@changemynameuk.com mailbox, or change the address.
+- Add the founder section on `/about/` and have a solicitor review `/terms/`.
