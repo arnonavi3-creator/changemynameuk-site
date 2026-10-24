@@ -108,3 +108,9 @@ footer p { margin: 0 0 8px; }
 @media (max-width: 760px) {
   .cols, .offer { grid-template-columns: minmax(0, 1fr); }
 }
+
+ul.list { padding-left: 20px; margin: 0; display: grid; gap: 6px; font-size: 16px; color: var(--muted); }
+.card .fine { margin-top: 10px; }
+.not-covered { margin-top: 16px; }
+.not-covered h3 { margin-bottom: 4px; }
+.not-covered ul { margin-bottom: 0; }
