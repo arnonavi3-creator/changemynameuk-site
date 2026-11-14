@@ -1,6 +1,6 @@
 # changemynameuk.com
 
-Website for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
+Website for Change My Name UK (run by Avi as a sole trader until the company is set up). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
 
 ## Pages
 
@@ -45,7 +45,7 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 
 ## Before going live
 
-- Add the Paperlight Ltd company number in the footers and privacy notice once registered.
+- Replace "Avi (full name to be added)" with the full legal name in the footers, terms and privacy notice (search the repo for "full name to be added"). Once the limited company exists, switch these back to the company name and number.
 - Add the ICO registration number to `privacy.html`.
 - Set up the hello@changemynameuk.com mailbox, or change the address.
 - Add the founder section on `/about/` and have a solicitor review `/terms/`.
