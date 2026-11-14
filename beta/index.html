@@ -48,7 +48,7 @@
   </ol>
 
   <div class="cta-box">
-    <p><b>What we ask in return:</b> honest feedback, including a short call during and after. Beta places are limited. There's no payment now, and we'll tell you the beta price before you decide whether to go ahead.</p>
+    <p><b>What we ask in return:</b> honest feedback, including a short call during and after. Beta places are limited.</p>
   </div>
 
   <h2 class="mt" id="apply">Apply for a beta place</h2>
@@ -100,14 +100,6 @@
       <label class="opt"><input type="radio" name="help_level" value="prepare"> Prepare the forms and letters, and I'll send them</label>
       <label class="opt"><input type="radio" name="help_level" value="unsure"> Not sure yet</label>
     </fieldset>
-    <fieldset>
-      <legend>What would you expect to pay for this? <span class="optional">(optional, it helps us set a fair price)</span></legend>
-      <label class="opt"><input type="radio" name="expected_price" value="0"> I'd only use it if it was free</label>
-      <label class="opt"><input type="radio" name="expected_price" value="under25"> Under £25</label>
-      <label class="opt"><input type="radio" name="expected_price" value="25to49"> £25 to £49</label>
-      <label class="opt"><input type="radio" name="expected_price" value="50to99"> £50 to £99</label>
-      <label class="opt"><input type="radio" name="expected_price" value="100plus"> £100 or more</label>
-    </fieldset>
     <div class="field">
       <label for="b-notes">Anything we should know? <span class="optional">(optional)</span></label>
       <div class="row"><textarea id="b-notes" name="notes" rows="3" placeholder="For example, what's worrying you or what you've already done"></textarea></div>
@@ -123,7 +115,7 @@
 (function () {
   var f = document.getElementById('beta-form');
   var data = null;
-  try { data = JSON.parse(sessionStorage.getItem('cmn-beta-from-checklist')); } catch (e) { data = null; }
+  try { data = JSON.parse(sessionStorage.getItem('cmn-from-checklist')); } catch (e) { data = null; }
   if (!data) return;
   f.checklist_answers.value = data.answers || '';
   f.source.value = 'checklist';

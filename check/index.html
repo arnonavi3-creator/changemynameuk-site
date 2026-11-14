@@ -185,6 +185,7 @@
         <button type="button" class="ghost-btn" id="link-btn">Copy a link to this list</button>
         <button type="button" class="ghost-btn" id="edit-btn">Change my answers</button>
       </p>
+      <p class="voucher-strip"><b>Your checklist is ready.</b> Could you spare 15 minutes to tell us how your name change is going? We'll send you a £7 Amazon voucher as thanks. <a class="call-link" href="/call/">Find out more</a></p>
       <p class="fine" id="link-note" hidden>Link copied. It holds your answers, not your name or email, and your ticks are saved on this device.</p>
     </div>
 
@@ -193,42 +194,17 @@
     <p class="fine">This is general information about public procedures, checked against gov.uk and organisations' own websites in October 2026. Processes change and vary between providers, so check with each organisation. It isn't legal or immigration advice.</p>
 
     <div class="help-cards">
-      <section class="help-card" id="talk">
-        <h2>Could we talk for 20 minutes?</h2>
-        <p>We're building a service that does this for people, and we'd love to hear how your name change is going: what's easy, what's confusing, and what's taking the time. It's a relaxed video or phone call with the founder, and there's nothing to buy.</p>
-        <form id="contact-form" class="signup" name="checklist-contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="company">
-          <input type="hidden" name="form-name" value="checklist-contact">
-          <input type="hidden" name="answers" value="">
-          <input type="hidden" name="reason" value="">
-          <input type="hidden" name="stage" value="">
-          <input type="hidden" name="nation" value="">
-          <input type="hidden" name="item_count" value="">
-          <input type="hidden" name="wedding_date" value="">
-          <p class="hidden"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
-          <div class="field">
-            <label for="c-name">First name</label>
-            <div class="row"><input id="c-name" type="text" name="first_name" autocomplete="given-name" required></div>
-          </div>
-          <div class="field">
-            <label for="c-email">Email</label>
-            <div class="row"><input id="c-email" type="email" name="email" autocomplete="email" required placeholder="you@example.com"></div>
-          </div>
-          <label class="consent"><input type="checkbox" name="call_consent" value="yes"> Yes, you can email me to arrange a short call about my name change. I can say no or change my mind at any time.</label>
-          <label class="consent"><input type="checkbox" name="launch_updates" value="yes"> Also email me when the service launches, with the early-bird offer.</label>
-          <p id="contact-error" class="error" tabindex="-1" hidden>Please tick at least one box so we know how you'd like us to contact you.</p>
-          <button type="submit">Send</button>
-          <p class="fine">We'll only use your details for what you tick above, and your answers help us prepare for the call. See our <a href="/privacy.html">privacy notice</a>.</p>
-        </form>
-        <div id="contact-done" class="done-box" hidden tabindex="-1">
-          <p><b>Thank you!</b> <span id="contact-done-text"></span></p>
-        </div>
+      <section class="help-card voucher-card" id="talk">
+        <h2>Got 15 minutes? Get a £7 Amazon voucher</h2>
+        <p>I'm researching how people in the UK change their name: what's easy, what's a pain, and where people get stuck. I'm not selling anything. If you'll do a 15 minute call about how it's going for you, I'll send you a £7 Amazon voucher as a thank you.</p>
+        <p><a class="button call-link" href="/call/">Yes, I'll do a call</a></p>
       </section>
 
       <section class="help-card beta-card">
         <h2>Want us to do it for you?</h2>
         <p>We're opening a small beta of our done-for-you service. We find every organisation you need to tell, prepare every form and letter, contact organisations for you where they allow it, and keep track until every one is done. You just sign and post the few things the law says must come from you.</p>
         <p><a class="button" id="beta-link" href="/beta/">Join the beta</a></p>
-        <p class="fine">No payment now. We'll bring your answers across so you don't have to type them again.</p>
+        <p class="fine">We'll bring your answers across so you don't have to type them again.</p>
       </section>
     </div>
   </div>

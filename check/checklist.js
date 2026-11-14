@@ -1,7 +1,7 @@
 /* Name change questionnaire and personalised checklist.
    Everything runs in the browser. Answers and ticks are kept in this
    device's localStorage, and are only sent to us if the visitor submits
-   the contact form (or carries them to the beta form). */
+   the call or beta form after clicking through. */
 (function () {
   'use strict';
 
@@ -166,7 +166,7 @@
       } else if (a.nation === 'scotland') {
         dpText = 'In Scotland you can use a deed of change of name or a statutory declaration. If you were born in Scotland you can also record the change with National Records of Scotland. Make a few copies once it\'s signed.';
       } else {
-        dpText = 'A deed poll is a signed and witnessed statement that you\'ve changed your name. You can' + link('https://www.gov.uk/change-name-deed-poll', 'write one yourself for free') + ', or enrol it with the court if you want an official record' + (a.nation === 'ni' ? ' (in Northern Ireland, at the Royal Courts of Justice)' : '') + '. Make a few signed copies.' + (ew && a.reason === 'marriage' ? ' We can also prepare one for you with our £19 add-on.' : '');
+        dpText = 'A deed poll is a signed and witnessed statement that you\'ve changed your name. You can' + link('https://www.gov.uk/change-name-deed-poll', 'write one yourself for free') + ', or enrol it with the court if you want an official record' + (a.nation === 'ni' ? ' (in Northern Ireland, at the Royal Courts of Justice)' : '') + '. Make a few signed copies.';
         dpText += ' Some organisations, including DVLA, also ask for a recent document showing your new name.';
       }
       if (a.reason === 'marriage') dpText = (a.name === 'meshed' ? 'A new combined surname' : 'A change to your first or middle name') + ' isn\'t covered by your marriage certificate, so you\'ll need a deed poll. ' + dpText;
@@ -320,7 +320,6 @@
       resultList.innerHTML = '';
       document.getElementById('result-progress').textContent = '';
       document.querySelector('.result-meter').hidden = true;
-      setHidden(a, 0);
       if (scroll) document.getElementById('result-title').focus();
       return;
     }
@@ -349,7 +348,6 @@
     });
     resultList.innerHTML = html;
     updateProgress();
-    setHidden(a, items.length);
     if (scroll) { document.getElementById('result-title').focus({ preventScroll: true }); result.scrollIntoView({ block: 'start' }); }
   }
 
@@ -379,16 +377,6 @@
     if (a.accts.length) parts.push('accounts: ' + a.accts.join(' '));
     return parts.join('; ');
   }
-  function setHidden(a, count) {
-    var f = document.getElementById('contact-form');
-    f.answers.value = describe(a);
-    f.reason.value = a.reason;
-    f.stage.value = a.stage;
-    f.nation.value = a.nation;
-    f.item_count.value = count;
-    f.wedding_date.value = a.wedding || '';
-  }
-
   /* ---------- result tools ---------- */
   document.getElementById('print-btn').addEventListener('click', function () { window.print(); });
   document.getElementById('edit-btn').addEventListener('click', function () {
@@ -405,38 +393,17 @@
     } else { prompt('Copy this link:', url); }
   });
 
-  /* ---------- contact form (Netlify Forms, sent without leaving the page) ---------- */
-  var contact = document.getElementById('contact-form');
-  contact.addEventListener('submit', function (e) {
-    var cErr = document.getElementById('contact-error');
-    var call = contact.call_consent.checked, upd = contact.launch_updates.checked;
-    if (!call && !upd) { e.preventDefault(); cErr.hidden = false; cErr.focus(); return; }
-    cErr.hidden = true;
-    if (!contact.checkValidity()) return; // let the browser show its messages
-    e.preventDefault();
-    var btn = contact.querySelector('button[type="submit"]');
-    btn.disabled = true; btn.textContent = 'Sending...';
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(contact)).toString()
-    }).then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      contact.hidden = true;
-      var box = document.getElementById('contact-done');
-      document.getElementById('contact-done-text').textContent = call
-        ? 'We\'ll email you within a few days to find a time that suits you.'
-        : 'We\'ll email you when we launch.';
-      box.hidden = false; box.focus();
-    }).catch(function () {
-      contact.submit(); // fall back to a normal form post
-    });
-  });
-
-  /* Carry answers to the beta page. */
-  document.getElementById('beta-link').addEventListener('click', function () {
-    try { sessionStorage.setItem('cmn-beta-from-checklist', JSON.stringify({ answers: describe(state.answers || readAnswers()), reason: (state.answers || {}).reason || '', nation: (state.answers || {}).nation || '', wedding: (state.answers || {}).wedding || '' })); } catch (err) { /* ignore */ }
-  });
+  /* Carry answers to the call and beta pages (this browser tab only). */
+  function carry() {
+    var a = state.answers || readAnswers();
+    try {
+      sessionStorage.setItem('cmn-from-checklist', JSON.stringify({
+        answers: describe(a), reason: a.reason || '', nation: a.nation || '', stage: a.stage || '',
+        wedding: a.wedding || '', items: document.querySelectorAll('#result-list .todo-item').length
+      }));
+    } catch (err) { /* ignore */ }
+  }
+  document.querySelectorAll('.call-link, #beta-link').forEach(function (el) { el.addEventListener('click', carry); });
 
   /* ---------- start ---------- */
   var fromLink = null;

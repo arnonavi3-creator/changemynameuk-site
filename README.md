@@ -4,7 +4,7 @@ Website for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build ste
 
 ## Pages
 
-- `/` home, `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit), `/pricing/`, `/how-it-works/`, `/free-guide/`
+- `/` home, `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit), `/pricing/`, `/how-it-works/`, `/free-guide/`
 - `/guides/` and 10 guides under it
 - `/about/`, `/help/`, `/terms/` (draft, noindex), `privacy.html`, `thanks.html`
 - `sitemap.xml` and `robots.txt`
@@ -12,8 +12,8 @@ Website for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build ste
 Each page is a folder with an `index.html`, so links end in `/`. The header, footer and free DIY banner are repeated in every page, so change them everywhere at once. Netlify forms:
 
 - `waitlist` (home page): email, optional wedding date.
-- `checklist-contact` (bottom of `/check/` results): first name, email, `call_consent` and `launch_updates` tick boxes (at least one required), plus hidden `answers` summary, `reason`, `stage`, `nation`, `item_count`, `wedding_date`. Sent in the background so the visitor keeps their checklist. Filter on `call_consent = yes` to find people to invite to a research call.
-- `beta` (`/beta/`): first name, email, reason, nation, start date, help level, expected price, notes, `call_consent`, and `checklist_answers` when the visitor came from the checklist.
+- `research-call` (`/call/`, linked from the checklist results): first name, email, optional phone, `call_type`, `good_times`, required `call_consent`, optional `launch_updates`, plus hidden `checklist_answers`, `reason`, `stage`, `nation`, `wedding_date`, `item_count` when the visitor came from the checklist. Offers a £7 Amazon voucher for a 15 minute call. After submitting, `/call/thanks/` shows the booking page set in its `data-booking-url` attribute (empty = a "we'll email you some times" message).
+- `beta` (`/beta/`): first name, email, reason, nation, start date, help level, notes, `call_consent`, and `checklist_answers` when the visitor came from the checklist.
 
 Netlify only stores fields that exist in the HTML at deploy time, so add new fields to the markup, not just in JavaScript. The free plan allows 100 form submissions a month across all forms.
 
