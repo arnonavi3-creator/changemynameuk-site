@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the Beta: We Change Your Name for You | Change My Name UK</title>
+<meta name="description" content="Apply for a beta place on our done-for-you UK name change service. We find every organisation, prepare every form and letter, and track it until every record is done.">
+<link rel="canonical" href="https://changemynameuk.com/beta/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238a3f4a'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='white'%3Ec%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="free-banner">
+  <div class="wrap">
+    <p><strong>Good to know:</strong> you can change your name on your passport, driving licence and every other record for free (apart from the normal passport fee) directly with the government and each organisation. We're an independent private company, not part of or linked to the government. You pay us for help, not for the right to change your name. <a href="/free-guide/">Do it yourself for free</a></p>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
+      <a href="/free-guide/">Do it free</a>
+      <a class="nav-cta" href="/check/">Check what you need</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow">
+  <div class="page-head">
+    <h1>Join the beta: we change your name for you</h1>
+    <p class="lede">We're looking for a small group of people to try our done-for-you service before it launches. Instead of a checklist, you get someone doing the work with you, and your feedback shapes the service.</p>
+  </div>
+
+  <h2>What we'll do</h2>
+  <ol class="steps">
+    <li><b>Find every place that has your name</b><span>From a short call or form, plus the accounts you tell us about, we build your full list: government, banks, work, pensions, insurance, home and the rest.</span></li>
+    <li><b>Prepare every form and letter</b><span>Passport and DVLA forms filled in, and a change of name letter for each organisation that needs one, ready to sign.</span></li>
+    <li><b>Contact organisations for you, where they allow it</b><span>Some organisations only accept a change from you, and the passport office and DVLA need your own signature and original documents. For those, we get everything ready so you just sign and post.</span></li>
+    <li><b>Track it until every record is done</b><span>We keep a live list, chase anything that's stuck, and remind you when something needs you.</span></li>
+  </ol>
+
+  <div class="cta-box">
+    <p><b>What we ask in return:</b> honest feedback, including a short call during and after. Beta places are limited. There's no payment now, and we'll tell you the beta price before you decide whether to go ahead.</p>
+  </div>
+
+  <h2 class="mt" id="apply">Apply for a beta place</h2>
+  <form id="beta-form" class="signup" name="beta" method="POST" action="/beta/thanks/" data-netlify="true" netlify-honeypot="company">
+    <input type="hidden" name="form-name" value="beta">
+    <input type="hidden" name="checklist_answers" value="">
+    <input type="hidden" name="source" value="beta-page">
+    <p class="hidden"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+    <p class="fine" id="beta-carried" hidden>We've brought across your checklist answers, so you don't need to type them again.</p>
+
+    <div class="field">
+      <label for="b-name">First name</label>
+      <div class="row"><input id="b-name" type="text" name="first_name" autocomplete="given-name" required></div>
+    </div>
+    <div class="field">
+      <label for="b-email">Email</label>
+      <div class="row"><input id="b-email" type="email" name="email" autocomplete="email" required placeholder="you@example.com"></div>
+    </div>
+    <div class="field">
+      <label for="b-reason">Why are you changing your name?</label>
+      <div class="row">
+        <select id="b-reason" name="reason" required>
+          <option value="">Choose one</option>
+          <option value="marriage">Marriage or civil partnership</option>
+          <option value="divorce">Divorce or end of a civil partnership</option>
+          <option value="other">Another reason</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="b-nation">Where in the UK do you live?</label>
+      <div class="row">
+        <select id="b-nation" name="nation" required>
+          <option value="">Choose one</option>
+          <option value="england">England</option>
+          <option value="wales">Wales</option>
+          <option value="scotland">Scotland</option>
+          <option value="ni">Northern Ireland</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="b-date">Wedding date, or when you'd like to start <span class="optional">(optional)</span></label>
+      <div class="row"><input id="b-date" type="date" name="start_date"></div>
+    </div>
+    <fieldset>
+      <legend>How much help would you want?</legend>
+      <label class="opt"><input type="radio" name="help_level" value="everything" required> Do as much as you can for me</label>
+      <label class="opt"><input type="radio" name="help_level" value="prepare"> Prepare the forms and letters, and I'll send them</label>
+      <label class="opt"><input type="radio" name="help_level" value="unsure"> Not sure yet</label>
+    </fieldset>
+    <fieldset>
+      <legend>What would you expect to pay for this? <span class="optional">(optional, it helps us set a fair price)</span></legend>
+      <label class="opt"><input type="radio" name="expected_price" value="0"> I'd only use it if it was free</label>
+      <label class="opt"><input type="radio" name="expected_price" value="under25"> Under £25</label>
+      <label class="opt"><input type="radio" name="expected_price" value="25to49"> £25 to £49</label>
+      <label class="opt"><input type="radio" name="expected_price" value="50to99"> £50 to £99</label>
+      <label class="opt"><input type="radio" name="expected_price" value="100plus"> £100 or more</label>
+    </fieldset>
+    <div class="field">
+      <label for="b-notes">Anything we should know? <span class="optional">(optional)</span></label>
+      <div class="row"><textarea id="b-notes" name="notes" rows="3" placeholder="For example, what's worrying you or what you've already done"></textarea></div>
+    </div>
+    <label class="consent"><input type="checkbox" name="call_consent" value="yes"> You can also contact me to arrange a short call about my name change, even if I don't get a beta place.</label>
+    <button type="submit">Apply for the beta</button>
+    <p class="fine">We'll use your details to contact you about the beta, and only for anything else you've ticked. See our <a href="/privacy.html">privacy notice</a>.</p>
+  </form>
+
+  <p class="mt">Prefer to do it yourself? <a href="/check/">Get your free personalised checklist</a>.</p>
+</main>
+<script>
+(function () {
+  var f = document.getElementById('beta-form');
+  var data = null;
+  try { data = JSON.parse(sessionStorage.getItem('cmn-beta-from-checklist')); } catch (e) { data = null; }
+  if (!data) return;
+  f.checklist_answers.value = data.answers || '';
+  f.source.value = 'checklist';
+  if (data.reason) f.reason.value = data.reason;
+  if (data.nation) f.nation.value = data.nation;
+  if (data.wedding) f.start_date.value = data.wedding;
+  document.getElementById('beta-carried').hidden = false;
+})();
+</script>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Service</p>
+        <a href="/check/">Free name change checklist</a>
+        <a href="/beta/">Join the beta</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/free-guide/">Do it yourself for free</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">Company</p>
+        <a href="/about/">About us</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/terms/">Terms and cancellation</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    <p>Change My Name UK is a trading name of Paperlight Ltd, a company registered in England and Wales (company number to be added). We are an independent private company and are not affiliated with HM Passport Office, DVLA, HMRC or any government department or agency. Everything we help with can be done for free directly with each organisation.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
