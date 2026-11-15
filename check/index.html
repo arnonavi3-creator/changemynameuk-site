@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Name Change Checker: Do I Need a Deed Poll? | Change My Name UK</title>
+<meta name="description" content="Free checker for a name change after marriage in the UK. Find out in two minutes whether you need a deed poll, when to apply for your passport, and what to do first.">
+<link rel="canonical" href="https://changemynameuk.com/check/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238a3f4a'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='white'%3Ec%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="free-banner">
+  <div class="wrap">
+    <p><strong>Good to know:</strong> you can change your name on your passport, driving licence and every other record for free (apart from the normal passport fee) directly with the government and each organisation. We're an independent private company, not part of or linked to the government. You pay us for help, not for the right to change your name. <a href="/free-guide/">Do it yourself for free</a></p>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
+      <a href="/free-guide/">Do it free</a>
+      <a class="nav-cta" href="/check/">Check what you need</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow">
+  <div class="page-head">
+    <h1>What do I need to change my name?</h1>
+    <p class="lede">Six quick questions, about two minutes. It's free, you don't need to sign up, and nothing you enter is sent to us unless you join the waitlist at the end.</p>
+  </div>
+  <form id="checker" class="checker" novalidate>
+    <fieldset>
+      <legend>1. What will your name be?</legend>
+        <label class="opt"><input type="radio" name="name" value="spouse"> My partner's surname</label>
+        <label class="opt"><input type="radio" name="name" value="double"> Both our surnames, double-barrelled</label>
+        <label class="opt"><input type="radio" name="name" value="meshed"> A new combined surname</label>
+        <label class="opt"><input type="radio" name="name" value="first"> I'm also changing my first or middle name</label>
+        <label class="opt"><input type="radio" name="name" value="keep"> I'm keeping my name</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Where do you live?</legend>
+        <label class="opt"><input type="radio" name="nation" value="england"> England</label>
+        <label class="opt"><input type="radio" name="nation" value="wales"> Wales</label>
+        <label class="opt"><input type="radio" name="nation" value="scotland"> Scotland</label>
+        <label class="opt"><input type="radio" name="nation" value="ni"> Northern Ireland</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Are you married yet?</legend>
+        <label class="opt"><input type="radio" name="when" value="future"> Not yet, the wedding is coming up</label>
+        <label class="opt"><input type="radio" name="when" value="done"> Yes, we're already married</label>
+      <div class="date-row" id="date-row" hidden>
+        <label for="wedding">Wedding date</label>
+        <input id="wedding" name="wedding" type="date">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>4. Are you travelling abroad within 3 months of the wedding, or soon?</legend>
+        <label class="opt"><input type="radio" name="trip" value="yes"> Yes, or probably</label>
+        <label class="opt"><input type="radio" name="trip" value="no"> No</label>
+    </fieldset>
+    <fieldset>
+      <legend>5. Do you own a car registered in your name?</legend>
+        <label class="opt"><input type="radio" name="car" value="yes"> Yes</label>
+        <label class="opt"><input type="radio" name="car" value="no"> No</label>
+    </fieldset>
+    <fieldset>
+      <legend>6. Did you marry outside the UK?</legend>
+        <label class="opt"><input type="radio" name="abroad" value="yes"> Yes</label>
+        <label class="opt"><input type="radio" name="abroad" value="no"> No, in the UK</label>
+    </fieldset>
+    <p id="checker-error" class="error" tabindex="-1" hidden>Please answer every question.</p>
+    <button type="submit">Show my plan</button>
+  </form>
+
+  <div id="result" class="result" hidden aria-live="polite">
+    <h2>Your plan</h2>
+    <ol class="steps" id="result-list"></ol>
+    <div class="plan-box" id="result-plan"></div>
+    <p class="fine">This is general information about public procedures, not legal or immigration advice. Always check the latest guidance on gov.uk.</p>
+    <h2 class="mt">Get this by email and hear when we launch</h2>
+    <form class="signup" name="waitlist" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="company">
+      <input type="hidden" name="form-name" value="waitlist">
+      <input type="hidden" name="source" value="checker">
+      <input type="hidden" name="checker_result" value="">
+      <input type="hidden" name="suggested_plan" value="">
+      <p class="hidden"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <div class="field">
+        <label for="email-checker">Your email</label>
+        <div class="row">
+          <input id="email-checker" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="field">
+        <label for="wedding-checker">Wedding date <span class="optional">(optional, helps us remind you at the right time)</span></label>
+        <div class="row">
+          <input id="wedding-checker" type="date" name="wedding_date">
+        </div>
+      </div>
+      <button type="submit">Email me and join the waitlist</button>
+      <p class="fine">We'll only email you about the launch and your early-bird offer. Unsubscribe any time. See our <a href="/privacy.html">privacy notice</a>.</p>
+    </form>
+  </div>
+</main>
+<script>
+(function () {
+  var form = document.getElementById('checker');
+  var out = document.getElementById('result');
+  var resultList = document.getElementById('result-list');
+  var planBox = document.getElementById('result-plan');
+  var marriedRadio = form.querySelectorAll('input[name="when"]');
+  var dateRow = document.getElementById('date-row');
+
+  function toggleDate() {
+    var v = form.querySelector('input[name="when"]:checked');
+    dateRow.hidden = !(v && v.value === 'future');
+  }
+  marriedRadio.forEach(function (r) { r.addEventListener('change', toggleDate); });
+  toggleDate();
+
+  function val(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+  function fmt(d) {
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+  function li(title, text) {
+    return '<li><b>' + title + '</b><span>' + text + '</span></li>';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = val('name'), nation = val('nation'), when = val('when'), trip = val('trip'), car = val('car'), abroad = val('abroad');
+    var missing = [name, nation, when, trip, car, abroad].some(function (x) { return !x; });
+    var err = document.getElementById('checker-error');
+    if (missing) { err.hidden = false; err.focus(); return; }
+    err.hidden = true;
+
+    var items = [];
+    var plan = 'Kit';
+    var addon = false;
+    var reasons = [];
+
+    if (name === 'keep') {
+      items.push(li('You don\'t need to change anything', 'Keeping your name is your choice and nothing changes in law. You can still use your partner\'s surname socially. <a href="/guides/keeping-your-maiden-name/">Read more</a>.'));
+      resultList.innerHTML = items.join('');
+      planBox.innerHTML = '<p>You don\'t need a paid plan. If your partner is changing their name, our checker can help them too.</p>';
+      out.hidden = false; out.scrollIntoView({ behavior: 'smooth' });
+      setHidden('keep name', 'none');
+      return;
+    }
+
+    // Deed poll
+    if (name === 'meshed' || name === 'first') {
+      var dp = name === 'meshed' ? 'A new combined surname (for example Smith and Jones becoming Smones) isn\'t covered by your certificate, so you\'ll need a deed poll.' : 'Changing a first or middle name isn\'t covered by your certificate, so you\'ll need a deed poll.';
+      if (nation === 'scotland') dp += ' Scotland has its own rules for this, so check with National Records of Scotland before you start.';
+      else dp += ' You can <a href="https://www.gov.uk/change-name-deed-poll" rel="noopener">write one yourself for free</a>.';
+      if (nation === 'england' || nation === 'wales') dp += ' Or we can prepare it for you with our £19 deed poll add-on, which is included in Concierge.';
+      items.push(li('You\'ll need a deed poll', dp + ' <a href="/guides/do-i-need-a-deed-poll/">Deed poll guide</a>.'));
+      plan = 'Guided'; reasons.push('a person checks your paperwork, which matters when your new name isn\'t on your certificate');
+      if (nation === 'england' || nation === 'wales') addon = true;
+    } else {
+      items.push(li('You don\'t need a deed poll', 'Your marriage or civil partnership certificate is enough evidence for your new surname' + (name === 'double' ? ', as long as the double-barrelled name is made from both your surnames as they appear on the certificate' : '') + '. <a href="/guides/do-i-need-a-deed-poll/">Why</a>.'));
+    }
+
+    // Passport
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var passport;
+    if (when === 'future') {
+      var wd = form.wedding.value ? new Date(form.wedding.value + 'T00:00:00') : null;
+      if (wd && wd > today) {
+        var opens = new Date(wd); opens.setMonth(opens.getMonth() - 3);
+        var openText = opens <= today ? 'You can already apply.' : 'You can apply from about ' + fmt(opens) + '.';
+        if (trip === 'yes') {
+          passport = 'You have two options. Book your trip in your current name and travel on your current passport, then change it when you\'re back. Or get a passport in your new name before the wedding, using forms PD1 and PD2. ' + openText + ' Your current passport is cancelled when you apply, and the new one can\'t be used until the wedding day, so don\'t travel abroad in between. Make sure your tickets match the passport you\'ll travel on.';
+          if (plan === 'Kit') { plan = 'Guided'; reasons.push('it includes a check of your passport timing against your wedding and travel dates'); }
+        } else {
+          passport = 'You can change your passport after the wedding using your certificate. If you\'d like it done before, you can apply with forms PD1 and PD2. ' + openText;
+        }
+      } else {
+        passport = 'Add your wedding date above and we\'ll tell you when you can apply. You can apply for a passport in your new name up to 3 months before the wedding.';
+        if (trip === 'yes' && plan === 'Kit') { plan = 'Guided'; reasons.push('it includes a check of your passport timing'); }
+      }
+    } else {
+      passport = 'Apply for a new passport in your new name using your certificate. It costs £102 online or £115.50 by post for an adult.';
+      if (trip === 'yes') {
+        passport += ' You\'re travelling soon, so don\'t send off your passport until you know you\'ll have the new one back in time, and make sure your tickets match the passport you travel on.';
+        if (plan === 'Kit') { plan = 'Guided'; reasons.push('it includes a check of your passport timing against your travel dates'); }
+      }
+    }
+    items.push(li('Your passport', passport + ' <a href="/guides/honeymoon-passport/">Honeymoon passport guide</a>.'));
+
+    // DVLA
+    items.push(li('Your driving licence' + (car === 'yes' ? ' and car log book' : ''), 'Free, by post with form D1' + (car === 'yes' ? ', and the change of name section of your V5C log book' : '') + '. You must update your licence by law. <a href="/guides/driving-licence-name-change/">How to do it</a>.'));
+
+    // Others
+    items.push(li('HMRC, the electoral register and your GP', 'All free. Your National Insurance and NHS numbers stay the same.'));
+    items.push(li('Around 25 to 40 other organisations', 'Your employer, banks, cards, pension, insurance, utilities, mobile, airlines and more. <a href="/guides/who-to-tell-checklist/">See the free checklist</a>.'));
+
+    if (abroad === 'yes') {
+      items.push(li('Married outside the UK', 'Your certificate may need a certified translation if it isn\'t in English. We don\'t translate certificates or give immigration advice, so check what each organisation accepts. <a href="/guides/married-abroad/">Read more</a>.'));
+      if (plan === 'Kit') { plan = 'Guided'; reasons.push('a person checks your paperwork, which helps with a certificate from abroad'); }
+    }
+    if (nation === 'scotland' || nation === 'ni') {
+      items.push(li('Where you live', 'The passport, DVLA and HMRC steps are the same across the UK. Your GP and electoral register are run locally, and your checklist will reflect that.'));
+    }
+
+    resultList.innerHTML = items.join('');
+    var why = reasons.length ? ' We suggest it because ' + reasons[0] + '.' : ' Your change looks simple, so the forms and checklist should be enough.';
+    var price = { Kit: '£25', Guided: '£49', Concierge: '£149' }[plan];
+    var planText = addon ? plan + ' (' + price + ') plus the deed poll add-on (£19), or Concierge (£149), which includes it' : plan + ' (' + price + ')';
+    planBox.innerHTML = '<p><b>Suggested plan: ' + planText + '.</b>' + why + ' If your partner is changing their name too, the Couple plan covers you both for £79.</p><p>Or <a href="/free-guide/">do it all yourself for free</a> using the steps above.</p>';
+    setHidden([name, nation, when, 'trip ' + trip, 'car ' + car, 'abroad ' + abroad].join(', '), plan + (addon ? ' + deed poll' : ''));
+    if (form.wedding.value) {
+      var w = document.querySelector('#result form input[name="wedding_date"]');
+      if (w) w.value = form.wedding.value;
+    }
+    out.hidden = false;
+    out.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function setHidden(result, plan) {
+    var f = document.querySelector('#result form');
+    f.querySelector('input[name="checker_result"]').value = result;
+    f.querySelector('input[name="suggested_plan"]').value = plan;
+  }
+})();
+</script>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Service</p>
+        <a href="/check/">Free name change checker</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/free-guide/">Do it yourself for free</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">Company</p>
+        <a href="/about/">About us</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/terms/">Terms and cancellation</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    <p>Change My Name UK is a trading name of Paperlight Ltd, a company registered in England and Wales (company number to be added). We are an independent private company and are not affiliated with HM Passport Office, DVLA, HMRC or any government department or agency. Everything we help with can be done for free directly with each organisation.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
