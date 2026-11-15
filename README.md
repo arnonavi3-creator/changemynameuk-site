@@ -4,14 +4,15 @@ Website for Change My Name UK (run by Avi Arnon as a sole trader until the compa
 
 ## Pages
 
-- `/` home, `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit), `/pricing/`, `/how-it-works/`, `/free-guide/`
+- `/` home (lead generation for research calls), `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit)
 - `/guides/` and 10 guides under it
-- `/about/`, `/help/`, `/terms/` (draft, noindex), `privacy.html`, `thanks.html`
+- `/about/`, `/help/`, `privacy.html`, `thanks.html`
+- `/pricing/`, `/how-it-works/`, `/free-guide/` and `/terms/` were removed in Nov 2026 while the site is used for research; `netlify.toml` redirects them
 - `sitemap.xml` and `robots.txt`
 
-Each page is a folder with an `index.html`, so links end in `/`. The header, footer and free DIY banner are repeated in every page, so change them everywhere at once. Netlify forms:
+Each page is a folder with an `index.html`, so links end in `/`. The header and footer are repeated in every page, so change them everywhere at once. Netlify forms:
 
-- `waitlist` (home page): email, optional wedding date.
+- `waitlist`: no longer on the site (closed Nov 2026); old submissions stay in Netlify.
 - `research-call` (`/call/`, linked from the checklist results): first name, email, optional phone, `call_type`, `good_times`, required `call_consent`, optional `launch_updates`, plus hidden `checklist_answers`, `reason`, `stage`, `nation`, `wedding_date`, `item_count` when the visitor came from the checklist. Offers a £7 Amazon voucher for a 15 minute call. After submitting, `/call/thanks/` shows a button to the booking page set in its `data-booking-url` attribute (currently Avi's Google Calendar appointment schedule; empty = a "we'll email you some times" message).
 - `beta` (`/beta/`): first name, email, reason, nation, start date, help level, notes, `call_consent`, and `checklist_answers` when the visitor came from the checklist.
 

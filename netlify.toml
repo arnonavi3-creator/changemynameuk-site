@@ -7,3 +7,24 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
+
+# Pages removed when the site became a free checklist (Nov 2026)
+[[redirects]]
+  from = "/pricing/*"
+  to = "/check/"
+  status = 301
+
+[[redirects]]
+  from = "/how-it-works/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/free-guide/*"
+  to = "/check/"
+  status = 301
+
+[[redirects]]
+  from = "/terms/*"
+  to = "/"
+  status = 301
