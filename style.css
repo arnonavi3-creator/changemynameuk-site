@@ -1,27 +1,27 @@
 :root {
-  --bg: #fbf8f4;
-  --surface: #ffffff;
-  --ink: #23201c;
-  --muted: #645d55;
-  --line: #e7dfd5;
-  --accent: #8a3f4a;
+  --bg: #fcf5ea;
+  --surface: #fffcf6;
+  --ink: #3b2c22;
+  --muted: #6e5b4d;
+  --line: #ecdcc6;
+  --accent: #b4552f;
   --accent-ink: #ffffff;
-  --accent-soft: #f5e9e7;
-  --note: #f3efe6;
-  --display: "Young Serif", Georgia, "Times New Roman", serif;
-  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --accent-soft: #f9e5d4;
+  --note: #f5ead9;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #181513; --surface: #221e1b; --ink: #efe9e2; --muted: #b3aaa0; --line: #39322c;
-    --accent: #e3a3ad; --accent-ink: #1d1416; --accent-soft: #33242a; --note: #2a2521;
+    --bg: #1d1712; --surface: #271f19; --ink: #f3e9dd; --muted: #c2b09e; --line: #3d3128;
+    --accent: #eb9a72; --accent-ink: #24150d; --accent-soft: #3a261b; --note: #2c231c;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #181513; --surface: #221e1b; --ink: #efe9e2; --muted: #b3aaa0; --line: #39322c;
-  --accent: #e3a3ad; --accent-ink: #1d1416; --accent-soft: #33242a; --note: #2a2521;
+  --bg: #1d1712; --surface: #271f19; --ink: #f3e9dd; --muted: #c2b09e; --line: #3d3128;
+  --accent: #eb9a72; --accent-ink: #24150d; --accent-soft: #3a261b; --note: #2c231c;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -292,7 +292,7 @@ p.hint { margin: 0 0 6px; }
 .hero-split { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 40px; align-items: center; }
 .hero-split h1 { margin-top: 4px; }
 .paper {
-  background: var(--paper); border: 1px solid var(--paper-line); border-radius: 4px; padding: 22px 24px 26px 44px;
+  background: var(--paper); border: 1px solid var(--paper-line); border-radius: 4px; padding: 22px 24px 52px 44px;
   box-shadow: 0 1px 0 var(--paper-line), 0 12px 28px rgba(60, 40, 20, .10); transform: rotate(1.5deg); position: relative;
   background-image: repeating-linear-gradient(to bottom, transparent 0 33px, var(--paper-line) 33px 34px);
   background-position: 0 56px;
@@ -304,7 +304,7 @@ p.hint { margin: 0 0 6px; }
 .paper li::before { content: ""; position: absolute; left: 0; top: 9px; width: 16px; height: 16px; border: 2px solid var(--muted); border-radius: 3px; }
 .paper li.ticked { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--accent); }
 .paper li.ticked::after { content: "\2713"; position: absolute; left: 2px; top: -6px; font-size: 26px; color: var(--accent); font-family: var(--body); font-weight: 700; }
-.paper-scribble { position: absolute; right: 18px; top: 18px; font-family: var(--hand); font-size: 24px; color: var(--accent); transform: rotate(-6deg); margin: 0; }
+.paper-scribble { position: absolute; right: 22px; bottom: 10px; font-family: var(--hand); font-size: 24px; color: var(--accent); transform: rotate(-6deg); margin: 0; }
 .story { border-top: 0; padding-top: 8px; }
 .story-card { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; margin: 8px 0 24px; }
 .story-card h2 { margin: 0 0 10px !important; font-size: 30px; }
@@ -326,3 +326,13 @@ p.hint { margin: 0 0 6px; }
   .story-card.small { grid-template-columns: 56px minmax(0, 1fr); }
   .story-card.small .story-photo { width: 56px; height: 56px; }
 }
+
+/* Warmer feel */
+h1, h2, .phase h3 { font-weight: 600; letter-spacing: -0.01em; font-variation-settings: "SOFT" 100; }
+h2 { font-weight: 600; }
+.button, button, .main-nav a.nav-cta { border-radius: 999px; }
+.card, .tier, .todo-item, .checker fieldset, .signup, .help-card, .story-card, .cta-box { border-radius: 16px; }
+.card, .story-card, .signup { box-shadow: 0 1px 2px rgba(80, 50, 25, .05), 0 6px 18px rgba(80, 50, 25, .05); }
+body { background-image: radial-gradient(circle at 85% -10%, rgba(232, 160, 110, .14), transparent 45%); background-repeat: no-repeat; }
+.brand { font-weight: 600; }
+.quiz { margin-bottom: 56px; }
