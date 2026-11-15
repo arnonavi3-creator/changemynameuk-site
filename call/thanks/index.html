@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick a Time for Your Call | Change My Name UK</title>
+<meta name="description" content="Pick a time for your 15 minute research call.">
+<link rel="canonical" href="https://changemynameuk.com/call/thanks/">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238a3f4a'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='white'%3Ec%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="free-banner">
+  <div class="wrap">
+    <p><strong>Good to know:</strong> you can change your name on your passport, driving licence and every other record for free (apart from the normal passport fee) directly with the government and each organisation. We're an independent private business, not part of or linked to the government. You pay us for help, not for the right to change your name. <a href="/free-guide/">Do it yourself for free</a></p>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
+      <a href="/free-guide/">Do it free</a>
+      <a class="nav-cta" href="/check/">Check what you need</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow">
+  <div class="page-head">
+    <h1 id="call-thanks-title">Thank you! Now pick a time</h1>
+    <p class="lede">Choose a 15 minute slot that suits you. You'll get a calendar invite by email, and your £7 Amazon voucher after the call.</p>
+  </div>
+
+  <!-- Booking page: Avi's Google Calendar appointment schedule. Change the link in data-booking-url
+       to use a different booking page. While it's empty, visitors see the fallback message. -->
+  <div id="booking" data-booking-url="https://calendar.app.google/pwMDAwBcUqVqyk9m6">
+    <div id="booking-embed" class="cta-box" hidden>
+      <p><a class="button" id="booking-open" href="#" rel="noopener" target="_blank">Choose a time for your call</a></p>
+      <p class="fine">Opens our booking calendar in a new tab. Pick any 15 minute slot and you'll get a calendar invite by email.</p>
+    </div>
+    <div id="booking-fallback" class="cta-box">
+      <p><b>We'll email you within 2 working days with a few times to choose from.</b> If none of them suit, just reply with a time that does.</p>
+    </div>
+  </div>
+
+  <p class="mt">While you wait, your <a href="/check/">checklist</a> is saved on this device, so you can carry on ticking things off.</p>
+</main>
+<script>
+(function () {
+  var box = document.getElementById('booking');
+  var url = box.getAttribute('data-booking-url');
+  var name = null;
+  try { name = sessionStorage.getItem('cmn-call-name'); } catch (e) { name = null; }
+  if (name) document.getElementById('call-thanks-title').textContent = 'Thank you, ' + name + '! Now pick a time';
+  if (!url) {
+    document.getElementById('call-thanks-title').textContent = name ? 'Thank you, ' + name + '!' : 'Thank you!';
+    document.querySelector('.page-head .lede').textContent = 'We\'ll be in touch soon to arrange your 15 minute call. Your £7 Amazon voucher comes after the call.';
+    return;
+  }
+  document.getElementById('booking-open').href = url;
+  document.getElementById('booking-embed').hidden = false;
+  document.getElementById('booking-fallback').hidden = true;
+})();
+</script>
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Service</p>
+        <a href="/check/">Free name change checklist</a>
+        <a href="/beta/">Join the beta</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/free-guide/">Do it yourself for free</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">Company</p>
+        <a href="/about/">About us</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/terms/">Terms and cancellation</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    <p>Change My Name UK is a trading name of Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK. We are an independent private business and are not affiliated with HM Passport Office, DVLA, HMRC or any government department or agency. Everything we help with can be done for free directly with each organisation.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

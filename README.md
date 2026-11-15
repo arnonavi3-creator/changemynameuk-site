@@ -1,15 +1,23 @@
 # changemynameuk.com
 
-Website for Change My Name UK (Paperlight Ltd). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
+Website for Change My Name UK (run by Avi Arnon as a sole trader until the company is set up). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
 
 ## Pages
 
-- `/` home, `/check/` free name change checker (runs in the browser, sends nothing unless the visitor joins the waitlist), `/pricing/`, `/how-it-works/`, `/free-guide/`
+- `/` home, `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit), `/pricing/`, `/how-it-works/`, `/free-guide/`
 - `/guides/` and 10 guides under it
 - `/about/`, `/help/`, `/terms/` (draft, noindex), `privacy.html`, `thanks.html`
 - `sitemap.xml` and `robots.txt`
 
-Each page is a folder with an `index.html`, so links end in `/`. The header, footer and free DIY banner are repeated in every page, so change them everywhere at once. Both the home page and the checker post to the same `waitlist` form with the same fields (`source`, `checker_result` and `suggested_plan` are hidden).
+Each page is a folder with an `index.html`, so links end in `/`. The header, footer and free DIY banner are repeated in every page, so change them everywhere at once. Netlify forms:
+
+- `waitlist` (home page): email, optional wedding date.
+- `research-call` (`/call/`, linked from the checklist results): first name, email, optional phone, `call_type`, `good_times`, required `call_consent`, optional `launch_updates`, plus hidden `checklist_answers`, `reason`, `stage`, `nation`, `wedding_date`, `item_count` when the visitor came from the checklist. Offers a £7 Amazon voucher for a 15 minute call. After submitting, `/call/thanks/` shows a button to the booking page set in its `data-booking-url` attribute (currently Avi's Google Calendar appointment schedule; empty = a "we'll email you some times" message).
+- `beta` (`/beta/`): first name, email, reason, nation, start date, help level, notes, `call_consent`, and `checklist_answers` when the visitor came from the checklist.
+
+Netlify only stores fields that exist in the HTML at deploy time, so add new fields to the markup, not just in JavaScript. The free plan allows 100 form submissions a month across all forms.
+
+To change checklist rules, edit `buildItems()` in `check/checklist.js`. Rules come from the operational map (where to update, proof needed, order).
 
 ## Deploy on Netlify (free plan)
 
@@ -37,7 +45,7 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 
 ## Before going live
 
-- Add the Paperlight Ltd company number in the footers and privacy notice once registered.
+- Once the limited company exists, replace "Avi Arnon, a sole trader" in the footers, terms, about page and privacy notice with the company name, number and registered office.
 - Add the ICO registration number to `privacy.html`.
 - Set up the hello@changemynameuk.com mailbox, or change the address.
 - Add the founder section on `/about/` and have a solicitor review `/terms/`.
