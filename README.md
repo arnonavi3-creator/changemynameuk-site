@@ -1,6 +1,6 @@
 # changemynameuk.com
 
-Website for Change My Name UK (run by Avi as a sole trader until the company is set up). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
+Website for Change My Name UK (run by Avi Arnon as a sole trader until the company is set up). Plain HTML and CSS, no build step. Signups are collected with Netlify Forms.
 
 ## Pages
 
@@ -45,7 +45,7 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 
 ## Before going live
 
-- Replace "Avi (full name to be added)" with the full legal name in the footers, terms and privacy notice (search the repo for "full name to be added"). Once the limited company exists, switch these back to the company name and number.
+- Once the limited company exists, replace "Avi Arnon, a sole trader" in the footers, terms, about page and privacy notice with the company name, number and registered office.
 - Add the ICO registration number to `privacy.html`.
 - Set up the hello@changemynameuk.com mailbox, or change the address.
 - Add the founder section on `/about/` and have a solicitor review `/terms/`.
