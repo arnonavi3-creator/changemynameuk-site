@@ -334,7 +334,7 @@
     PHASES.forEach(function (p, idx) {
       var group = items.filter(function (i) { return i.phase === idx; });
       if (!group.length) return;
-      html += '<section class="phase"><h3><span class="phase-n">' + (idx + 1) + '</span>' + p.title + '</h3><p class="phase-blurb">' + p.blurb + '</p><ul class="todo-list">';
+      html += '<section class="phase"><h3><span class="phase-n">' + ('0' + (idx + 1)).slice(-2) + '</span>' + p.title + '</h3><p class="phase-blurb">' + p.blurb + '</p><ul class="todo-list">';
       group.forEach(function (it) {
         var done = !!state.ticks[it.id];
         html += '<li class="todo-item' + (done ? ' done' : '') + '">' +
