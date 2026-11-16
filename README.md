@@ -50,3 +50,17 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 - Add the ICO registration number to `privacy.html`.
 - Set up the hello@changemynameuk.com mailbox, or change the address.
 - Add the founder section on `/about/` and have a solicitor review `/terms/`.
+
+## Search and analytics
+
+### Google Search Console
+
+Set up on 16 Nov 2026: the `changemynameuk.com` domain property is verified with a `google-site-verification=` TXT record on `@` in GoDaddy DNS (keep that record, or verification is lost), and `sitemap.xml` is submitted. Open it at https://search.google.com/search-console. Optional: at https://www.bing.com/webmasters choose **Import from Google Search Console** to cover Bing too.
+
+### Cloudflare Web Analytics (cookie-free visitor counts)
+
+Set up on 16 Nov 2026 in Avi's Cloudflare account (Analytics > Web analytics). The site token is in `js/analytics.js`; set `TOKEN` to `""` there to switch analytics off. No DNS change or Cloudflare proxy is involved.
+
+### Link previews
+
+Every page has Open Graph and Twitter card tags, using `img/og-image.png` (1200x630). After deploying, check a link at https://www.opengraph.xyz or Facebook's Sharing Debugger (https://developers.facebook.com/tools/debug/) and press **Scrape again** if Facebook cached an old preview.
