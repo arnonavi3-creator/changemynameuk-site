@@ -53,22 +53,13 @@ If you plan to use an email address on the domain (like hello@changemynameuk.com
 
 ## Search and analytics
 
-### Google Search Console (one-off, about 15 minutes)
+### Google Search Console
 
-1. Go to https://search.google.com/search-console and sign in with your Google account.
-2. Choose **Add property**, then **Domain**, and type `changemynameuk.com` (no https, no www).
-3. Google shows a TXT record starting `google-site-verification=`. Copy it.
-4. In GoDaddy, open **My Products > changemynameuk.com > DNS**, choose **Add new record**: type `TXT`, name `@`, value = the text you copied, TTL default. Save (GoDaddy may email you a code to confirm). This doesn't touch the existing MX or SPF records for email.
-5. Back in Search Console, press **Verify**. If it fails, wait an hour and try again.
-6. In Search Console, open **Sitemaps** and submit `https://changemynameuk.com/sitemap.xml`.
-7. Optional: at https://www.bing.com/webmasters choose **Import from Google Search Console** to cover Bing too.
+Set up on 16 Nov 2026: the `changemynameuk.com` domain property is verified with a `google-site-verification=` TXT record on `@` in GoDaddy DNS (keep that record, or verification is lost), and `sitemap.xml` is submitted. Open it at https://search.google.com/search-console. Optional: at https://www.bing.com/webmasters choose **Import from Google Search Console** to cover Bing too.
 
 ### Cloudflare Web Analytics (cookie-free visitor counts)
 
-1. Create a free account at https://dash.cloudflare.com (no need to move the domain or change DNS).
-2. Open **Analytics & Logs > Web Analytics > Add a site**, enter `changemynameuk.com`, and choose the manual JavaScript snippet option.
-3. Copy the token from the snippet (the value after `"token":`).
-4. Paste it between the quotes on the `var TOKEN = "";` line in `js/analytics.js`, and push. Until then, the script does nothing.
+Set up on 16 Nov 2026 in Avi's Cloudflare account (Analytics > Web analytics). The site token is in `js/analytics.js`; set `TOKEN` to `""` there to switch analytics off. No DNS change or Cloudflare proxy is involved.
 
 ### Link previews
 

@@ -1,8 +1,8 @@
 // Cookie-free visitor counts with Cloudflare Web Analytics.
 // It sets no cookies and stores nothing on the visitor's device, so no cookie banner is needed.
-// To turn it on, paste the site token from Cloudflare (Analytics & Logs > Web Analytics) below.
+// Site token from Cloudflare (Analytics > Web analytics). Set TOKEN to "" to switch it off.
 (function () {
-  var TOKEN = "";
+  var TOKEN = "a723f5fe2567446d9a403ae702107f5f";
   if (!TOKEN) return;
   var s = document.createElement("script");
   s.defer = true;
