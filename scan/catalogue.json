@@ -1,0 +1,685 @@
+{
+ "version": 1,
+ "generated_on": "2026-11-18",
+ "sample": true,
+ "phases": {
+  "1": "Identity documents",
+  "2": "Government, legal and civic",
+  "3": "Money, health and work",
+  "4": "Home and utilities",
+  "5": "Online, shopping and travel"
+ },
+ "categories": {
+  "banking": "Banks and building societies",
+  "civic": "Civic and voting",
+  "credit": "Credit cards and loans",
+  "credit-identity": "Credit files and digital identity",
+  "energy": "Energy",
+  "government": "Government and benefits",
+  "health": "Health",
+  "home-family": "Home, family and education",
+  "identity": "Identity documents",
+  "insurance": "Insurance",
+  "investments": "Savings and investments",
+  "legal-property": "Legal, property and licences",
+  "pensions": "Pensions",
+  "retail": "Shopping and loyalty",
+  "subscriptions": "Online accounts and subscriptions",
+  "telecoms": "Mobile, broadband and TV",
+  "travel": "Travel",
+  "water": "Water",
+  "work": "Work, regulators and professional bodies"
+ },
+ "groups": {
+  "dvla.gov.uk": "DVLA",
+  "hmrc.gov.uk": "HMRC",
+  "dwp.gov.uk": "DWP (benefits and State Pension)",
+  "nhsbsa.nhs.uk": "NHS Business Services Authority",
+  "nhsbt.nhs.uk": "NHS Blood and Transplant",
+  "veterans-uk.mod.gov.uk": "Veterans UK",
+  "companieshouse.gov.uk": "Companies House",
+  "caa.co.uk": "Civil Aviation Authority",
+  "aviva.co.uk": "Aviva",
+  "boots.com": "Boots",
+  "marksandspencer.com": "M&S",
+  "virginmoney.com": "Virgin Money",
+  "paypal.com": "PayPal",
+  "landg.com": "Legal & General",
+  "royallondon.com": "Royal London"
+ },
+ "organisations": [
+  {
+   "id": "dvla-licence",
+   "name": "DVLA driving licence",
+   "category": "identity",
+   "phase": 1,
+   "priority": "legal",
+   "domains": [
+    "dvla.gov.uk"
+   ]
+  },
+  {
+   "id": "dva-vehicle",
+   "name": "DVLA log book for Northern Ireland vehicles",
+   "category": "identity",
+   "phase": 1,
+   "priority": "legal",
+   "domains": [
+    "dvla.gov.uk"
+   ]
+  },
+  {
+   "id": "dvla-v5c",
+   "name": "DVLA vehicle log book (V5C)",
+   "category": "identity",
+   "phase": 1,
+   "priority": "legal",
+   "domains": [
+    "dvla.gov.uk"
+   ]
+  },
+  {
+   "id": "hm-passport-office",
+   "name": "HM Passport Office",
+   "category": "identity",
+   "phase": 1,
+   "priority": "essential",
+   "domains": [
+    "hmpo.gov.uk",
+    "passport.service.gov.uk"
+   ]
+  },
+  {
+   "id": "hmrc-child-benefit",
+   "name": "Child Benefit (HMRC)",
+   "category": "government",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "hmrc.gov.uk"
+   ]
+  },
+  {
+   "id": "gov-one-login",
+   "name": "GOV.UK One Login",
+   "category": "government",
+   "phase": 2,
+   "priority": "recommended",
+   "domains": [
+    "account.gov.uk"
+   ]
+  },
+  {
+   "id": "hm-land-registry",
+   "name": "HM Land Registry (England and Wales)",
+   "category": "legal-property",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "landregistry.gov.uk"
+   ]
+  },
+  {
+   "id": "hmrc",
+   "name": "HMRC (tax and National Insurance)",
+   "category": "government",
+   "phase": 2,
+   "priority": "essential",
+   "domains": [
+    "hmrc.gov.uk",
+    "tax.service.gov.uk"
+   ]
+  },
+  {
+   "id": "slc",
+   "name": "Student Loans Company (repayment)",
+   "category": "government",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "slc.co.uk",
+    "studentloanrepayment.co.uk"
+   ]
+  },
+  {
+   "id": "tv-licensing",
+   "name": "TV Licensing",
+   "category": "civic",
+   "phase": 2,
+   "priority": "essential",
+   "domains": [
+    "tvlicensing.co.uk"
+   ]
+  },
+  {
+   "id": "admiral",
+   "name": "Admiral",
+   "category": "insurance",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "admiral.com"
+   ]
+  },
+  {
+   "id": "amex",
+   "name": "American Express",
+   "category": "credit",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "aexp.com",
+    "americanexpress.com"
+   ]
+  },
+  {
+   "id": "aviva-insurance",
+   "name": "Aviva (car and home insurance)",
+   "category": "insurance",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "aviva.co.uk"
+   ]
+  },
+  {
+   "id": "aviva-pensions",
+   "name": "Aviva (pensions)",
+   "category": "pensions",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "aviva.co.uk",
+    "aviva.com"
+   ]
+  },
+  {
+   "id": "aviva-health",
+   "name": "Aviva health insurance",
+   "category": "health",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "aviva.co.uk"
+   ]
+  },
+  {
+   "id": "barclaycard",
+   "name": "Barclaycard",
+   "category": "credit",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "barclaycard.co.uk"
+   ]
+  },
+  {
+   "id": "barclays",
+   "name": "Barclays",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "barclays.co.uk",
+    "barclays.com"
+   ]
+  },
+  {
+   "id": "boots-pharmacy",
+   "name": "Boots pharmacy and Online Doctor",
+   "category": "health",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "boots.com"
+   ]
+  },
+  {
+   "id": "bupa",
+   "name": "Bupa (health insurance)",
+   "category": "health",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "bupa.co.uk",
+    "bupa.com"
+   ]
+  },
+  {
+   "id": "halifax",
+   "name": "Halifax",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "halifax.co.uk"
+   ]
+  },
+  {
+   "id": "hargreaves-lansdown",
+   "name": "Hargreaves Lansdown",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "hl.co.uk"
+   ]
+  },
+  {
+   "id": "hsbc",
+   "name": "HSBC UK",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "hsbc.co.uk"
+   ]
+  },
+  {
+   "id": "klarna",
+   "name": "Klarna",
+   "category": "credit",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "klarna.com"
+   ]
+  },
+  {
+   "id": "lloyds",
+   "name": "Lloyds Bank",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "lloydsbank.co.uk",
+    "lloydsbank.com"
+   ]
+  },
+  {
+   "id": "monzo",
+   "name": "Monzo",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "monzo.com"
+   ]
+  },
+  {
+   "id": "nationwide",
+   "name": "Nationwide Building Society",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "nationwide.co.uk"
+   ]
+  },
+  {
+   "id": "natwest",
+   "name": "NatWest",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "natwest.com"
+   ]
+  },
+  {
+   "id": "nest",
+   "name": "Nest Pensions",
+   "category": "pensions",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "nestpensions.org.uk"
+   ]
+  },
+  {
+   "id": "nhs-app",
+   "name": "NHS App and NHS login",
+   "category": "health",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "login.nhs.uk"
+   ]
+  },
+  {
+   "id": "nsi",
+   "name": "NS&I (Premium Bonds and savings)",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "nsandi.com"
+   ]
+  },
+  {
+   "id": "nmc",
+   "name": "Nursing and Midwifery Council",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "nmc-uk.org",
+    "nmc.org.uk"
+   ]
+  },
+  {
+   "id": "paypal",
+   "name": "PayPal",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "paypal.com"
+   ]
+  },
+  {
+   "id": "paypal-credit",
+   "name": "PayPal Credit and Pay in 3",
+   "category": "credit",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "paypal.com"
+   ]
+  },
+  {
+   "id": "revolut",
+   "name": "Revolut",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "revolut.com"
+   ]
+  },
+  {
+   "id": "santander",
+   "name": "Santander UK",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "santander.co.uk"
+   ]
+  },
+  {
+   "id": "specsavers",
+   "name": "Specsavers",
+   "category": "health",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "specsavers.co.uk",
+    "specsavers.com"
+   ]
+  },
+  {
+   "id": "starling",
+   "name": "Starling Bank",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "starlingbank.com"
+   ]
+  },
+  {
+   "id": "british-gas",
+   "name": "British Gas",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "britishgas.co.uk"
+   ]
+  },
+  {
+   "id": "bt",
+   "name": "BT",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "bt.com"
+   ]
+  },
+  {
+   "id": "edf",
+   "name": "EDF",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "edfenergy.com"
+   ]
+  },
+  {
+   "id": "ee",
+   "name": "EE",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "ee.co.uk"
+   ]
+  },
+  {
+   "id": "o2",
+   "name": "O2",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "o2.co.uk"
+   ]
+  },
+  {
+   "id": "octopus-energy",
+   "name": "Octopus Energy",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "octopus.energy"
+   ]
+  },
+  {
+   "id": "ovo",
+   "name": "OVO Energy",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "ovoenergy.com"
+   ]
+  },
+  {
+   "id": "royal-mail",
+   "name": "Royal Mail (redirection, if moving too)",
+   "category": "home-family",
+   "phase": 4,
+   "priority": "optional",
+   "domains": [
+    "royalmail.com"
+   ]
+  },
+  {
+   "id": "sky",
+   "name": "Sky (TV, broadband, mobile)",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "sky.com"
+   ]
+  },
+  {
+   "id": "thames-water",
+   "name": "Thames Water",
+   "category": "water",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "thameswater.co.uk"
+   ]
+  },
+  {
+   "id": "virgin-media",
+   "name": "Virgin Media",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "virginmedia.com"
+   ]
+  },
+  {
+   "id": "vodafone",
+   "name": "Vodafone",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "vodafone.co.uk"
+   ]
+  },
+  {
+   "id": "amazon",
+   "name": "Amazon (and Prime)",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "amazon.co.uk"
+   ]
+  },
+  {
+   "id": "apple-id",
+   "name": "Apple Account",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "apple.com",
+    "id.apple.com"
+   ]
+  },
+  {
+   "id": "boots-advantage",
+   "name": "Boots Advantage Card",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "boots.com"
+   ]
+  },
+  {
+   "id": "ba-executive-club",
+   "name": "British Airways Executive Club",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "ba.com",
+    "britishairways.com"
+   ]
+  },
+  {
+   "id": "easyjet",
+   "name": "easyJet (account and bookings)",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "easyjet.com"
+   ]
+  },
+  {
+   "id": "ebay",
+   "name": "eBay",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "ebay.co.uk",
+    "ebay.com"
+   ]
+  },
+  {
+   "id": "experian",
+   "name": "Experian",
+   "category": "credit-identity",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "experian.co.uk"
+   ]
+  },
+  {
+   "id": "google-account",
+   "name": "Google Account",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "google.com"
+   ]
+  },
+  {
+   "id": "nectar",
+   "name": "Nectar (Sainsbury's, Argos, eBay)",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "nectar.com"
+   ]
+  },
+  {
+   "id": "netflix",
+   "name": "Netflix",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "netflix.com"
+   ]
+  },
+  {
+   "id": "spotify",
+   "name": "Spotify",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "spotify.com"
+   ]
+  },
+  {
+   "id": "tesco-clubcard",
+   "name": "Tesco Clubcard",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "tesco.com"
+   ]
+  },
+  {
+   "id": "trainline",
+   "name": "Trainline",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "thetrainline.com"
+   ]
+  }
+ ]
+}

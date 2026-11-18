@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find everyone who has your name | Change My Name UK (beta)</title>
+<meta name="description" content="Private beta: find the organisations that have your old name from your Gmail, on your own device, and tick them off as they confirm your new name.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/scan/scan.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E4D3B'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='%23FBF9F5'%3Ec%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="/guides/">Guides</a>
+      <a href="/call/">Talk to me</a>
+      <a href="/beta/">Join the beta</a>
+      <a class="nav-cta" href="/check/">Get your free checklist</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow">
+
+  <section id="intro">
+    <div class="page-head">
+      <h1>Find everyone who has your name</h1>
+      <p class="lede">Connect your Gmail and we'll find the banks, providers and services that email you, in the order to update them. Then, each time you come back, we look for their emails confirming your new name and tick them off.</p>
+    </div>
+
+    <div class="scan-promise">
+      <div><b>Headers only</b>We read who each email is from, its subject line and its date. Never the message itself.</div>
+      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us.</div>
+      <div><b>You're in control</b>Remove access at any time with one click, here or in your Google account.</div>
+    </div>
+
+    <p class="beta-note"><strong>Private beta.</strong> Only invited testers can connect Gmail for now. Google will warn you that the app hasn't been verified yet, which is expected while we're testing. Access lasts 7 days, then you reconnect with one click.</p>
+
+    <div class="scan-form">
+      <div class="scan-field">
+        <label for="period">How far back should we look?</label>
+        <select id="period">
+          <option value="12">The last 12 months</option>
+          <option value="24" selected>The last 2 years</option>
+          <option value="60">The last 5 years (slower)</option>
+        </select>
+      </div>
+      <div class="scan-field">
+        <label for="started">When did you start changing your name? <span class="hint">(optional)</span></label>
+        <input type="date" id="started">
+        <p class="hint">We only count confirmation emails sent after this date.</p>
+      </div>
+      <div class="scan-actions">
+        <button type="button" id="connect-btn">Connect Gmail and scan</button>
+        <button type="button" class="ghost-btn" id="demo-btn">Try a sample inbox</button>
+      </div>
+      <p class="hint" id="no-client" hidden>Gmail connection isn't switched on yet. You can try the sample inbox, which is made up.</p>
+      <p class="scan-error" id="scan-error" role="alert" hidden></p>
+    </div>
+
+    <p class="fine">How we handle your data is in our <a href="/privacy.html#gmail">privacy notice</a>. Our use of information received from Google APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+  </section>
+
+  <section id="scanning" hidden>
+    <div class="scan-box" aria-live="polite">
+      <h2>Reading your email headers…</h2>
+      <div class="scan-progress" aria-hidden="true"><span id="scan-bar"></span></div>
+      <p id="scan-count">Starting…</p>
+      <p class="hint">This can take a few minutes for a busy inbox. Keep this page open.</p>
+      <button type="button" class="ghost-btn" id="cancel-btn">Stop and show what's found</button>
+    </div>
+  </section>
+
+  <section id="tracker" hidden>
+    <div class="page-head">
+      <p class="beta-note" id="demo-banner" hidden>This is a <strong>sample inbox</strong> with made-up emails, so you can see how it works.</p>
+      <h1>Your name change tracker</h1>
+      <div class="summary">
+        <div><b id="sum-found">0</b><span>organisations</span></div>
+        <div><b id="sum-done">0</b><span>confirmed</span></div>
+        <div><b id="sum-emails">0</b><span>emails checked</span></div>
+      </div>
+      <div class="scan-progress" aria-hidden="true"><span id="done-bar"></span></div>
+      <p class="hint">From the last <span id="sum-period">2 years</span> of email, in the order to update them.<span id="sum-limit" hidden> We stopped after 6,000 emails, so some older senders may be missing.</span></p>
+      <div class="monitor">
+        <button type="button" id="check-btn">Check for confirmations</button>
+        <p id="last-check"></p>
+      </div>
+    </div>
+
+    <section id="maybe" class="mt" hidden>
+      <h2>Check these</h2>
+      <div id="maybe-list"></div>
+    </section>
+
+    <div id="org-phases"></div>
+
+    <div class="hidden-wrap" id="hidden-wrap" hidden>
+      <details>
+        <summary>Not mine (<span id="hidden-count">0</span>)</summary>
+        <ul id="hidden-list"></ul>
+      </details>
+    </div>
+
+    <div class="tracker-foot">
+      <p>Your tracker is saved only in this browser. Missing someone? The <a href="/check/">checklist</a> covers places that don't email you.</p>
+      <button type="button" class="ghost-btn small" id="forget-btn">Disconnect Gmail and delete this tracker</button>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Free tools</p>
+        <a href="/check/">Name change checklist</a>
+        <a href="/call/">Talk to me (£7 voucher)</a>
+        <a href="/beta/">Join the beta</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">About</p>
+        <a href="/about/">About me</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    <p>Change My Name UK is run by Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>
+
+<script src="/scan/config.js"></script>
+<script src="/scan/engine.js"></script>
+<script src="/scan/gmail.js"></script>
+<script src="/scan/demo.js"></script>
+<script src="/scan/app.js"></script>
+</body>
+</html>
