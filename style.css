@@ -355,3 +355,20 @@ p.hint { margin: 0 0 8px; }
   a { color: #000; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10pt; color: #444; }
 }
+
+/* Going back to your name page */
+.envelopes { gap: 16px; }
+.envelope { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 20px 22px 18px; position: relative; }
+.envelope::after { content: ""; position: absolute; top: 14px; right: 16px; width: 34px; height: 40px; border: 1px dashed var(--line); border-radius: 2px; }
+.env-from { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 22px; }
+.env-to { margin: 0 0 14px; display: flex; flex-direction: column-reverse; align-items: flex-start; }
+.env-old { font-family: var(--mono); font-size: 16px; color: var(--muted); text-decoration: line-through; text-decoration-color: var(--wax); text-decoration-thickness: 2px; }
+.env-new { font-family: var(--hand); font-size: 28px; line-height: 1.1; color: var(--wax); transform: rotate(-2deg); margin-bottom: 2px; }
+.env-note { margin: 0; font-size: 16px; color: var(--ink); }
+.narrow-lede { max-width: 680px; }
+.plain-list { margin: 0 0 12px; padding-left: 20px; }
+.plain-list li { margin: 4px 0; }
+.last-letter { text-align: center; padding: 40px 28px; }
+.last-letter h2 { font-size: clamp(26px, 4vw, 36px); }
+.last-letter p { max-width: 560px; margin-left: auto; margin-right: auto; }
+.call-line { text-align: center; color: var(--muted); margin-top: 16px; }
