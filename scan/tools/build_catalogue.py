@@ -8,8 +8,8 @@ scanner needs to recognise senders: id, name, category, phase and sender domains
 Usage:
   python3 scan/tools/build_catalogue.py /path/to/organisations.json /path/to/categories.json [--sample]
 
---sample keeps a short list of well-known organisations (the default until the
-full list is approved for publishing).
+--sample keeps a short list of well-known organisations. Avi approved publishing
+the full names-and-domains list on 18 Nov 2026, so run without it.
 """
 import json
 import sys
