@@ -355,3 +355,12 @@ p.hint { margin: 0 0 8px; }
   a { color: #000; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10pt; color: #444; }
 }
+
+/* Related guides at the end of each guide, and the homepage guide list */
+.related { margin: 40px 0 8px; padding-top: 24px; border-top: 1px solid var(--line); }
+.related h2 { margin-top: 0; }
+.related ul, .more-guides { list-style: none; padding: 0; margin: 0 0 12px; }
+.related li, .more-guides li { padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.related li span { display: block; color: var(--muted); font-size: 15px; }
+.more-guides-h { margin: 28px 0 8px; }
+@media (min-width: 720px) { .more-guides { columns: 2; column-gap: 32px; } .more-guides li { break-inside: avoid; } }
