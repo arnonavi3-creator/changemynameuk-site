@@ -1,4 +1,6 @@
-# Inbox scanner (private beta)
+# Inbox scanner: the Finder (private beta)
+
+This is Scanner 1, the Finder: it finds organisations and builds the checklist. Scanner 2 (done for you: sends name change emails from the customer's Gmail and posted letters) is planned, not built. Plan: https://claude.ai/artifact/SB7hKvGEqkruwaz95gD6t3
 
 Finds the organisations that have a person's name from their Gmail, shows which name each one uses (old or new), and ticks them off when they confirm the change. Everything runs in the browser.
 
