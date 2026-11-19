@@ -1,6 +1,7 @@
 /* Gmail reader for the inbox scanner. Uses the gmail.readonly scope.
-   It only ever searches for, and opens, emails from organisations on our list:
-   other emails are never downloaded. Everything stays in this browser tab.
+   It searches for emails from organisations on our list, and for emails that
+   mention your old surname. Emails from people (personal email addresses) are
+   never opened. Everything stays in this browser tab.
    The access token lives in memory and is never written to storage or sent
    anywhere except Google. */
 (function (root, factory) {
@@ -117,13 +118,34 @@
       return { checked: checked, stopped: (o.signal && o.signal.aborted) ? 'cancelled' : 'end' };
     }
 
+    /* Headers of every email matching a Gmail search (for the old-surname search). */
+    async function readQuery(q, o) {
+      o = o || {};
+      var ids = await searchIds(q, o.maxMessages || 3000, o.signal);
+      var msgs = [];
+      var checked = 0;
+      await pool(ids, CONCURRENCY, async function (id) {
+        msgs.push(await headers(id));
+        checked++;
+        if (o.onProgress && checked % 10 === 0) o.onProgress({ checked: checked, total: ids.length });
+      }, o.signal);
+      if (o.onBatch) o.onBatch(msgs);
+      return { checked: checked, total: ids.length };
+    }
+
     /* Open several messages (by id) and hand each to fn(message). */
     async function readFull(ids, fn, signal) {
       await pool(ids, 6, async function (id) { fn(await full(id)); }, signal);
     }
 
-    return { profile: profile, readFrom: readFrom, readFull: readFull };
+    return { profile: profile, readFrom: readFrom, readQuery: readQuery, readFull: readFull };
   }
 
-  return { create: create, buildQuery: buildQuery };
+  /* Gmail search for emails that mention the old surname, leaving out your own
+     sent mail, chats, social networks and forums. */
+  function surnameQuery(surname, sinceMs) {
+    return '"' + String(surname).replace(/"/g, '') + '" -from:me -in:chats -category:social -category:forums after:' + gmailDate(sinceMs);
+  }
+
+  return { create: create, buildQuery: buildQuery, surnameQuery: surnameQuery };
 }));

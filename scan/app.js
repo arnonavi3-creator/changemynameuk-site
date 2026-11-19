@@ -139,6 +139,99 @@
 
   function allDomains() { return Object.keys(index.byDomain); }
 
+  /* Organisations the person added from "others" join the list for this browser only. */
+  function rebuildIndex() {
+    var custom = state && state.custom ? Object.keys(state.custom).map(function (k) { return state.custom[k]; }) : [];
+    index = E.buildIndex({ organisations: catalogue.organisations.concat(custom), groups: catalogue.groups });
+  }
+
+  /* ---------- Senders not on our list that still use the old surname ---------- */
+
+  function scanOthers(sinceMs, signal, onProgress) {
+    if (!state.oldSurname) return Promise.resolve(0);
+    state.others = state.others || {};
+    var acc = {};
+    var r = reader();
+    return r.readQuery(window.GmailReader.surnameQuery(state.oldSurname, sinceMs), {
+      maxMessages: 3000,
+      signal: signal,
+      onBatch: function (raw) { E.groupOthers(raw.map(E.fromGmail), index, ownEmail, acc); }
+    }).then(function () {
+      var cands = Object.keys(acc).map(function (k) { return acc[k]; })
+        .filter(function (o) { var ex = state.others[o.domain]; return !ex || o.lastSeen > ex.lastSeen; })
+        .sort(function (a, b) { return b.count - a.count; }).slice(0, 120);
+      var byMsg = {};
+      cands.forEach(function (o) { (byMsg[o.lastId] = byMsg[o.lastId] || []).push(o); });
+      var ids = Object.keys(byMsg);
+      var done = 0, added = 0;
+      return r.readFull(ids, function (m) {
+        var res = E.nameInBody(E.textFromPayload(m.payload), state.oldSurname, state.newSurname);
+        (byMsg[m.id] || []).forEach(function (o) {
+          var toSt = o.toName ? E.nameStatus(o.toName, state.oldSurname, state.newSurname) : 'unknown';
+          var st = res.status !== 'unknown' ? res.status : toSt;
+          var ex = state.others[o.domain];
+          if (st !== 'old') { if (ex && st === 'new') ex.status = 'new'; return; }
+          if (!ex) added++;
+          state.others[o.domain] = {
+            domain: o.domain, name: o.name, count: (ex ? ex.count : 0) + o.count, lastSeen: o.lastSeen,
+            greeting: res.greeting || o.toName || '', status: 'old',
+            hidden: ex ? ex.hidden : false, suggested: ex ? ex.suggested : false
+          };
+        });
+        done++;
+        if (onProgress) onProgress(done, ids.length);
+      }, signal).then(function () { return added; });
+    });
+  }
+
+  function addOther(domain) {
+    var o = state.others[domain];
+    if (!o) return;
+    state.custom = state.custom || {};
+    var id = 'x-' + domain.replace(/[^a-z0-9]+/g, '-');
+    state.custom[id] = { id: id, name: o.name, category: 'other', phase: 6, domains: [domain] };
+    rebuildIndex();
+    state.orgs[id] = {
+      match: 'sure', group: null, count: o.count, firstSeen: o.lastSeen, lastSeen: o.lastSeen, kept: true, hidden: false,
+      askedOn: null, confirmed: null, toName: '', nameDate: null,
+      body: { status: 'old', greeting: o.greeting, date: o.lastSeen, msgId: null }
+    };
+    o.added = true;
+  }
+
+  /* Ask the site to consider adding this organisation for everyone. Sends only
+     the organisation's name and web address, never anything from an email. */
+  function suggestOther(domain) {
+    var o = state.others[domain];
+    if (!o || state.demo) { if (o) o.suggested = true; return Promise.resolve(); }
+    var body = 'form-name=org-suggestion&domain=' + encodeURIComponent(o.domain) + '&name=' + encodeURIComponent(o.name);
+    return fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+      .then(function (r) { if (r.ok) o.suggested = true; else throw new Error(); })
+      .catch(function () { setError('Sorry, that didn\'t send. Please try again.'); });
+  }
+
+  /* A reminder in your own calendar, made on this device (nothing is sent). */
+  function remindMe(id) {
+    var o = org(id);
+    var d = new Date(Date.now() + 7 * DAY);
+    var ymd = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+    var safe = function (s) { return String(s).replace(/[\\;,]/g, function (c) { return '\\' + c; }).replace(/\n/g, ' '); };
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Change My Name UK//Scanner//EN', 'BEGIN:VEVENT',
+      'UID:' + id + '-' + ymd + '@changemynameuk.com', 'DTSTAMP:' + stamp, 'DTSTART;VALUE=DATE:' + ymd,
+      'SUMMARY:' + safe('Change your name with ' + o.name),
+      'DESCRIPTION:' + safe('They still use your old name. Open your tracker: https://changemynameuk.com/scan/'),
+      'BEGIN:VALARM', 'TRIGGER:PT9H', 'ACTION:DISPLAY', 'DESCRIPTION:' + safe('Change your name with ' + o.name), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    a.download = 'change-name-' + id + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    state.orgs[id].remindOn = d.getTime();
+  }
+
   /* ---------- First scan ---------- */
 
   function startScan(demo) {
@@ -155,12 +248,14 @@
       v: 1, demo: !!demo, demoNow: demo ? Date.now() : null,
       months: months, startedOn: started, scannedAt: Date.now(), lastCheckAt: null,
       oldSurname: oldS, newSurname: newS,
-      checked: 0, orgs: {}
+      checked: 0, orgs: {}, others: {}, custom: {}
     };
+    rebuildIndex();
     getToken(!demo).then(loadProfile).then(function () {
       return runScan(Date.now() - months * 30.44 * DAY);
     }).catch(function (err) {
       state = prev;
+      rebuildIndex();
       busy = false;
       show('intro');
       setError(err.message);
@@ -208,6 +303,12 @@
       return readNames(Object.keys(state.orgs), abort.signal, function (done, total) {
         $('scan-count').textContent = 'Checking which name each organisation uses (' + done + ' of ' + total + ')…';
         $('scan-bar').style.width = (70 + done / total * 28) + '%';
+      });
+    }).then(function () {
+      if (!state.oldSurname) return;
+      $('scan-count').textContent = 'Looking for anyone else still using your old name…';
+      return scanOthers(sinceMs, abort.signal, function (done, total) {
+        $('scan-count').textContent = 'Looking for anyone else still using your old name (' + done + ' of ' + total + ')…';
       });
     }).then(function () {
       Object.keys(state.orgs).forEach(confirmByName);
@@ -276,7 +377,9 @@
           var s = state.orgs[id];
           if (s.kept && !s.hidden && confirmByName(id) && !s.isNew) newConf++;
         });
-        return [newConf, newOrgs];
+        return scanOthers(since);
+      }).then(function (newOthers) {
+        return [newConf, newOrgs + (newOthers || 0)];
       });
     }).then(function (counts) {
       var newConf = counts[0], newOrgs = counts[1];
@@ -322,6 +425,7 @@
         ? '<button type="button" class="small ghost-btn" data-act="unask" data-id="' + esc(id) + '">Not asked yet</button>'
         : '<button type="button" class="small ghost-btn" data-act="ask" data-id="' + esc(id) + '">I\'ve asked them</button>') +
         '<button type="button" class="small ghost-btn" data-act="done" data-id="' + esc(id) + '">Mark as done</button>' +
+        (ns === 'old' ? '<button type="button" class="link-btn" data-act="remind" data-id="' + esc(id) + '">' + (s.remindOn ? 'Reminder added for ' + esc(fmtShort(s.remindOn)) : 'Remind me in a week') + '</button>' : '') +
         '<button type="button" class="link-btn" data-act="hide" data-id="' + esc(id) + '">Not mine</button>';
     }
     return '<li class="org-item' + (s.confirmed ? ' is-done' : '') + '">' +
@@ -388,6 +492,23 @@
     }
     $('org-phases').innerHTML = html;
 
+    /* Senders not on our list still using the old surname. */
+    var others = state.others || {};
+    var ok = Object.keys(others).filter(function (k) { var o = others[k]; return o.status === 'old' && !o.hidden && !o.added; })
+      .sort(function (a, b) { return others[b].count - others[a].count; });
+    $('others').hidden = !ok.length;
+    $('others-list').innerHTML = ok.map(function (k) {
+      var o = others[k];
+      return '<li class="org-item other-item"><div class="org-head"><h4>' + esc(o.name) + '</h4><span class="tag">' + esc(o.domain) + '</span></div>' +
+        '<p class="org-meta">' + fmtNum(o.count) + ' email' + (o.count === 1 ? '' : 's') + ', latest ' + esc(fmtDate(o.lastSeen)) + '</p>' +
+        (o.greeting ? '<p class="org-name">Their latest email says <q>' + esc(o.greeting) + '</q> <span class="tag name-old">Old name</span></p>' : '') +
+        '<div class="org-actions"><button type="button" class="small" data-act="add-other" data-domain="' + esc(k) + '">Add to my tracker</button>' +
+        '<button type="button" class="link-btn" data-act="hide-other" data-domain="' + esc(k) + '">Not an organisation</button>' +
+        (o.suggested ? '<span class="hint">Thanks, sent to us</span>'
+          : '<button type="button" class="link-btn" data-act="suggest-other" data-domain="' + esc(k) + '" title="Sends us only this organisation\'s name and web address, nothing from your emails">Suggest it for everyone\'s list</button>') +
+        '</div></li>';
+    }).join('');
+
     $('hidden-wrap').hidden = !hidden.length;
     $('hidden-count').textContent = hidden.length;
     $('hidden-list').innerHTML = hidden.map(function (id) {
@@ -398,6 +519,16 @@
   function act(e) {
     var b = e.target.closest('[data-act]');
     if (!b) return;
+    var dom = b.getAttribute('data-domain');
+    if (dom && state.others && state.others[dom]) {
+      var kind = b.getAttribute('data-act');
+      if (kind === 'add-other') addOther(dom);
+      else if (kind === 'hide-other') state.others[dom].hidden = true;
+      else if (kind === 'suggest-other') { suggestOther(dom).then(function () { save(); render(); }); return; }
+      save();
+      render();
+      return;
+    }
     var s = state.orgs[b.getAttribute('data-id')];
     if (!s) return;
     switch (b.getAttribute('data-act')) {
@@ -408,6 +539,7 @@
       case 'hide': s.hidden = true; break;
       case 'unhide': s.hidden = false; break;
       case 'keep': s.kept = true; break;
+      case 'remind': remindMe(b.getAttribute('data-id')); break;
     }
     s.isNew = false;
     save();
@@ -443,8 +575,10 @@
 
     fetch('/scan/catalogue.json').then(function (r) { return r.json(); }).then(function (c) {
       catalogue = c;
-      index = E.buildIndex(c);
+      catalogue.phases['6'] = 'Others found in your inbox';
+      catalogue.categories.other = 'Found in your inbox';
       state = load();
+      rebuildIndex();
       if (state && state.v === 1) { render(); show('tracker'); }
       else { state = null; show('intro'); }
     }).catch(function () {

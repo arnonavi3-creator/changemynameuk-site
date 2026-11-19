@@ -36,7 +36,7 @@
     </div>
 
     <div class="scan-promise">
-      <div><b>Only their emails</b>We only open emails from organisations on our list, like banks and energy companies, to see which name they use. We never open emails from people.</div>
+      <div><b>Only organisations</b>We open emails from organisations on our list, and from other companies that still use your old surname, to see which name they use. Never emails from people.</div>
       <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us, and we can't read it.</div>
       <div><b>You're in control</b>Remove access at any time with one click, here or in your Google account.</div>
     </div>
@@ -59,7 +59,7 @@
       <div class="scan-field">
         <label for="new-surname">Your new surname</label>
         <input type="text" id="new-surname" autocomplete="off" spellcheck="false">
-        <p class="hint">So we can tell which name each organisation uses. Saved only on this device.</p>
+        <p class="hint">So we can tell which name each organisation uses, and find companies we don't know about yet that still use your old surname. Saved only on this device.</p>
       </div>
       <div class="scan-field">
         <label for="started">When did you start changing your name? <span class="hint">(optional)</span></label>
@@ -113,6 +113,12 @@
 
     <div id="org-phases"></div>
 
+    <section id="others" class="mt" hidden>
+      <h2>Others still using your old name</h2>
+      <p class="hint">These aren't on our list yet, but their emails still use your old surname. Add the ones you want to update to your tracker.</p>
+      <ul class="org-list" id="others-list"></ul>
+    </section>
+
     <div class="hidden-wrap" id="hidden-wrap" hidden>
       <details>
         <summary>Not mine (<span id="hidden-count">0</span>)</summary>
@@ -155,6 +161,13 @@
     <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
   </div>
 </footer>
+
+<!-- Netlify registers this form at deploy time. The page posts to it only when
+     someone clicks "Suggest it for everyone's list": an organisation's name and web address. -->
+<form name="org-suggestion" data-netlify="true" hidden>
+  <input type="text" name="domain">
+  <input type="text" name="name">
+</form>
 
 <script src="/scan/config.js"></script>
 <script src="/scan/engine.js"></script>

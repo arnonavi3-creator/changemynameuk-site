@@ -14,6 +14,9 @@ Finds the organisations that have a person's name from their Gmail, shows which 
 | `tools/build_catalogue.py` | Builds `catalogue.json`. `--sample` keeps a short public list |
 | `tests/engine.test.js` | `node --test scan/tests/engine.test.js` |
 
+## Old-surname search (19 Nov 2026, Avi's idea)
+If the person enters their old surname, the scanner also searches Gmail for `"<old surname>" -from:me -in:chats -category:social -category:forums`. Senders not on the list are grouped by base domain; personal providers (Gmail, Hotmail, iCloud…) and the person's own workplace domain are skipped before anything is opened. The latest email from each (top 120) is opened, and senders whose email still uses the old surname are listed under "Others still using your old name". The person can add one to their tracker (kept in this browser), dismiss it, or click "Suggest it for everyone's list", which posts only the organisation name and domain to the Netlify form `org-suggestion`. "Remind me in a week" downloads an .ics calendar file made on the device.
+
 ## Privacy design
 - The access token stays in memory (about 1 hour) and is never stored or sent to our server.
 - Only emails from catalogue domains are ever downloaded (Gmail search). Nothing leaves the browser. Saved in localStorage: organisation list, counts, dates, surnames, the name/greeting each organisation uses (max 60 chars), ticks, and the subject of a confirming email. Email text is never saved.

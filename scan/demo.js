@@ -29,6 +29,10 @@
     ['Aviva', 'aviva@aviva.co.uk', 'Your policy documents', 180],
     ['Tesco Clubcard', 'clubcard@tesco.com', 'Your Clubcard vouchers', 40],
     ['Jo from the book club', 'jo.bookclub@gmail.com', 'Next month\'s book', 20],
+    ['Riverside Dental', 'reception@riversidedental.co.uk', 'Your check-up reminder', 180],
+    ['Acme Payroll', 'payslips@mail.acmepayroll.co.uk', 'Your payslip is ready', 30],
+    ['Hackney Libraries', 'noreply@libraries.hackney.gov.uk', 'Your loans are due soon', 60],
+    ['Lumen Yoga', 'hello@lumenyoga.co.uk', 'Class timetable', 21, ME],
     ['Garden Weekly', 'news@gardenweekly.example', 'This week in the garden', 7],
     ['Mum', 'mum1960@hotmail.co.uk', 'Sunday lunch?', 9]
   ];
@@ -54,7 +58,7 @@
       msgs.push({ id: 'd' + (n++), from: s[0] + ' <' + s[1] + '>', to: s[4] || NEW, subject: s[2], date: now - s[3] * DAY });
     });
     msgs.forEach(function (m) {
-      var nm = (m.to.match(/"([^"]+)"/) || [])[1] || 'Sam Taylor';
+      var nm = (m.to.match(/"([^"]+)"/) || [])[1] || (m.from.indexOf('lumenyoga') >= 0 ? 'Sam' : 'Sam Taylor');
       m.body = 'Dear ' + nm + ',\n\n' + m.subject + '.\n\nKind regards,\n' + m.from.replace(/\s*<.*$/, '');
     });
     msgs.sort(function (a, b) { return b.date - a.date; });
@@ -70,11 +74,13 @@
   function filter(msgs, q) {
     if (!q) return msgs;
     var from = (q.match(/from:\(([^)]*)\)/) || [])[1];
+    var term = (q.match(/^"([^"]+)"/) || [])[1];
     var doms = from ? from.split(/\s+OR\s+/).map(function (x) { return x.trim().toLowerCase(); }) : null;
     var after = (q.match(/after:(\d+)\/(\d+)\/(\d+)/) || null);
     var afterMs = after ? Date.UTC(+after[1], +after[2] - 1, +after[3]) : 0;
     return msgs.filter(function (m) {
       var addr = ((m.from.match(/<([^>]+)>/) || [])[1] || m.from).toLowerCase();
+      if (term && (m.from + ' ' + m.to + ' ' + m.subject + ' ' + m.body).toLowerCase().indexOf(term.toLowerCase()) < 0) return false;
       return m.date >= afterMs && (!doms || doms.some(function (d) { return addr.indexOf(d) >= 0; }));
     });
   }

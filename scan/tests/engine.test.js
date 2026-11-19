@@ -134,3 +134,29 @@ test('reader retries on rate limit and reports expired sign-in', async () => {
   const expired = () => Promise.resolve({ ok: false, status: 401 });
   await assert.rejects(Gmail.create({ fetch: expired, getToken: () => 'x' }).profile(), /expired/);
 });
+
+test('groupOthers keeps unknown organisations and drops people and known senders', () => {
+  const t = Date.UTC(2026, 9, 1);
+  const g = E.groupOthers([
+    { id: 'a', from: 'Riverside Dental <reception@riversidedental.co.uk>', to: '"Sam Taylor" <me@x.com>', subject: 's', date: t },
+    { id: 'b', from: 'Acme Payroll <payslips@mail.acmepayroll.co.uk>', to: 'me@x.com', subject: 's', date: t },
+    { id: 'c', from: 'Acme Payroll <payslips@mail.acmepayroll.co.uk>', to: 'me@x.com', subject: 's', date: t + 5 },
+    { id: 'd', from: 'Jo <jo@gmail.com>', to: 'me@x.com', subject: 's', date: t },
+    { id: 'e', from: 'Monzo <help@monzo.com>', to: 'me@x.com', subject: 's', date: t }
+  ], index, 'me@x.com');
+  assert.deepStrictEqual(Object.keys(g).sort(), ['acmepayroll.co.uk', 'riversidedental.co.uk']);
+  assert.strictEqual(g['acmepayroll.co.uk'].count, 2);
+  assert.strictEqual(g['acmepayroll.co.uk'].lastId, 'c');
+  assert.strictEqual(g['acmepayroll.co.uk'].name, 'Acme Payroll');
+  assert.strictEqual(g['riversidedental.co.uk'].toName, 'Sam Taylor');
+});
+
+test('isPersonalSender skips personal providers and your own workplace', () => {
+  assert.ok(E.isPersonalSender(E.parseFrom('x@hotmail.co.uk')));
+  assert.ok(E.isPersonalSender(E.parseFrom('boss@acme.co.uk'), 'me@mail.acme.co.uk'));
+  assert.ok(!E.isPersonalSender(E.parseFrom('noreply@acme.co.uk'), 'me@gmail.com'));
+});
+
+test('surnameQuery leaves out sent mail, chats, social and forums', () => {
+  assert.strictEqual(Gmail.surnameQuery('Taylor', Date.UTC(2025, 0, 5)), '"Taylor" -from:me -in:chats -category:social -category:forums after:2025/1/5');
+});

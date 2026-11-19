@@ -121,6 +121,61 @@
     return { status: status, greeting: greeting };
   }
 
+  /* ---------- Senders we don't know yet ---------- */
+
+  /* Personal email providers: a sender here is a person, not an organisation. */
+  var FREEMAIL = ('gmail.com googlemail.com hotmail.com hotmail.co.uk outlook.com outlook.co.uk live.com live.co.uk ' +
+    'msn.com yahoo.com yahoo.co.uk ymail.com icloud.com me.com mac.com aol.com aol.co.uk btinternet.com sky.com ' +
+    'virginmedia.com blueyonder.co.uk talktalk.net ntlworld.com protonmail.com proton.me pm.me gmx.com gmx.co.uk ' +
+    'mail.com zoho.com fastmail.com hey.com tutanota.com yandex.com').split(' ');
+  var SECOND_LEVEL = ['co.uk', 'org.uk', 'gov.uk', 'ac.uk', 'me.uk', 'ltd.uk', 'plc.uk', 'nhs.uk', 'police.uk', 'sch.uk',
+    'com.au', 'co.nz', 'co.za', 'co.il', 'org.il', 'com.br', 'co.in', 'co.jp'];
+
+  /* email.info.example.co.uk -> example.co.uk */
+  function baseDomain(domain) {
+    var parts = String(domain).toLowerCase().split('.');
+    var last2 = parts.slice(-2).join('.');
+    return SECOND_LEVEL.indexOf(last2) >= 0 ? parts.slice(-3).join('.') : last2;
+  }
+
+  function isPersonalSender(parsed, ownEmail) {
+    if (!parsed) return true;
+    var d = parsed.domain;
+    if (FREEMAIL.some(function (f) { return d === f || d.slice(-(f.length + 1)) === '.' + f; })) return true;
+    if (ownEmail) {
+      var own = String(ownEmail).toLowerCase();
+      if (parsed.email === own) return true;
+      var ownDomain = own.slice(own.lastIndexOf('@') + 1);
+      if (FREEMAIL.indexOf(ownDomain) < 0 && baseDomain(ownDomain) === baseDomain(d)) return true; // your workplace
+    }
+    return false;
+  }
+
+  /* Group emails from senders that are not on our list and not people.
+     -> { 'example.co.uk': { domain, name, count, lastSeen, lastId, toName } } */
+  function groupOthers(messages, index, ownEmail, existing) {
+    var out = existing || {};
+    messages.forEach(function (msg) {
+      var f = parseFrom(msg.from);
+      if (!f || lookupDomain(f.domain, index) || isPersonalSender(f, ownEmail)) return;
+      var bd = baseDomain(f.domain);
+      var r = out[bd] || (out[bd] = { domain: bd, names: {}, count: 0, lastSeen: 0, lastId: null, toName: '' });
+      r.count++;
+      var nm = f.name.replace(/\s+/g, ' ').trim().slice(0, 60);
+      if (nm) r.names[nm] = (r.names[nm] || 0) + 1;
+      if (msg.date >= r.lastSeen) {
+        r.lastSeen = msg.date; r.lastId = msg.id;
+        r.toName = nameInTo(msg.to, ownEmail) || r.toName;
+      }
+    });
+    Object.keys(out).forEach(function (k) {
+      var r = out[k], best = '', n = 0;
+      Object.keys(r.names).forEach(function (x) { if (r.names[x] > n) { n = r.names[x]; best = x; } });
+      r.name = best || k;
+    });
+    return out;
+  }
+
   /* domain -> [org ids]. A domain shared by several organisations is a "group". */
   function buildIndex(catalogue) {
     var byDomain = {};
@@ -228,6 +283,9 @@
   return {
     parseFrom: parseFrom,
     nameInTo: nameInTo,
+    baseDomain: baseDomain,
+    isPersonalSender: isPersonalSender,
+    groupOthers: groupOthers,
     textFromPayload: textFromPayload,
     nameInBody: nameInBody,
     nameStatus: nameStatus,
