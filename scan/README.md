@@ -21,7 +21,7 @@ Finds the organisations that have a person's name from their Gmail, shows which 
 - No analytics script on this page.
 
 ## Google setup (beta project, Testing mode)
-External audience in Testing, up to 100 named test users for the life of the project, access ends 7 days after consent. Scope `https://www.googleapis.com/auth/gmail.readonly` (Avi chose reading bodies for the name check, 19 Nov 2026). Web client with JavaScript origins `https://changemynameuk.com` and `https://neon-dragon-1ac41e.netlify.app` (add `http://localhost:8765` for local testing). Put the client ID in `config.js`.
+External audience in Testing, up to 100 named test users for the life of the project, access ends 7 days after consent. Scope `https://www.googleapis.com/auth/gmail.readonly` (Avi chose reading bodies for the name check, 19 Nov 2026). Project "Change My Name UK beta", web client "Scanner web" with JavaScript origins `https://changemynameuk.com`, `https://neon-dragon-1ac41e.netlify.app` and `https://deploy-preview-8--neon-dragon-1ac41e.netlify.app` (add `http://localhost:8765` for local testing). Client ID is in `config.js` (public by design; the client secret is not used and must never be committed).
 
 ## Updating the organisation list
 ```
