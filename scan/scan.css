@@ -5,7 +5,7 @@
 .scan-promise b { display: block; font-family: var(--display); font-size: 19px; font-weight: 600; margin-bottom: 4px; }
 .scan-form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin: 0 0 24px; }
 .scan-form label { display: block; font-weight: 600; margin: 0 0 6px; }
-.scan-form select, .scan-form input[type="date"] { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); width: 100%; max-width: 320px; }
+.scan-form select, .scan-form input[type="date"], .scan-form input[type="text"] { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); width: 100%; max-width: 320px; }
 .scan-field { margin: 0 0 18px; }
 .scan-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
 .beta-note { background: var(--wax-soft); border-left: 3px solid var(--wax); border-radius: 4px; padding: 12px 16px; font-size: 15px; margin: 0 0 24px; }
@@ -51,3 +51,8 @@ button:disabled:hover { background: var(--accent); border-color: var(--accent); 
   .summary div { padding: 10px 12px; }
   .summary b { font-size: 24px; }
 }
+.org-name { margin: 4px 0 0; font-size: 15px; }
+.org-name q { font-style: italic; }
+.tag.name-old { background: var(--wax-soft); border-color: var(--wax); color: var(--ink); }
+.tag.name-new { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.name-alert { background: var(--wax-soft); border-left: 3px solid var(--wax); border-radius: 4px; padding: 10px 14px; font-size: 15px; font-weight: 600; margin: 12px 0 8px; }

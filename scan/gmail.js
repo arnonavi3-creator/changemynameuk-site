@@ -1,10 +1,8 @@
-/* Gmail reader for the inbox scanner. Uses the gmail.metadata scope only:
-   message headers (From, Subject, Date), never message bodies.
-   Everything stays in this browser tab. The access token lives in memory and
-   is never written to storage or sent anywhere except Google.
-
-   gmail.metadata does not allow Gmail search (q=), so we page through the
-   message list newest first and stop at the date limit. */
+/* Gmail reader for the inbox scanner. Uses the gmail.readonly scope.
+   It only ever searches for, and opens, emails from organisations on our list:
+   other emails are never downloaded. Everything stays in this browser tab.
+   The access token lives in memory and is never written to storage or sent
+   anywhere except Google. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
   else root.GmailReader = factory();
@@ -13,6 +11,7 @@
 
   var API = 'https://gmail.googleapis.com/gmail/v1/users/me';
   var CONCURRENCY = 8;
+  var DOMAINS_PER_QUERY = 30;
 
   function GmailError(message, status) {
     var e = new Error(message);
@@ -21,6 +20,31 @@
   }
 
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function gmailDate(ms) {
+    var d = new Date(ms);
+    return d.getUTCFullYear() + '/' + (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+  }
+
+  /* Gmail search for mail from any of these domains after a date.
+     from:monzo.com also matches subdomains such as email.monzo.com. */
+  function buildQuery(domains, sinceMs) {
+    return 'from:(' + domains.join(' OR ') + ') after:' + gmailDate(sinceMs);
+  }
+
+  async function pool(items, n, fn, signal) {
+    var i = 0;
+    async function worker() {
+      while (i < items.length) {
+        if (signal && signal.aborted) return;
+        var item = items[i++];
+        await fn(item);
+      }
+    }
+    var ws = [];
+    for (var w = 0; w < n; w++) ws.push(worker());
+    await Promise.all(ws);
+  }
 
   /* opts.fetch lets the demo and tests swap in a fake Gmail. */
   function create(opts) {
@@ -41,52 +65,65 @@
 
     function profile() { return call('/profile'); }
 
-    /* Read headers of messages newer than sinceMs, newest first.
-       onBatch(messages) is called as each page is read; onProgress({ checked }).
-       Stops at maxMessages or when signal.aborted. */
-    async function readSince(sinceMs, o) {
-      o = o || {};
-      var max = o.maxMessages || 6000;
-      var checked = 0;
+    async function searchIds(q, max, signal) {
+      var ids = [];
       var pageToken = '';
-      while (true) {
-        if (o.signal && o.signal.aborted) return { checked: checked, stopped: 'cancelled' };
-        var list = await call('/messages?maxResults=500' + (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : ''));
-        var ids = (list.messages || []).map(function (m) { return m.id; });
-        if (!ids.length) return { checked: checked, stopped: 'end' };
-        var msgs = [];
-        var i = 0;
-        var worker = async function () {
-          while (i < ids.length) {
-            if (o.signal && o.signal.aborted) return;
-            var id = ids[i++];
-            var m = await call('/messages/' + encodeURIComponent(id) +
-              '?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date&fields=id,internalDate,payload/headers');
-            msgs.push(m);
-            checked++;
-            if (o.onProgress && checked % 10 === 0) o.onProgress({ checked: checked });
-          }
-        };
-        var workers = [];
-        for (var w = 0; w < CONCURRENCY; w++) workers.push(worker());
-        await Promise.all(workers);
-        var oldest = Infinity;
-        var inRange = msgs.filter(function (m) {
-          var t = Number(m.internalDate) || 0;
-          if (t < oldest) oldest = t;
-          return t >= sinceMs;
-        });
-        if (o.onBatch) o.onBatch(inRange);
-        if (o.onProgress) o.onProgress({ checked: checked });
-        if (oldest < sinceMs) return { checked: checked, stopped: 'date' };
-        if (checked >= max) return { checked: checked, stopped: 'limit' };
-        if (!list.nextPageToken) return { checked: checked, stopped: 'end' };
-        pageToken = list.nextPageToken;
-      }
+      do {
+        if (signal && signal.aborted) break;
+        var list = await call('/messages?maxResults=500&q=' + encodeURIComponent(q) +
+          (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : ''));
+        (list.messages || []).forEach(function (m) { ids.push(m.id); });
+        pageToken = list.nextPageToken || '';
+      } while (pageToken && ids.length < max);
+      return ids.slice(0, max);
     }
 
-    return { profile: profile, readSince: readSince };
+    function headers(id) {
+      return call('/messages/' + encodeURIComponent(id) +
+        '?format=metadata&metadataHeaders=From&metadataHeaders=To&metadataHeaders=Subject&metadataHeaders=Date&fields=id,internalDate,payload/headers');
+    }
+
+    /* The full message, for reading the name used in the text. */
+    function full(id) {
+      return call('/messages/' + encodeURIComponent(id) + '?format=full&fields=id,internalDate,payload');
+    }
+
+    /* Headers of every email from these domains since sinceMs.
+       onBatch(rawMessages) after each group of domains; onProgress({ checked, groups, group }). */
+    async function readFrom(domains, sinceMs, o) {
+      o = o || {};
+      var max = o.maxMessages || 8000;
+      var seen = {};
+      var checked = 0;
+      var groups = [];
+      for (var g = 0; g < domains.length; g += DOMAINS_PER_QUERY) groups.push(domains.slice(g, g + DOMAINS_PER_QUERY));
+      for (var k = 0; k < groups.length; k++) {
+        if (o.signal && o.signal.aborted) return { checked: checked, stopped: 'cancelled' };
+        var ids = (await searchIds(buildQuery(groups[k], sinceMs), max - checked, o.signal)).filter(function (id) {
+          if (seen[id]) return false;
+          seen[id] = true;
+          return true;
+        });
+        var msgs = [];
+        await pool(ids, CONCURRENCY, async function (id) {
+          msgs.push(await headers(id));
+          checked++;
+          if (o.onProgress && checked % 10 === 0) o.onProgress({ checked: checked, groups: groups.length, group: k + 1 });
+        }, o.signal);
+        if (o.onBatch) o.onBatch(msgs);
+        if (o.onProgress) o.onProgress({ checked: checked, groups: groups.length, group: k + 1 });
+        if (checked >= max) return { checked: checked, stopped: 'limit' };
+      }
+      return { checked: checked, stopped: (o.signal && o.signal.aborted) ? 'cancelled' : 'end' };
+    }
+
+    /* Open several messages (by id) and hand each to fn(message). */
+    async function readFull(ids, fn, signal) {
+      await pool(ids, 6, async function (id) { fn(await full(id)); }, signal);
+    }
+
+    return { profile: profile, readFrom: readFrom, readFull: readFull };
   }
 
-  return { create: create };
+  return { create: create, buildQuery: buildQuery };
 }));

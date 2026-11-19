@@ -64,24 +64,62 @@ test('findConfirmations only counts tracked organisations after their date', () 
   assert.strictEqual(c.monzo.date, t);
 });
 
-test('reader + engine find the sample inbox organisations end to end', async () => {
+test('reader searches only catalogue senders and finds the sample organisations', async () => {
   const now = Date.UTC(2026, 10, 18);
   const r = Gmail.create({ fetch: Demo.createFetch(now, 50), getToken: () => 'x' });
   const found = {};
-  let conf = {};
+  const conf = {};
   const tracked = Object.fromEntries(catalogue.organisations.map(o => [o.id, now - 30 * 86400000]));
-  const res = await r.readSince(now - 730 * 86400000, {
+  const domains = Object.keys(index.byDomain);
+  const res = await r.readFrom(domains, now - 730 * 86400000, {
     onBatch: raw => {
       const msgs = raw.map(E.fromGmail);
-      E.matchMessages(msgs, index, found);
+      for (const m of msgs) assert.ok(E.lookupDomain(E.parseFrom(m.from).domain, index), 'downloaded a non-catalogue email: ' + m.from);
+      E.matchMessages(msgs, index, found, 'sample.inbox@example.com');
       Object.assign(conf, E.findConfirmations(msgs, index, tracked));
     }
   });
-  assert.strictEqual(res.stopped, 'date');
+  assert.strictEqual(res.stopped, 'end');
   for (const id of ['hm-passport-office', 'hmrc', 'monzo', 'nationwide', 'barclaycard', 'octopus-energy', 'ee', 'amazon', 'netflix', 'trainline'])
     assert.ok(found[id], 'missing ' + id);
-  assert.ok(!Object.keys(found).some(id => /mum|garden/.test(id)));
   assert.deepStrictEqual(Object.keys(conf).sort(), ['ee', 'monzo', 'nationwide']);
+  assert.strictEqual(found.monzo.toName, 'Sam Rivers');
+  assert.strictEqual(found.netflix.toName, 'Sam Taylor');
+  assert.strictEqual(found.amazon.toName, undefined); // bare address in To
+  // Open the latest Octopus email and read the name in it.
+  let body;
+  await r.readFull([found['octopus-energy'].lastId], m => { body = E.textFromPayload(m.payload); });
+  assert.deepStrictEqual(E.nameInBody(body, 'Taylor', 'Rivers'), { status: 'new', greeting: 'Dear Sam Rivers' });
+});
+
+test('buildQuery builds a Gmail search', () => {
+  assert.strictEqual(Gmail.buildQuery(['monzo.com', 'ee.co.uk'], Date.UTC(2025, 0, 5)), 'from:(monzo.com OR ee.co.uk) after:2025/1/5');
+});
+
+test('nameInTo picks your own name from the To line', () => {
+  assert.strictEqual(E.nameInTo('"Sam Taylor" <me@x.com>', 'me@x.com'), 'Sam Taylor');
+  assert.strictEqual(E.nameInTo('Bob <b@y.com>, Sam Rivers <ME@x.com>', 'me@x.com'), 'Sam Rivers');
+  assert.strictEqual(E.nameInTo('me@x.com', 'me@x.com'), '');
+  assert.strictEqual(E.nameInTo('"Taylor, Sam" <me@x.com>', ''), 'Taylor, Sam');
+});
+
+test('nameStatus and nameInBody tell old from new surnames', () => {
+  assert.strictEqual(E.nameStatus('Mrs S Taylor', 'Taylor', 'Rivers'), 'old');
+  assert.strictEqual(E.nameStatus('Sam Taylor-Rivers', 'Taylor', 'Taylor-Rivers'), 'new');
+  assert.strictEqual(E.nameStatus('Sam', 'Taylor', 'Rivers'), 'unknown');
+  assert.strictEqual(E.nameStatus('Sam Taylors', 'Taylor', 'Rivers'), 'unknown');
+  assert.deepStrictEqual(E.nameInBody('Dear Mrs Rivers,\nThanks for writing.', 'Taylor', 'Rivers'), { status: 'new', greeting: 'Dear Mrs Rivers' });
+  assert.strictEqual(E.nameInBody('Hi Sam, your statement for S TAYLOR is ready', 'Taylor', 'Rivers').status, 'old');
+  // The greeting decides, even if the text mentions both names.
+  assert.strictEqual(E.nameInBody('Dear Ms Rivers, we changed your name from Taylor to Rivers.', 'Taylor', 'Rivers').status, 'new');
+});
+
+test('textFromPayload reads plain text or strips HTML', () => {
+  const enc = s => Buffer.from(s).toString('base64').replace(/\+/g, '-').replace(/\//g, '_');
+  assert.match(E.textFromPayload({ mimeType: 'multipart/alternative', parts: [
+    { mimeType: 'text/html', body: { data: enc('<p>Dear <b>Sam</b> Rivers</p>') } },
+    { mimeType: 'text/plain', body: { data: enc('Dear Sam Rivers, plain') } }] }), /plain/);
+  assert.match(E.textFromPayload({ mimeType: 'text/html', body: { data: enc('<style>x{}</style><p>Dear&nbsp;Sam Rivers</p>') } }), /Dear Sam Rivers/);
 });
 
 test('reader retries on rate limit and reports expired sign-in', async () => {

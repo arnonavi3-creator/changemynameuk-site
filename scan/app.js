@@ -1,10 +1,11 @@
-/* Inbox scanner page: connects Gmail (read headers only), finds the
-   organisations that have your name, and ticks them off as their
-   confirmation emails arrive. Everything runs and stays in this browser. */
+/* Inbox scanner page: connects Gmail (read-only), finds the organisations
+   that have your name, checks which name their emails use, and ticks them
+   off as they confirm the change. Only emails from organisations on our list
+   are opened. Everything runs and stays in this browser. */
 (function () {
   'use strict';
 
-  var SCOPE = 'https://www.googleapis.com/auth/gmail.metadata';
+  var SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
   var KEY = 'cmn-scan-v1';
   var DAY = 86400000;
   var E = window.ScanEngine;
@@ -20,6 +21,7 @@
   var tokenExpires = 0;
   var tokenClient = null;
   var abort = null;
+  var ownEmail = '';        // in memory only, used to pick your name out of the To line
   var busy = false;
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -88,6 +90,55 @@
     });
   }
 
+  function loadProfile() {
+    if (ownEmail) return Promise.resolve();
+    return reader().profile().then(function (p) { ownEmail = (p && p.emailAddress) || ''; }, function () { /* fall back to first named recipient */ });
+  }
+
+  /* Which name does this organisation use? The latest email's text wins,
+     then the To line. -> { status: 'new'|'old'|'unknown', label, date, from } */
+  function nameOf(s) {
+    if (s.body && s.body.status !== 'unknown') return { status: s.body.status, label: s.body.greeting, date: s.body.date, from: 'body' };
+    if (s.toName) {
+      var st = E.nameStatus(s.toName, state.oldSurname, state.newSurname);
+      if (st !== 'unknown' || !(s.body && s.body.greeting)) return { status: st, label: s.toName, date: s.nameDate, from: 'to' };
+    }
+    if (s.body && s.body.greeting) return { status: 'unknown', label: s.body.greeting, date: s.body.date, from: 'body' };
+    return { status: 'unknown', label: '', date: null, from: '' };
+  }
+
+  /* An email using the new surname is proof the organisation has changed it. */
+  function confirmByName(id) {
+    var s = state.orgs[id];
+    if (!s || s.confirmed) return false;
+    var n = nameOf(s);
+    if (n.status !== 'new') return false;
+    s.confirmed = { date: n.date, byName: n.label || state.newSurname, auto: true };
+    return true;
+  }
+
+  /* Open the latest email from each of these organisations and read the name in it. */
+  function readNames(ids, signal, onEach) {
+    var byMsg = {};
+    ids.forEach(function (id) {
+      var s = state.orgs[id];
+      if (!s || !s.lastId || (s.body && s.body.msgId === s.lastId)) return;
+      (byMsg[s.lastId] = byMsg[s.lastId] || []).push(id);
+    });
+    var msgIds = Object.keys(byMsg);
+    var done = 0;
+    return reader().readFull(msgIds, function (m) {
+      var r = E.nameInBody(E.textFromPayload(m.payload), state.oldSurname, state.newSurname);
+      (byMsg[m.id] || []).forEach(function (id) {
+        state.orgs[id].body = { status: r.status, greeting: r.greeting, date: Number(m.internalDate) || state.orgs[id].lastSeen, msgId: m.id };
+      });
+      done++;
+      if (onEach) onEach(done, msgIds.length);
+    }, signal);
+  }
+
+  function allDomains() { return Object.keys(index.byDomain); }
+
   /* ---------- First scan ---------- */
 
   function startScan(demo) {
@@ -96,13 +147,17 @@
     var months = Number($('period').value) || 24;
     var started = $('started').value ? Date.parse($('started').value) : null;
     if (demo && !started) started = Date.now() - 30 * DAY; // so the sample shows confirmations
+    var oldS = $('old-surname').value.trim();
+    var newS = $('new-surname').value.trim();
+    if (demo && !oldS && !newS) { oldS = window.DemoGmail.oldSurname; newS = window.DemoGmail.newSurname; }
     var prev = state;
     state = {
       v: 1, demo: !!demo, demoNow: demo ? Date.now() : null,
       months: months, startedOn: started, scannedAt: Date.now(), lastCheckAt: null,
+      oldSurname: oldS, newSurname: newS,
       checked: 0, orgs: {}
     };
-    getToken(!demo).then(function () {
+    getToken(!demo).then(loadProfile).then(function () {
       return runScan(Date.now() - months * 30.44 * DAY);
     }).catch(function (err) {
       state = prev;
@@ -120,24 +175,23 @@
     $('scan-bar').style.width = '2%';
     var findings = {};
     var tracked = trackAll();
-    var max = 6000;
+    var max = 8000;
     var r = reader();
-    return r.readSince(sinceMs, {
+    return r.readFrom(allDomains(), sinceMs, {
       maxMessages: max,
       signal: abort.signal,
       onBatch: function (raw) {
         var msgs = raw.map(E.fromGmail);
-        E.matchMessages(msgs, index, findings);
+        E.matchMessages(msgs, index, findings, ownEmail);
         var conf = E.findConfirmations(msgs, index, tracked);
         Object.keys(conf).forEach(function (id) { (findings[id] || {}).pendingConfirm = conf[id]; });
       },
       onProgress: function (p) {
         var n = Object.keys(findings).length;
-        $('scan-count').textContent = 'Checked ' + fmtNum(p.checked) + ' emails. Found ' + n + ' organisation' + (n === 1 ? '' : 's') + ' so far.';
-        $('scan-bar').style.width = Math.min(96, 2 + p.checked / max * 94) + '%';
+        $('scan-count').textContent = 'Found ' + fmtNum(p.checked) + ' emails from ' + n + ' organisation' + (n === 1 ? '' : 's') + ' so far.';
+        $('scan-bar').style.width = Math.min(70, 2 + (p.group - 1 + 0.5) / p.groups * 68) + '%';
       }
     }).then(function (res) {
-      busy = false;
       state.checked = res.checked;
       state.stopped = res.stopped;
       state.lastCheckAt = Date.now();
@@ -145,10 +199,19 @@
         var f = findings[id];
         state.orgs[id] = {
           match: f.match, group: f.group, count: f.count, firstSeen: f.firstSeen, lastSeen: f.lastSeen,
-          kept: f.match === 'sure', hidden: false, askedOn: null,
+          kept: f.match === 'sure', hidden: false, askedOn: null, toName: f.toName || '', nameDate: f.nameDate || null,
           confirmed: f.pendingConfirm ? { date: f.pendingConfirm.date, subject: f.pendingConfirm.subject, auto: true } : null
         };
+        state.orgs[id].lastId = f.lastId;
       });
+      $('scan-count').textContent = 'Checking which name each organisation uses…';
+      return readNames(Object.keys(state.orgs), abort.signal, function (done, total) {
+        $('scan-count').textContent = 'Checking which name each organisation uses (' + done + ' of ' + total + ')…';
+        $('scan-bar').style.width = (70 + done / total * 28) + '%';
+      });
+    }).then(function () {
+      Object.keys(state.orgs).forEach(confirmByName);
+      busy = false;
       save();
       render();
       show('tracker');
@@ -181,12 +244,12 @@
     var fresh = {};
     var conf = {};
     busy = true;
-    getToken(false).then(function () {
-      return reader().readSince(since, {
+    getToken(false).then(loadProfile).then(function () {
+      return reader().readFrom(allDomains(), since, {
         maxMessages: 3000,
         onBatch: function (raw) {
           var msgs = raw.map(E.fromGmail);
-          E.matchMessages(msgs, index, fresh);
+          E.matchMessages(msgs, index, fresh, ownEmail);
           var c = E.findConfirmations(msgs, index, tracked);
           Object.keys(c).forEach(function (id) { if (!conf[id] || c[id].date < conf[id].date) conf[id] = c[id]; });
         }
@@ -198,11 +261,25 @@
         newConf++;
       });
       Object.keys(fresh).forEach(function (id) {
-        if (state.orgs[id]) return;
         var f = fresh[id];
-        state.orgs[id] = { match: f.match, group: f.group, count: f.count, firstSeen: f.firstSeen, lastSeen: f.lastSeen, kept: f.match === 'sure', hidden: false, askedOn: null, confirmed: null, isNew: true };
+        var s = state.orgs[id];
+        if (s) {
+          if (f.toName && (!s.nameDate || f.nameDate > s.nameDate)) { s.toName = f.toName; s.nameDate = f.nameDate; }
+          if (f.lastSeen >= s.lastSeen) { s.lastSeen = f.lastSeen; s.lastId = f.lastId; }
+          return;
+        }
+        state.orgs[id] = { match: f.match, group: f.group, count: f.count, firstSeen: f.firstSeen, lastSeen: f.lastSeen, lastId: f.lastId, kept: f.match === 'sure', hidden: false, askedOn: null, confirmed: null, isNew: true, toName: f.toName || '', nameDate: f.nameDate || null };
         newOrgs++;
       });
+      return readNames(Object.keys(fresh)).then(function () {
+        Object.keys(fresh).forEach(function (id) {
+          var s = state.orgs[id];
+          if (s.kept && !s.hidden && confirmByName(id) && !s.isNew) newConf++;
+        });
+        return [newConf, newOrgs];
+      });
+    }).then(function (counts) {
+      var newConf = counts[0], newOrgs = counts[1];
       state.lastCheckAt = Date.now();
       state.lastResult = (newConf ? newConf + ' new confirmation' + (newConf === 1 ? '' : 's') : 'No new confirmations') +
         (newOrgs ? ' and ' + newOrgs + ' new organisation' + (newOrgs === 1 ? '' : 's') : '') + '.';
@@ -224,11 +301,20 @@
     var o = org(id);
     var cat = catalogue.categories[o.category] || '';
     var meta = fmtNum(s.count) + ' email' + (s.count === 1 ? '' : 's') + ', latest ' + fmtDate(s.lastSeen);
+    var nm = nameOf(s);
+    var ns = nm.status;
+    var nameLine = nm.label
+      ? '<p class="org-name">' + (nm.from === 'body' ? 'Their latest email says' : 'Their emails call you') + ' <q>' + esc(nm.label) + '</q>' +
+        (ns === 'old' ? ' <span class="tag name-old">Old name</span>' : ns === 'new' ? ' <span class="tag name-new">New name</span>' : '') + '</p>'
+      : '';
     var status, actions;
     if (s.confirmed) {
-      status = '<p class="org-status done">' + (s.confirmed.auto
-        ? 'Confirmed by email on ' + esc(fmtShort(s.confirmed.date)) + ': <q>' + esc(s.confirmed.subject) + '</q>'
-        : 'Marked as done on ' + esc(fmtShort(s.confirmed.date))) + '</p>';
+      var how;
+      if (s.confirmed.byName) how = 'Confirmed: their email on ' + esc(fmtShort(s.confirmed.date)) + ' uses your new name';
+      else if (s.confirmed.auto) how = 'Confirmed by email on ' + esc(fmtShort(s.confirmed.date)) + ': <q>' + esc(s.confirmed.subject) + '</q>';
+      else how = 'Marked as done on ' + esc(fmtShort(s.confirmed.date));
+      if (ns === 'old' && !s.confirmed.byName) how += '. <strong>But their latest email still uses your old name.</strong>';
+      status = '<p class="org-status done">' + how + '</p>';
       actions = '<button type="button" class="link-btn" data-act="undo-done" data-id="' + esc(id) + '">Undo</button>';
     } else {
       status = s.askedOn ? '<p class="org-status asked">You asked them on ' + esc(fmtShort(s.askedOn)) + '. We\'ll look for their reply.</p>' : '';
@@ -241,7 +327,7 @@
     return '<li class="org-item' + (s.confirmed ? ' is-done' : '') + '">' +
       '<div class="org-head"><h4>' + esc(o.name) + (s.isNew ? ' <span class="tag">New</span>' : '') + '</h4>' +
       (cat ? '<span class="tag">' + esc(cat) + '</span>' : '') + '</div>' +
-      '<p class="org-meta">' + esc(meta) + '</p>' + status +
+      '<p class="org-meta">' + esc(meta) + '</p>' + nameLine + status +
       '<div class="org-actions">' + actions + '</div></li>';
   }
 
@@ -251,6 +337,13 @@
     var pending = ids.filter(function (id) { var s = state.orgs[id]; return !s.kept && !s.hidden; });
     var hidden = ids.filter(function (id) { return state.orgs[id].hidden; });
     var done = visible.filter(function (id) { return state.orgs[id].confirmed; }).length;
+    var oldCount = visible.filter(function (id) {
+      var s = state.orgs[id];
+      return !s.confirmed && nameOf(s).status === 'old';
+    }).length;
+    $('sum-old').hidden = !oldCount;
+    $('sum-old').textContent = oldCount + ' still email you using your old name.';
+    $('names-ask').hidden = !!(state.oldSurname || state.newSurname);
 
     $('demo-banner').hidden = !state.demo;
     $('sum-found').textContent = visible.length;

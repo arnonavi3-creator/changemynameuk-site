@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Find everyone who has your name | Change My Name UK (beta)</title>
-<meta name="description" content="Private beta: find the organisations that have your old name from your Gmail, on your own device, and tick them off as they confirm your new name.">
+<meta name="description" content="Private beta: find the organisations that have your old name from your Gmail, on your own device, see which name each one uses, and tick them off as they confirm your new name.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +32,12 @@
   <section id="intro">
     <div class="page-head">
       <h1>Find everyone who has your name</h1>
-      <p class="lede">Connect your Gmail and we'll find the banks, providers and services that email you, in the order to update them. Then, each time you come back, we look for their emails confirming your new name and tick them off.</p>
+      <p class="lede">Connect your Gmail and we'll find the banks, providers and services that email you, in the order to update them, and show which name each one still uses. Each time you come back, we look for their latest emails and tick off the ones that have your new name.</p>
     </div>
 
     <div class="scan-promise">
-      <div><b>Headers only</b>We read who each email is from, its subject line and its date. Never the message itself.</div>
-      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us.</div>
+      <div><b>Only their emails</b>We only open emails from organisations on our list, like banks and energy companies, to see which name they use. We never open emails from people.</div>
+      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us, and we can't read it.</div>
       <div><b>You're in control</b>Remove access at any time with one click, here or in your Google account.</div>
     </div>
 
@@ -51,6 +51,15 @@
           <option value="24" selected>The last 2 years</option>
           <option value="60">The last 5 years (slower)</option>
         </select>
+      </div>
+      <div class="scan-field">
+        <label for="old-surname">Your old surname</label>
+        <input type="text" id="old-surname" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="scan-field">
+        <label for="new-surname">Your new surname</label>
+        <input type="text" id="new-surname" autocomplete="off" spellcheck="false">
+        <p class="hint">So we can tell which name each organisation uses. Saved only on this device.</p>
       </div>
       <div class="scan-field">
         <label for="started">When did you start changing your name? <span class="hint">(optional)</span></label>
@@ -70,7 +79,7 @@
 
   <section id="scanning" hidden>
     <div class="scan-box" aria-live="polite">
-      <h2>Reading your email headers…</h2>
+      <h2>Looking through your inbox…</h2>
       <div class="scan-progress" aria-hidden="true"><span id="scan-bar"></span></div>
       <p id="scan-count">Starting…</p>
       <p class="hint">This can take a few minutes for a busy inbox. Keep this page open.</p>
@@ -85,10 +94,12 @@
       <div class="summary">
         <div><b id="sum-found">0</b><span>organisations</span></div>
         <div><b id="sum-done">0</b><span>confirmed</span></div>
-        <div><b id="sum-emails">0</b><span>emails checked</span></div>
+        <div><b id="sum-emails">0</b><span>emails from them</span></div>
       </div>
       <div class="scan-progress" aria-hidden="true"><span id="done-bar"></span></div>
-      <p class="hint">From the last <span id="sum-period">2 years</span> of email, in the order to update them.<span id="sum-limit" hidden> We stopped after 6,000 emails, so some older senders may be missing.</span></p>
+      <p class="name-alert" id="sum-old" hidden></p>
+      <p class="hint" id="names-ask" hidden>Add your old and new surnames next time you scan, and we'll show which name each organisation uses.</p>
+      <p class="hint">From the last <span id="sum-period">2 years</span> of email, in the order to update them.<span id="sum-limit" hidden> We stopped after 8,000 emails, so some older ones may be missing.</span></p>
       <div class="monitor">
         <button type="button" id="check-btn">Check for confirmations</button>
         <p id="last-check"></p>
