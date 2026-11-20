@@ -131,7 +131,9 @@
   var f = document.getElementById('beta-form');
   var data = null;
   try { data = JSON.parse(sessionStorage.getItem('cmn-from-checklist')); } catch (e) { data = null; }
-  if (!data) return;
+  var pre = (location.search.match(/[?&]reason=(marriage|divorce|other)\b/) || [])[1];
+ if (pre && !f.reason.value) f.reason.value = pre;
+ if (!data) return;
   f.checklist_answers.value = data.answers || '';
   f.source.value = 'checklist';
   if (data.reason) f.reason.value = data.reason;
