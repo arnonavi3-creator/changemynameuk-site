@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
 <link rel="stylesheet" href="/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E4D3B'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='%23FBF9F5'%3Ec%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <script defer src="/js/analytics.js"></script>
 <script type="application/ld+json">
 {
@@ -76,19 +76,20 @@
 <body>
 
 
+<a class="skip" href="#main">Skip to content</a>
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name <em>UK</em></span></a>
     <nav class="main-nav" aria-label="Main">
       <a href="/guides/" aria-current="page">Guides</a>
-      <a href="/call/">Talk to me</a>
-      <a href="/beta/">Join the beta</a>
-      <a class="nav-cta" href="/check/">Get your free checklist</a>
+      <a href="/about/">About</a>
+      <a href="/help/">Help</a>
+      <a class="nav-cta" href="/check/">Free checklist</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap narrow doc">
+<main id="main" class="wrap narrow doc">
   <p class="crumbs"><a href="/guides/">Guides</a></p>
   <h1>How to change the name on your driving licence and log book</h1>
   <p class="lede">Updating your driving licence is free, and you must do it by law when your name changes. If you own a car, you need to update your V5C log book too.</p>
@@ -136,6 +137,10 @@
 <footer>
   <div class="wrap">
     <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="brand" href="/"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="32" height="32"><span class="brand-name">Change My Name <em>UK</em></span></a>
+        <p>A free, friendly guide to changing your name in the UK, made by someone going through it too.</p>
+      </div>
       <div>
         <p class="foot-h">Free tools</p>
         <a href="/check/">Name change checklist</a>
