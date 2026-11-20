@@ -17,6 +17,7 @@
   var catalogue = null;
   var index = null;
   var state = null;
+  var view = 'todo'; /* 'todo' = only organisations that still need updating */
   var token = null;         // in memory only
   var tokenExpires = 0;
   var tokenClient = null;
@@ -478,15 +479,36 @@
     $('maybe').hidden = !gh;
     $('maybe-list').innerHTML = gh;
 
-    /* Organisations, in the order to change them. */
+    /* Organisations, in the order to change them. "Needs updating" (the default)
+       lists only those not confirmed, old-name ones first in each phase; the
+       confirmed ones fold into "Already on your new name". */
+    var todo = visible.filter(function (id) { return !state.orgs[id].confirmed; });
+    var doneIds = visible.filter(function (id) { return state.orgs[id].confirmed; })
+      .sort(function (a, b) { return org(a).name.localeCompare(org(b).name); });
+    var showAll = view === 'all';
+    var listed = showAll ? visible : todo;
+    var rank = function (id) { var s = state.orgs[id]; return s.confirmed ? 3 : ({ old: 0, unknown: 1, 'new': 2 })[nameOf(s).status]; };
+    $('view-toggle').hidden = !doneIds.length;
+    $('todo-count').textContent = todo.length;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-view]'), function (b) {
+      var on = b.getAttribute('data-view') === view;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.classList.toggle('ghost-btn', !on);
+    });
+    $('done-wrap').hidden = showAll || !doneIds.length;
+    $('done-count').textContent = doneIds.length;
+    $('done-list').innerHTML = showAll ? '' : doneIds.map(itemHtml).join('');
     var html = '';
     Object.keys(catalogue.phases).forEach(function (p) {
-      var inPhase = visible.filter(function (id) { return String(org(id).phase) === p; })
-        .sort(function (a, b) { return org(a).name.localeCompare(org(b).name); });
+      var inPhase = listed.filter(function (id) { return String(org(id).phase) === p; })
+        .sort(function (a, b) { return (rank(a) - rank(b)) || org(a).name.localeCompare(org(b).name); });
       if (!inPhase.length) return;
       html += '<section class="phase"><h3><span class="phase-n">0' + esc(p) + '</span>' + esc(catalogue.phases[p]) + '</h3><ul class="org-list">' +
         inPhase.map(itemHtml).join('') + '</ul></section>';
     });
+    if (!showAll && visible.length && !todo.length) {
+      html = '<p class="empty">Every organisation we found already uses your new name.</p>';
+    }
     if (!visible.length && !pending.length) {
       html = '<p class="empty">We didn\'t find any organisations we know in this period. Try a longer period, or use the <a href="/check/">checklist</a> instead.</p>';
     }
@@ -572,6 +594,12 @@
     $('check-btn').addEventListener('click', checkNow);
     $('forget-btn').addEventListener('click', forget);
     $('tracker').addEventListener('click', act);
+    $('view-toggle').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-view]');
+      if (!b) return;
+      view = b.getAttribute('data-view');
+      render();
+    });
 
     fetch('/scan/catalogue.json').then(function (r) { return r.json(); }).then(function (c) {
       catalogue = c;

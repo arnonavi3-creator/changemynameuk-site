@@ -112,7 +112,19 @@
       <div id="maybe-list"></div>
     </section>
 
+    <div class="view-toggle" id="view-toggle" hidden>
+      <button type="button" class="small" data-view="todo" aria-pressed="true">Needs updating (<span id="todo-count">0</span>)</button>
+      <button type="button" class="small ghost-btn" data-view="all" aria-pressed="false">Show all</button>
+    </div>
+
     <div id="org-phases"></div>
+
+    <div class="hidden-wrap" id="done-wrap" hidden>
+      <details>
+        <summary>Already on your new name (<span id="done-count">0</span>)</summary>
+        <ul class="org-list mt" id="done-list"></ul>
+      </details>
+    </div>
 
     <section id="others" class="mt" hidden>
       <h2>Others still using your old name</h2>

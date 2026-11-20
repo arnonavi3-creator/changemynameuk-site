@@ -57,3 +57,6 @@ button:disabled:hover { background: var(--accent); border-color: var(--accent); 
 .tag.name-new { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .name-alert { background: var(--wax-soft); border-left: 3px solid var(--wax); border-radius: 4px; padding: 10px 14px; font-size: 15px; font-weight: 600; margin: 12px 0 8px; }
 .other-item { border-style: dashed; }
+.view-toggle { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; }
+#done-wrap { margin-top: 24px; }
+#done-wrap summary { font-weight: 600; color: var(--ink); cursor: pointer; }
