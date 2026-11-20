@@ -349,12 +349,6 @@ p.hint { margin: 0 0 8px; }
 .reassure .ic { width: 18px; height: 18px; color: var(--accent); stroke-width: 2.2; }
 .hero2-photo { position: relative; margin: 0 0 0 24px; }
 .hero2-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 35%; border-radius: 20px; border: 1px solid var(--line); }
-.mini-list { position: absolute; left: -36px; bottom: 44px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px 12px; min-width: 210px; }
-.mini-title { font-family: var(--mono); text-transform: uppercase; letter-spacing: .06em; font-size: 11px; color: var(--muted); margin: 0 0 6px; }
-.mini-item { display: flex; align-items: center; gap: 8px; font-size: 15px; margin: 0 0 4px; }
-.mini-item .ic { width: 18px; height: 18px; color: var(--accent-ink); background: var(--accent); border-radius: 5px; padding: 2px; stroke-width: 2.6; }
-.mini-item.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--wax); }
-.mini-item .box { width: 18px; height: 18px; border: 1.5px solid var(--accent); border-radius: 5px; flex: none; }
 .hero2-photo .hand-note { margin: 14px 0 0; text-align: right; transform: rotate(-2deg); transform-origin: right; font-size: 26px; }
 
 .trust-band { background: var(--surface); border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line); padding: 28px 0; }
@@ -415,8 +409,7 @@ p.hint { margin: 0 0 8px; }
   .story-card.small .story-photo { width: 56px; height: 56px; }
   .hero2 { padding: 28px 0 48px; }
   .hero2-grid, .how-steps { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .hero2-photo { margin: 0 0 0 28px; }
-  .mini-list { left: -28px; bottom: 28px; min-width: 0; }
+  .hero2-photo { margin: 0; }
   .hero2-photo img { aspect-ratio: 1 / 1; object-position: center 40%; }
   .home .story-card { grid-template-columns: minmax(0, 1fr); }
   .home .story-photo { width: 120px; height: 120px; }
