@@ -476,3 +476,12 @@ p.hint { margin: 0 0 8px; }
 @media (max-width: 900px) { .route-grid, .how-steps.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .back-visual { margin: 0 6px; } }
 @media (max-width: 600px) { .route-grid, .how-steps.four { grid-template-columns: minmax(0, 1fr); } .mini-list { margin-left: 20px; } }
+.envelope .letter-to { font-size: 17px; margin: 0 0 12px; }
+.envelope .handwritten { font-size: 28px; }
+.envelope .letter-from { margin-bottom: 12px; }
+.why-stuck p { font-size: 18px; }
+.cols.two .route-card { height: 100%; }
+.cta-band p.cta-alt { margin: 14px 0 0; }
+.cta-band .cta-alt a { color: var(--accent-ink); }
+.home-strip { background: var(--surface); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 15px; text-align: center; }
+.home-strip a { font-weight: 600; }
