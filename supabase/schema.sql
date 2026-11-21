@@ -334,3 +334,20 @@ left join public.progress g on g.user_id = p.id and g.status <> 'not_needed'
 group by p.id;
 
 grant select on public.customer_overview to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Table permissions for the website's signed-in visitors
+-- ---------------------------------------------------------------------------
+-- Newer Supabase projects don't give these automatically. Row level security
+-- above still decides which rows each person can see or change.
+grant usage on schema public to anon, authenticated;
+grant select on public.admins to authenticated;
+grant select, insert, update on public.profiles to authenticated;
+grant select, insert, update on public.checklists to authenticated;
+grant select, insert, update on public.progress to authenticated;
+grant select on public.events to authenticated;
+grant select on public.organisations to anon, authenticated;
+grant insert, update, delete on public.organisations to authenticated;
+grant select on public.customer_overview to authenticated;
+grant usage, select on all sequences in schema public to authenticated;
+grant execute on function public.is_admin() to authenticated;
