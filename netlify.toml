@@ -8,6 +8,15 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
 
+# Admin (customer progress): never indexed, and the page may only talk to this
+# site and the Supabase database.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+    Cache-Control = "no-cache"
+
 # Pages removed when the site became a free checklist (Nov 2026)
 [[redirects]]
   from = "/pricing/*"
