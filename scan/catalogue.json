@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_on": "2026-11-18",
+ "generated_on": "2026-11-21",
  "sample": false,
  "phases": {
   "1": "Identity documents",
@@ -183,6 +183,16 @@
    ]
   },
   {
+   "id": "canal-river-trust",
+   "name": "Canal & River Trust boat licence",
+   "category": "legal-property",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "canalrivertrust.org.uk"
+   ]
+  },
+  {
    "id": "dwp-carers",
    "name": "Carer's Allowance",
    "category": "government",
@@ -331,6 +341,17 @@
    "priority": "recommended",
    "domains": [
     "account.gov.uk"
+   ]
+  },
+  {
+   "id": "healthy-start",
+   "name": "Healthy Start (NHS food vouchers card)",
+   "category": "government",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "healthystart.nhs.uk",
+    "nhsbsa.nhs.uk"
    ]
   },
   {
@@ -546,6 +567,16 @@
    ]
   },
   {
+   "id": "ipo-trade-marks",
+   "name": "UK IPO (trade mark and patent owners)",
+   "category": "legal-property",
+   "phase": 2,
+   "priority": "optional",
+   "domains": [
+    "ipo.gov.uk"
+   ]
+  },
+  {
    "id": "dwp-universal-credit",
    "name": "Universal Credit (DWP)",
    "category": "government",
@@ -564,6 +595,26 @@
    "priority": "optional",
    "domains": [
     "veterans-uk.mod.gov.uk"
+   ]
+  },
+  {
+   "id": "aat",
+   "name": "AAT (accounting technicians)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "aat.org.uk"
+   ]
+  },
+  {
+   "id": "ahcs",
+   "name": "Academy for Healthcare Science",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ahcs.ac.uk"
    ]
   },
   {
@@ -634,6 +685,16 @@
    "priority": "recommended",
    "domains": [
     "alrayanbank.co.uk"
+   ]
+  },
+  {
+   "id": "aldermore",
+   "name": "Aldermore (savings and mortgages)",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "aldermore.co.uk"
    ]
   },
   {
@@ -729,6 +790,26 @@
    ]
   },
   {
+   "id": "babcp",
+   "name": "BABCP (cognitive behavioural therapists)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "babcp.com"
+   ]
+  },
+  {
+   "id": "bacp",
+   "name": "BACP (counsellors and psychotherapists)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "bacp.co.uk"
+   ]
+  },
+  {
    "id": "bank-of-ireland-uk",
    "name": "Bank of Ireland UK",
    "category": "banking",
@@ -747,6 +828,16 @@
    "priority": "recommended",
    "domains": [
     "bankofscotland.co.uk"
+   ]
+  },
+  {
+   "id": "bar-ni",
+   "name": "Bar of Northern Ireland (Bar Council NI)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "barofni.com"
    ]
   },
   {
@@ -791,6 +882,16 @@
    ]
   },
   {
+   "id": "bestinvest",
+   "name": "Bestinvest",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "bestinvest.co.uk"
+   ]
+  },
+  {
    "id": "black-horse",
    "name": "Black Horse (car finance)",
    "category": "credit",
@@ -811,6 +912,16 @@
    ]
   },
   {
+   "id": "bacc",
+   "name": "British Acupuncture Council",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "acupuncture.org.uk"
+   ]
+  },
+  {
    "id": "bma",
    "name": "British Medical Association",
    "category": "work",
@@ -818,6 +929,26 @@
    "priority": "optional",
    "domains": [
     "bma.org.uk"
+   ]
+  },
+  {
+   "id": "bpc",
+   "name": "British Psychoanalytic Council",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "bpc.org.uk"
+   ]
+  },
+  {
+   "id": "bsr-building-inspectors",
+   "name": "Building Safety Regulator (registered building inspectors)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "hse.gov.uk"
    ]
   },
   {
@@ -842,6 +973,99 @@
    ]
   },
   {
+   "id": "care-inspectorate",
+   "name": "Care Inspectorate (childminders in Scotland)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "careinspectorate.com",
+    "careinspectorate.gov.scot"
+   ]
+  },
+  {
+   "id": "charles-stanley",
+   "name": "Charles Stanley Direct",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "charles-stanley-direct.co.uk",
+    "charles-stanley.co.uk"
+   ]
+  },
+  {
+   "id": "chartered-accountants-ireland",
+   "name": "Chartered Accountants Ireland (NI members)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "charteredaccountants.ie"
+   ]
+  },
+  {
+   "id": "chartered-banker",
+   "name": "Chartered Banker Institute",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "charteredbanker.com"
+   ]
+  },
+  {
+   "id": "cisi",
+   "name": "Chartered Institute for Securities and Investment",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "cisi.org"
+   ]
+  },
+  {
+   "id": "ciob",
+   "name": "Chartered Institute of Building",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ciob.org"
+   ]
+  },
+  {
+   "id": "cieh",
+   "name": "Chartered Institute of Environmental Health",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "cieh.org"
+   ]
+  },
+  {
+   "id": "cipa",
+   "name": "Chartered Institute of Patent Attorneys",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "cipa.org.uk"
+   ]
+  },
+  {
+   "id": "ciot",
+   "name": "Chartered Institute of Taxation and ATT",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "att.org.uk",
+    "tax.org.uk"
+   ]
+  },
+  {
    "id": "cii",
    "name": "Chartered Insurance Institute",
    "category": "work",
@@ -849,6 +1073,16 @@
    "priority": "optional",
    "domains": [
     "cii.co.uk"
+   ]
+  },
+  {
+   "id": "csp",
+   "name": "Chartered Society of Physiotherapy",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "csp.org.uk"
    ]
   },
   {
@@ -903,6 +1137,26 @@
    ]
   },
   {
+   "id": "cipfa",
+   "name": "CIPFA",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "cipfa.org"
+   ]
+  },
+  {
+   "id": "citma",
+   "name": "CITMA (trade mark attorneys)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "citma.org.uk"
+   ]
+  },
+  {
    "id": "mycsp",
    "name": "Civil Service Pension Scheme",
    "category": "pensions",
@@ -954,6 +1208,16 @@
    ]
   },
   {
+   "id": "cnhc",
+   "name": "Complementary and Natural Healthcare Council",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "cnhc.org.uk"
+   ]
+  },
+  {
    "id": "computershare",
    "name": "Computershare (shareholdings)",
    "category": "investments",
@@ -962,6 +1226,26 @@
    "domains": [
     "computershare.co.uk",
     "computershare.com"
+   ]
+  },
+  {
+   "id": "clsb",
+   "name": "Costs Lawyer Standards Board",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "clsb.info"
+   ]
+  },
+  {
+   "id": "clc",
+   "name": "Council for Licensed Conveyancers",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "clc-uk.org"
    ]
   },
   {
@@ -1015,6 +1299,16 @@
    ]
   },
   {
+   "id": "denplan",
+   "name": "Denplan (dental payment plans)",
+   "category": "health",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "denplan.co.uk"
+   ]
+  },
+  {
    "id": "direct-line",
    "name": "Direct Line",
    "category": "insurance",
@@ -1022,6 +1316,16 @@
    "priority": "recommended",
    "domains": [
     "directline.com"
+   ]
+  },
+  {
+   "id": "dvsa-adi",
+   "name": "DVSA approved driving instructor register",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "dvsa.gov.uk"
    ]
   },
   {
@@ -1076,6 +1380,26 @@
    ]
   },
   {
+   "id": "faculty-of-advocates",
+   "name": "Faculty of Advocates",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "advocates.org.uk"
+   ]
+  },
+  {
+   "id": "faculty-office-notaries",
+   "name": "Faculty Office (notaries public)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "facultyoffice.org.uk"
+   ]
+  },
+  {
    "id": "fca-register",
    "name": "FCA register (approved persons, via your firm)",
    "category": "work",
@@ -1106,6 +1430,16 @@
    ]
   },
   {
+   "id": "ford-money",
+   "name": "Ford Money (savings)",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "fordmoney.co.uk"
+   ]
+  },
+  {
    "id": "freetrade",
    "name": "Freetrade",
    "category": "investments",
@@ -1113,6 +1447,16 @@
    "priority": "recommended",
    "domains": [
     "freetrade.io"
+   ]
+  },
+  {
+   "id": "gas-safe",
+   "name": "Gas Safe Register (engineers)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "gassaferegister.co.uk"
    ]
   },
   {
@@ -1296,6 +1640,88 @@
    ]
   },
   {
+   "id": "ice",
+   "name": "ICE (Institution of Civil Engineers)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ice.org.uk"
+   ]
+  },
+  {
+   "id": "iet",
+   "name": "IET (Institution of Engineering and Technology)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "theiet.org"
+   ]
+  },
+  {
+   "id": "imeche",
+   "name": "IMechE (Institution of Mechanical Engineers)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "imeche.org"
+   ]
+  },
+  {
+   "id": "iaa",
+   "name": "Immigration Advice Authority (formerly OISC)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "immigrationadviceauthority.gov.uk",
+    "oisc.gov.uk"
+   ]
+  },
+  {
+   "id": "ipa-insolvency",
+   "name": "Insolvency Practitioners Association",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "insolvency-practitioners.org.uk"
+   ]
+  },
+  {
+   "id": "ifoa",
+   "name": "Institute and Faculty of Actuaries",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "actuaries.org.uk"
+   ]
+  },
+  {
+   "id": "ifa-accountants",
+   "name": "Institute of Financial Accountants",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ifa.org.uk"
+   ]
+  },
+  {
+   "id": "interactive-brokers",
+   "name": "Interactive Brokers UK",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "interactivebrokers.co.uk",
+    "interactivebrokers.com"
+   ]
+  },
+  {
    "id": "interactive-investor",
    "name": "interactive investor",
    "category": "investments",
@@ -1306,6 +1732,26 @@
    ]
   },
   {
+   "id": "ipreg",
+   "name": "IPReg (patent and trade mark attorneys)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ipreg.org.uk"
+   ]
+  },
+  {
+   "id": "istructe",
+   "name": "IStructE (Institution of Structural Engineers)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "istructe.org"
+   ]
+  },
+  {
    "id": "jaja",
    "name": "Jaja",
    "category": "credit",
@@ -1313,6 +1759,17 @@
    "priority": "recommended",
    "domains": [
     "jajafinance.co.uk"
+   ]
+  },
+  {
+   "id": "jib-ecs",
+   "name": "JIB ECS card (electricians)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ecscard.org.uk",
+    "jib.org.uk"
    ]
   },
   {
@@ -1333,6 +1790,16 @@
    "priority": "recommended",
    "domains": [
     "kroo.com"
+   ]
+  },
+  {
+   "id": "law-society-ni",
+   "name": "Law Society of Northern Ireland",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "lawsoc-ni.org"
    ]
   },
   {
@@ -1377,6 +1844,16 @@
    ]
   },
   {
+   "id": "lightyear",
+   "name": "Lightyear",
+   "category": "investments",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "lightyear.com"
+   ]
+  },
+  {
    "id": "lloyds",
    "name": "Lloyds Bank",
    "category": "banking",
@@ -1385,6 +1862,16 @@
    "domains": [
     "lloydsbank.co.uk",
     "lloydsbank.com"
+   ]
+  },
+  {
+   "id": "libf",
+   "name": "London Institute of Banking and Finance",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "libf.ac.uk"
    ]
   },
   {
@@ -1436,6 +1923,16 @@
    "priority": "recommended",
    "domains": [
     "marcus.co.uk"
+   ]
+  },
+  {
+   "id": "mca-seafarers",
+   "name": "Maritime and Coastguard Agency (seafarer certificates)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "mcga.gov.uk"
    ]
   },
   {
@@ -1527,6 +2024,16 @@
    "priority": "optional",
    "domains": [
     "nasuwt.org.uk"
+   ]
+  },
+  {
+   "id": "ncps",
+   "name": "National Counselling and Psychotherapy Society",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "nationalcounsellingsociety.org"
    ]
   },
   {
@@ -1642,6 +2149,16 @@
    ]
   },
   {
+   "id": "nhs-performers-list",
+   "name": "NHS performers list (GPs, dentists, optometrists in England, via PCSE)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "pcse.england.nhs.uk"
+   ]
+  },
+  {
    "id": "nhsbsa-ppc",
    "name": "NHS prescription prepayment certificate (PPC/HRT PPC)",
    "category": "health",
@@ -1682,6 +2199,16 @@
    ]
   },
   {
+   "id": "nrpsi",
+   "name": "NRPSI (public service interpreters)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "nrpsi.org.uk"
+   ]
+  },
+  {
    "id": "nsi",
    "name": "NS&I (Premium Bonds and savings)",
    "category": "investments",
@@ -1713,6 +2240,26 @@
    ]
   },
   {
+   "id": "ofsted-childminder",
+   "name": "Ofsted (registered childminders and childcare)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ofsted.gov.uk"
+   ]
+  },
+  {
+   "id": "paragon-bank",
+   "name": "Paragon Bank (savings)",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "paragonbank.co.uk"
+   ]
+  },
+  {
    "id": "paypal",
    "name": "PayPal",
    "category": "investments",
@@ -1733,6 +2280,26 @@
    ]
   },
   {
+   "id": "pensionbee",
+   "name": "PensionBee",
+   "category": "pensions",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "pensionbee.com"
+   ]
+  },
+  {
+   "id": "pmi-pensions",
+   "name": "Pensions Management Institute",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "pensions-pmi.org.uk"
+   ]
+  },
+  {
    "id": "petplan",
    "name": "Petplan",
    "category": "insurance",
@@ -1740,6 +2307,16 @@
    "priority": "recommended",
    "domains": [
     "petplan.co.uk"
+   ]
+  },
+  {
+   "id": "psni-pharmacy",
+   "name": "Pharmaceutical Society of Northern Ireland",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "psni.org.uk"
    ]
   },
   {
@@ -1783,6 +2360,16 @@
    ]
   },
   {
+   "id": "propertymark",
+   "name": "Propertymark (estate and letting agents)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "propertymark.co.uk"
+   ]
+  },
+  {
    "id": "rac",
    "name": "RAC (breakdown and insurance)",
    "category": "insurance",
@@ -1793,6 +2380,16 @@
    ]
   },
   {
+   "id": "raisin-uk",
+   "name": "Raisin UK (savings platform)",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "raisin.co.uk"
+   ]
+  },
+  {
    "id": "revolut",
    "name": "Revolut",
    "category": "banking",
@@ -1800,6 +2397,17 @@
    "priority": "recommended",
    "domains": [
     "revolut.com"
+   ]
+  },
+  {
+   "id": "riba",
+   "name": "RIBA (Royal Institute of British Architects)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "architecture.com",
+    "riba.org"
    ]
   },
   {
@@ -1823,6 +2431,26 @@
    ]
   },
   {
+   "id": "rcgp",
+   "name": "Royal College of General Practitioners",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rcgp.org.uk"
+   ]
+  },
+  {
+   "id": "rcm",
+   "name": "Royal College of Midwives",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rcm.org.uk"
+   ]
+  },
+  {
    "id": "rcn",
    "name": "Royal College of Nursing",
    "category": "work",
@@ -1830,6 +2458,26 @@
    "priority": "optional",
    "domains": [
     "rcn.org.uk"
+   ]
+  },
+  {
+   "id": "rcot",
+   "name": "Royal College of Occupational Therapists",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rcot.co.uk"
+   ]
+  },
+  {
+   "id": "rcvs",
+   "name": "Royal College of Veterinary Surgeons (vets and vet nurses)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rcvs.org.uk"
    ]
   },
   {
@@ -1850,6 +2498,26 @@
    "priority": "recommended",
    "domains": [
     "royallondon.com"
+   ]
+  },
+  {
+   "id": "rpharms",
+   "name": "Royal Pharmaceutical Society",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rpharms.com"
+   ]
+  },
+  {
+   "id": "rtpi",
+   "name": "Royal Town Planning Institute",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "rtpi.org.uk"
    ]
   },
   {
@@ -1893,6 +2561,16 @@
    ]
   },
   {
+   "id": "sppa",
+   "name": "Scottish Public Pensions Agency (NHS and teachers in Scotland)",
+   "category": "pensions",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "pensions.gov.scot"
+   ]
+  },
+  {
    "id": "sssc",
    "name": "Scottish Social Services Council",
    "category": "work",
@@ -1910,6 +2588,16 @@
    "priority": "recommended",
    "domains": [
     "scottishwidows.co.uk"
+   ]
+  },
+  {
+   "id": "shawbrook",
+   "name": "Shawbrook Bank (savings)",
+   "category": "banking",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "shawbrook.co.uk"
    ]
   },
   {
@@ -2004,6 +2692,16 @@
    ]
   },
   {
+   "id": "taxi-licence",
+   "name": "Taxi or private hire driver licence (council or TfL)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "tfl.gov.uk"
+   ]
+  },
+  {
    "id": "teachers-pensions",
    "name": "Teachers' Pension Scheme",
    "category": "pensions",
@@ -2081,6 +2779,26 @@
    "priority": "recommended",
    "domains": [
     "tsb.co.uk"
+   ]
+  },
+  {
+   "id": "ukphr",
+   "name": "UK Public Health Register",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "ukphr.org"
+   ]
+  },
+  {
+   "id": "ukcp",
+   "name": "UKCP (psychotherapists)",
+   "category": "work",
+   "phase": 3,
+   "priority": "optional",
+   "domains": [
+    "psychotherapy.org.uk"
    ]
   },
   {
@@ -2245,6 +2963,16 @@
    ]
   },
   {
+   "id": "zilch",
+   "name": "Zilch",
+   "category": "credit",
+   "phase": 3,
+   "priority": "recommended",
+   "domains": [
+    "zilch.com"
+   ]
+  },
+  {
    "id": "zopa",
    "name": "Zopa Bank",
    "category": "banking",
@@ -2315,6 +3043,16 @@
    ]
   },
   {
+   "id": "budget-energy-ni",
+   "name": "Budget Energy (Northern Ireland)",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "budgetenergy.co.uk"
+   ]
+  },
+  {
    "id": "calor",
    "name": "Calor Gas",
    "category": "energy",
@@ -2322,6 +3060,16 @@
    "priority": "recommended",
    "domains": [
     "calor.co.uk"
+   ]
+  },
+  {
+   "id": "click-energy-ni",
+   "name": "Click Energy (Northern Ireland)",
+   "category": "energy",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "clickenergyni.com"
    ]
   },
   {
@@ -2868,6 +3616,26 @@
    ]
   },
   {
+   "id": "youfibre",
+   "name": "YouFibre",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "youfibre.com"
+   ]
+  },
+  {
+   "id": "zen-internet",
+   "name": "Zen Internet",
+   "category": "telecoms",
+   "phase": 4,
+   "priority": "recommended",
+   "domains": [
+    "zen.co.uk"
+   ]
+  },
+  {
    "id": "airbnb",
    "name": "Airbnb",
    "category": "travel",
@@ -2969,6 +3737,16 @@
    ]
   },
   {
+   "id": "blue-light-card",
+   "name": "Blue Light Card",
+   "category": "memberships",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "bluelightcard.co.uk"
+   ]
+  },
+  {
    "id": "booking-com",
    "name": "Booking.com",
    "category": "travel",
@@ -3000,6 +3778,16 @@
    ]
   },
   {
+   "id": "channel4",
+   "name": "Channel 4 account",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "channel4.com"
+   ]
+  },
+  {
    "id": "clearscore",
    "name": "ClearScore",
    "category": "credit-identity",
@@ -3020,6 +3808,16 @@
    ]
   },
   {
+   "id": "costa-club",
+   "name": "Costa Coffee Club",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "costa.co.uk"
+   ]
+  },
+  {
    "id": "costco",
    "name": "Costco membership",
    "category": "retail",
@@ -3030,6 +3828,16 @@
    ]
   },
   {
+   "id": "currys",
+   "name": "Currys (account and Perks)",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "currys.co.uk"
+   ]
+  },
+  {
    "id": "david-lloyd",
    "name": "David Lloyd Clubs",
    "category": "memberships",
@@ -3037,6 +3845,17 @@
    "priority": "optional",
    "domains": [
     "davidlloyd.co.uk"
+   ]
+  },
+  {
+   "id": "deliveroo",
+   "name": "Deliveroo",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "deliveroo.co.uk",
+    "deliveroo.com"
    ]
   },
   {
@@ -3101,6 +3920,17 @@
    ]
   },
   {
+   "id": "expedia",
+   "name": "Expedia",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "expedia.co.uk",
+    "expedia.com"
+   ]
+  },
+  {
    "id": "experian",
    "name": "Experian",
    "category": "credit-identity",
@@ -3132,6 +3962,16 @@
    ]
   },
   {
+   "id": "hilton-honors",
+   "name": "Hilton Honors",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "hilton.com"
+   ]
+  },
+  {
    "id": "hes",
    "name": "Historic Environment Scotland",
    "category": "memberships",
@@ -3139,6 +3979,26 @@
    "priority": "optional",
    "domains": [
     "hes.scot"
+   ]
+  },
+  {
+   "id": "holland-barrett",
+   "name": "Holland & Barrett Rewards for Life",
+   "category": "retail",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "hollandandbarrett.com"
+   ]
+  },
+  {
+   "id": "ihg-one",
+   "name": "IHG One Rewards",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "ihg.com"
    ]
   },
   {
@@ -3162,6 +4022,16 @@
    ]
   },
   {
+   "id": "itvx",
+   "name": "ITVX account",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "itv.com"
+   ]
+  },
+  {
    "id": "jet2",
    "name": "Jet2.com",
    "category": "travel",
@@ -3169,6 +4039,16 @@
    "priority": "optional",
    "domains": [
     "jet2.com"
+   ]
+  },
+  {
+   "id": "just-eat",
+   "name": "Just Eat",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "just-eat.co.uk"
    ]
   },
   {
@@ -3199,6 +4079,16 @@
    "priority": "optional",
    "domains": [
     "marksandspencer.com"
+   ]
+  },
+  {
+   "id": "marriott-bonvoy",
+   "name": "Marriott Bonvoy",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "marriott.com"
    ]
   },
   {
@@ -3403,6 +4293,26 @@
    ]
   },
   {
+   "id": "tiktok",
+   "name": "TikTok",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "tiktok.com"
+   ]
+  },
+  {
+   "id": "totum",
+   "name": "TOTUM student discount card",
+   "category": "memberships",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "totum.com"
+   ]
+  },
+  {
    "id": "trainline",
    "name": "Trainline",
    "category": "travel",
@@ -3480,6 +4390,26 @@
    "priority": "optional",
    "domains": [
     "whatsapp.com"
+   ]
+  },
+  {
+   "id": "wizz-air",
+   "name": "Wizz Air",
+   "category": "travel",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "wizzair.com"
+   ]
+  },
+  {
+   "id": "x-twitter",
+   "name": "X (Twitter)",
+   "category": "subscriptions",
+   "phase": 5,
+   "priority": "optional",
+   "domains": [
+    "x.com"
    ]
   },
   {
