@@ -24,6 +24,7 @@
   function check(r) { if (r.error) throw r.error; return r.data; }
 
   A.mount($('acct-box'), {
+    admin: true,
     title: 'Sign in',
     blurb: 'with your admin email. We\'ll email you a link.',
     signedIn: function (email) { return 'Signed in as ' + email + '.'; }

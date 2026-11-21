@@ -231,8 +231,10 @@
     if (!el) return;
     opts = opts || {};
     var sent = '';
+    var testHost = /^deploy-preview-|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+    var allowed = opts.admin || cfg.publicSignIn !== false || testHost;
     function draw(msg, isErr) {
-      if (!enabled) { el.hidden = true; return; }
+      if (!enabled || (!allowed && !user)) { el.hidden = true; return; }
       el.hidden = false;
       if (user) {
         el.innerHTML = '<p class="acct-in"><span class="acct-dot" aria-hidden="true"></span>' +

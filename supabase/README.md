@@ -5,7 +5,7 @@ Customers can sign in with an emailed link (no password) to save their checklist
 | File | What it does |
 |---|---|
 | `supabase/schema.sql` | Tables, security rules (row level security), triggers and the admin view. Run in the Supabase SQL editor; safe to run again |
-| `js/account-config.js` | Supabase project address and publishable key (both public by design) |
+| `js/account-config.js` | Supabase project address and publishable key (both public by design), and `publicSignIn`: while `false`, the checklist's sign-in box only shows on deploy previews and localhost |
 | `js/account.js` | Sign-in box, and saving the checklist and scanner to the database |
 | `js/vendor/supabase-2.118.0.js` | Supabase's browser library (copied from npm so pages with a strict security policy can load it from this site) |
 | `admin/` | The admin page: all customers, then one customer's organisations, status, dates and history |
@@ -36,7 +36,8 @@ Done means the customer says so. Confirmed means there's evidence (an email, the
    ```
    Reload `/admin/` and you'll see every customer.
 7. **Sign-in emails for real customers.** Supabase's built-in email only sends to members of your Supabase team, a few an hour. Before real customers sign in, set up your own email sender, for example Resend (free for 3,000 emails a month): sign up at https://resend.com, add the domain `changemynameuk.com`, add the DNS records it shows in GoDaddy (keep the ImprovMX MX records), then in Supabase **Authentication > Emails > SMTP Settings** turn on custom SMTP: host `smtp.resend.com`, port `465`, username `resend`, password = your Resend API key, sender `hello@changemynameuk.com`, sender name `Change My Name UK`. In **Authentication > Emails > Templates > Magic Link** you can change the email's wording.
-8. **Paperwork:** sign Supabase's Data Processing Addendum (dashboard, **Organization settings > Legal documents**), and register with the ICO before real customers sign in.
+8. When steps 7 and 9 are done, set `publicSignIn: true` in `js/account-config.js` so customers on the live site see the sign-in box.
+9. **Paperwork:** sign Supabase's Data Processing Addendum (dashboard, **Organization settings > Legal documents**), and register with the ICO before real customers sign in.
 
 ## The inbox scanner
 

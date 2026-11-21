@@ -6,5 +6,10 @@
    before, saving only in the visitor's browser. */
 window.CMN_SUPABASE = {
   url: 'https://tgsoricyjpvtaqgewfip.supabase.co',
-  key: 'sb_publishable_v4jfXPCJhIcs4sCGroF2hg_s_kzZ9AK'
+  key: 'sb_publishable_v4jfXPCJhIcs4sCGroF2hg_s_kzZ9AK',
+  /* false = the "Save your checklist" box only shows on deploy previews and
+     localhost, not on the live site. Set to true once sign-in emails go
+     through our own sender (Resend) and the ICO registration is done.
+     The admin page works either way. */
+  publicSignIn: false
 };
