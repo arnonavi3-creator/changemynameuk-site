@@ -5,6 +5,6 @@
    Leave url empty to switch accounts off: the site then works exactly as
    before, saving only in the visitor's browser. */
 window.CMN_SUPABASE = {
-  url: '',
+  url: 'https://tgsoricyjpvtaqgewfip.supabase.co',
   key: ''
 };
