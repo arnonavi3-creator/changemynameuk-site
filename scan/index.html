@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Name change Finder: find everyone who has your name | Change My Name UK (beta)</title>
+<meta name="description" content="Private beta: find the organisations that have your old name from your Gmail, on your own device, see which name each one uses, and tick them off as they confirm your new name.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/scan/scan.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E4D3B'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' text-anchor='middle' fill='%23FBF9F5'%3Ec%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">Change My Name <span>UK</span></a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="/guides/">Guides</a>
+      <a href="/call/">Talk to me</a>
+      <a href="/beta/">Join the beta</a>
+      <a class="nav-cta" href="/check/">Get your free checklist</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow">
+
+  <section id="intro">
+    <div class="page-head">
+      <p class="badge">Name change Finder</p>
+      <h1>Find everyone who has your name</h1>
+      <p class="lede">Connect your Gmail and we'll find the banks, providers and services that email you, in the order to update them, and show which name each one still uses. Each time you come back, we look for their latest emails and tick off the ones that have your new name.</p>
+    </div>
+
+    <div class="scan-promise">
+      <div><b>Only organisations</b>We open emails from organisations on our list, and from other companies that still use your old surname, to see which name they use. Never emails from people.</div>
+      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us, unless you choose to send us your list for help.</div>
+      <div><b>You're in control</b>Remove access at any time with one click, here or in your Google account.</div>
+    </div>
+
+    <p class="beta-note"><strong>Private beta.</strong> Only invited testers can connect Gmail for now. Google will warn you that the app hasn't been verified yet, which is expected while we're testing. Access lasts 7 days, then you reconnect with one click.</p>
+
+    <div class="scan-form">
+      <div class="scan-field">
+        <label for="since">Search your emails from</label>
+        <input type="date" id="since">
+        <p class="hint">Usually your wedding or divorce date. Pick an earlier date to find organisations that rarely email you. <span class="presets">Or go back <button type="button" class="link-btn" data-years="1">1 year</button> <button type="button" class="link-btn" data-years="2">2 years</button> <button type="button" class="link-btn" data-years="5">5 years</button></span></p>
+      </div>
+      <div class="scan-field">
+        <label for="old-surname">Your old surname</label>
+        <input type="text" id="old-surname" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="scan-field">
+        <label for="new-surname">Your new surname</label>
+        <input type="text" id="new-surname" autocomplete="off" spellcheck="false">
+        <p class="hint">So we can tell which name each organisation uses, and find companies we don't know about yet that still use your old surname. Saved only on this device.</p>
+      </div>
+      <div class="scan-actions">
+        <button type="button" id="connect-btn">Connect Gmail and scan</button>
+        <button type="button" class="ghost-btn" id="demo-btn">Try a sample inbox</button>
+      </div>
+      <p class="hint" id="no-client" hidden>Gmail connection isn't switched on yet. You can try the sample inbox, which is made up.</p>
+      <p class="scan-error" id="scan-error" role="alert" hidden></p>
+    </div>
+
+    <p class="fine">How we handle your data is in our <a href="/privacy.html#gmail">privacy notice</a>. Our use of information received from Google APIs follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+  </section>
+
+  <section id="scanning" hidden>
+    <div class="scan-box" aria-live="polite">
+      <h2>Looking through your inbox…</h2>
+      <div class="scan-progress" aria-hidden="true"><span id="scan-bar"></span></div>
+      <p id="scan-count">Starting…</p>
+      <p class="hint">This can take a few minutes for a busy inbox. Keep this page open.</p>
+      <button type="button" class="ghost-btn" id="cancel-btn">Stop and show what's found</button>
+    </div>
+  </section>
+
+  <section id="tracker" hidden>
+    <div class="page-head">
+      <p class="beta-note" id="demo-banner" hidden>This is a <strong>sample inbox</strong> with made-up emails, so you can see how it works.</p>
+      <h1>Your name change tracker</h1>
+      <div class="summary">
+        <div><b id="sum-found">0</b><span>organisations</span></div>
+        <div><b id="sum-done">0</b><span>confirmed</span></div>
+        <div><b id="sum-emails">0</b><span>emails from them</span></div>
+      </div>
+      <div class="scan-progress" aria-hidden="true"><span id="done-bar"></span></div>
+      <p class="name-alert" id="sum-old" hidden></p>
+      <p class="hint" id="names-ask" hidden>Add your old and new surnames next time you scan, and we'll show which name each organisation uses.</p>
+      <p class="hint">From your emails since <span id="sum-period">2 years ago</span>, in the order to update them.<span id="sum-limit" hidden> We stopped after 8,000 emails, so some older ones may be missing.</span></p>
+      <div class="monitor">
+        <button type="button" id="check-btn">Check for confirmations</button>
+        <p id="last-check"></p>
+      </div>
+    </div>
+
+    <section id="maybe" class="mt" hidden>
+      <h2>Check these</h2>
+      <div id="maybe-list"></div>
+    </section>
+
+    <div class="view-toggle" id="view-toggle" hidden>
+      <button type="button" class="small" data-view="todo" aria-pressed="true">Needs updating (<span id="todo-count">0</span>)</button>
+      <button type="button" class="small ghost-btn" data-view="all" aria-pressed="false">Show all</button>
+    </div>
+
+    <div id="org-phases"></div>
+
+    <div class="hidden-wrap" id="done-wrap" hidden>
+      <details>
+        <summary>Already on your new name (<span id="done-count">0</span>)</summary>
+        <ul class="org-list mt" id="done-list"></ul>
+      </details>
+    </div>
+
+    <section id="others" class="mt" hidden>
+      <h2>Others still using your old name</h2>
+      <p class="hint">These aren't on our list yet, but their emails still use your old surname. Add the ones you want to update to your tracker, and tap "Not an organisation" for anything that isn't.</p>
+      <p><button type="button" class="small" data-act="add-all-others">Add all to my tracker</button></p>
+      <ul class="org-list" id="others-list"></ul>
+    </section>
+
+    <div class="hidden-wrap" id="hidden-wrap" hidden>
+      <details>
+        <summary>Not mine (<span id="hidden-count">0</span>)</summary>
+        <ul id="hidden-list"></ul>
+      </details>
+    </div>
+
+    <section id="help" class="help-card mt" hidden>
+      <h2>Want help updating these?</h2>
+      <p>Send this list to us and we'll help you work through it. We'll only send what you see below: each organisation's name and web address, and the name its latest email uses. Nothing else from your emails is sent.</p>
+      <div id="help-form">
+        <ul class="help-list" id="help-list"></ul>
+        <div class="scan-field">
+          <label for="help-email">Your email, so we can reply</label>
+          <input type="email" id="help-email" autocomplete="email">
+        </div>
+        <label class="check-line"><input type="checkbox" id="help-consent"> I agree to send this list, my old and new surname and my email to Change My Name UK, to help me change my name. <a href="/privacy.html#gmail">How we use it</a></label>
+        <div class="scan-actions">
+          <button type="button" id="help-send" disabled>Send my list</button>
+        </div>
+        <p class="scan-error" id="help-error" role="alert" hidden></p>
+      </div>
+      <p class="org-status done" id="help-sent" hidden></p>
+    </section>
+
+    <div class="tracker-foot">
+      <p>Your tracker is saved only in this browser. Missing someone? The <a href="/check/">checklist</a> covers places that don't email you.</p>
+      <button type="button" class="ghost-btn small" id="forget-btn">Disconnect Gmail and delete this tracker</button>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div>
+        <p class="foot-h">Free tools</p>
+        <a href="/check/">Name change checklist</a>
+        <a href="/call/">Talk to me (£7 voucher)</a>
+        <a href="/beta/">Join the beta</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">About</p>
+        <a href="/about/">About me</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    <p>Change My Name UK is run by Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>
+
+<!-- Netlify registers this form at deploy time. The page posts to it only when
+     someone clicks "Suggest it for everyone's list": an organisation's name and web address. -->
+<form name="scan-results" data-netlify="true" hidden>
+  <input type="email" name="email">
+  <input type="text" name="old_surname">
+  <input type="text" name="new_surname">
+  <input type="text" name="count">
+  <textarea name="organisations"></textarea>
+</form>
+<form name="org-suggestion" data-netlify="true" hidden>
+  <input type="text" name="domain">
+  <input type="text" name="name">
+</form>
+
+<script src="/scan/config.js"></script>
+<script src="/scan/engine.js"></script>
+<script src="/scan/gmail.js"></script>
+<script src="/scan/demo.js"></script>
+<script src="/scan/app.js"></script>
+</body>
+</html>

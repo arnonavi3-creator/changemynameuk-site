@@ -6,6 +6,7 @@ Website for Change My Name UK (run by Avi Arnon as a sole trader until the compa
 
 - `/` home (lead generation for research calls), `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit)
 - `/guides/` and 10 guides under it
+- `/scan/` inbox scanner, private beta (not linked or indexed). Connects Gmail with the `gmail.readonly` scope through Google Identity Services, searches only for emails from domains in `scan/catalogue.json`, reads the name each organisation uses, and saves the tracker in localStorage only. Later visits check for confirmations. See `scan/README.md`.
 - `/about/`, `/help/`, `privacy.html`, `thanks.html`
 - `/pricing/`, `/how-it-works/`, `/free-guide/` and `/terms/` were removed in Nov 2026 while the site is used for research; `netlify.toml` redirects them
 - `sitemap.xml` and `robots.txt`
