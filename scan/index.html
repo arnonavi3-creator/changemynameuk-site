@@ -46,12 +46,9 @@
 
     <div class="scan-form">
       <div class="scan-field">
-        <label for="period">How far back should we look?</label>
-        <select id="period">
-          <option value="12">The last 12 months</option>
-          <option value="24" selected>The last 2 years</option>
-          <option value="60">The last 5 years (slower)</option>
-        </select>
+        <label for="since">Search your emails from</label>
+        <input type="date" id="since">
+        <p class="hint">Usually your wedding or divorce date. Pick an earlier date to find organisations that rarely email you. <span class="presets">Or go back <button type="button" class="link-btn" data-years="1">1 year</button> <button type="button" class="link-btn" data-years="2">2 years</button> <button type="button" class="link-btn" data-years="5">5 years</button></span></p>
       </div>
       <div class="scan-field">
         <label for="old-surname">Your old surname</label>
@@ -61,11 +58,6 @@
         <label for="new-surname">Your new surname</label>
         <input type="text" id="new-surname" autocomplete="off" spellcheck="false">
         <p class="hint">So we can tell which name each organisation uses, and find companies we don't know about yet that still use your old surname. Saved only on this device.</p>
-      </div>
-      <div class="scan-field">
-        <label for="started">When did you start changing your name? <span class="hint">(optional)</span></label>
-        <input type="date" id="started">
-        <p class="hint">We only count confirmation emails sent after this date.</p>
       </div>
       <div class="scan-actions">
         <button type="button" id="connect-btn">Connect Gmail and scan</button>
@@ -100,7 +92,7 @@
       <div class="scan-progress" aria-hidden="true"><span id="done-bar"></span></div>
       <p class="name-alert" id="sum-old" hidden></p>
       <p class="hint" id="names-ask" hidden>Add your old and new surnames next time you scan, and we'll show which name each organisation uses.</p>
-      <p class="hint">From the last <span id="sum-period">2 years</span> of email, in the order to update them.<span id="sum-limit" hidden> We stopped after 8,000 emails, so some older ones may be missing.</span></p>
+      <p class="hint">From your emails since <span id="sum-period">2 years ago</span>, in the order to update them.<span id="sum-limit" hidden> We stopped after 8,000 emails, so some older ones may be missing.</span></p>
       <div class="monitor">
         <button type="button" id="check-btn">Check for confirmations</button>
         <p id="last-check"></p>
@@ -128,7 +120,8 @@
 
     <section id="others" class="mt" hidden>
       <h2>Others still using your old name</h2>
-      <p class="hint">These aren't on our list yet, but their emails still use your old surname. Add the ones you want to update to your tracker.</p>
+      <p class="hint">These aren't on our list yet, but their emails still use your old surname. Add the ones you want to update to your tracker, and tap "Not an organisation" for anything that isn't.</p>
+      <p><button type="button" class="small" data-act="add-all-others">Add all to my tracker</button></p>
       <ul class="org-list" id="others-list"></ul>
     </section>
 

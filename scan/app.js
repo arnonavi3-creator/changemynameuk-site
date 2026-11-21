@@ -154,13 +154,13 @@
     var acc = {};
     var r = reader();
     return r.readQuery(window.GmailReader.surnameQuery(state.oldSurname, sinceMs), {
-      maxMessages: 3000,
+      maxMessages: 5000,
       signal: signal,
       onBatch: function (raw) { E.groupOthers(raw.map(E.fromGmail), index, ownEmail, acc); }
     }).then(function () {
       var cands = Object.keys(acc).map(function (k) { return acc[k]; })
         .filter(function (o) { var ex = state.others[o.domain]; return !ex || o.lastSeen > ex.lastSeen; })
-        .sort(function (a, b) { return b.count - a.count; }).slice(0, 120);
+        .sort(function (a, b) { return b.count - a.count; }).slice(0, 250);
       var byMsg = {};
       cands.forEach(function (o) { (byMsg[o.lastId] = byMsg[o.lastId] || []).push(o); });
       var ids = Object.keys(byMsg);
@@ -238,22 +238,24 @@
   function startScan(demo) {
     if (busy) return;
     setError('');
-    var months = Number($('period').value) || 24;
-    var started = $('started').value ? Date.parse($('started').value) : null;
-    if (demo && !started) started = Date.now() - 30 * DAY; // so the sample shows confirmations
+    var sinceMs = $('since').value ? Date.parse($('since').value) : NaN;
+    if (!isFinite(sinceMs)) sinceMs = Date.now() - 730 * DAY;
+    if (sinceMs > Date.now() - DAY) { setError('Please pick a date in the past.'); return; }
+    /* Confirmations count from the same date. The sample inbox uses 30 days ago so it shows some. */
+    var started = demo ? Date.now() - 30 * DAY : sinceMs;
     var oldS = $('old-surname').value.trim();
     var newS = $('new-surname').value.trim();
     if (demo && !oldS && !newS) { oldS = window.DemoGmail.oldSurname; newS = window.DemoGmail.newSurname; }
     var prev = state;
     state = {
       v: 1, demo: !!demo, demoNow: demo ? Date.now() : null,
-      months: months, startedOn: started, scannedAt: Date.now(), lastCheckAt: null,
+      sinceOn: sinceMs, startedOn: started, scannedAt: Date.now(), lastCheckAt: null,
       oldSurname: oldS, newSurname: newS,
       checked: 0, orgs: {}, others: {}, custom: {}
     };
     rebuildIndex();
     getToken(!demo).then(loadProfile).then(function () {
-      return runScan(Date.now() - months * 30.44 * DAY);
+      return runScan(sinceMs);
     }).catch(function (err) {
       state = prev;
       rebuildIndex();
@@ -348,7 +350,7 @@
     busy = true;
     getToken(false).then(loadProfile).then(function () {
       return reader().readFrom(allDomains(), since, {
-        maxMessages: 3000,
+        maxMessages: 5000,
         onBatch: function (raw) {
           var msgs = raw.map(E.fromGmail);
           E.matchMessages(msgs, index, fresh, ownEmail);
@@ -454,7 +456,7 @@
     $('sum-found').textContent = visible.length;
     $('sum-done').textContent = done;
     $('sum-emails').textContent = fmtNum(state.checked);
-    $('sum-period').textContent = state.months >= 24 ? (state.months / 12) + ' years' : state.months + ' months';
+    $('sum-period').textContent = state.sinceOn ? fmtDate(state.sinceOn) : (state.months ? state.months + ' months ago' : '');
     $('sum-limit').hidden = state.stopped !== 'limit';
     $('done-bar').style.width = (visible.length ? Math.round(done / visible.length * 100) : 0) + '%';
     $('last-check').textContent = state.lastCheckAt ? 'Last checked ' + new Date(state.lastCheckAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. ' + (state.lastResult || '') : '';
@@ -510,7 +512,7 @@
       html = '<p class="empty">Every organisation we found already uses your new name.</p>';
     }
     if (!visible.length && !pending.length) {
-      html = '<p class="empty">We didn\'t find any organisations we know in this period. Try a longer period, or use the <a href="/check/">checklist</a> instead.</p>';
+      html = '<p class="empty">We didn\'t find any organisations we know since that date. Try an earlier date, or use the <a href="/check/">checklist</a> instead.</p>';
     }
     $('org-phases').innerHTML = html;
 
@@ -541,6 +543,15 @@
   function act(e) {
     var b = e.target.closest('[data-act]');
     if (!b) return;
+    if (b.getAttribute('data-act') === 'add-all-others') {
+      Object.keys(state.others || {}).forEach(function (k) {
+        var o = state.others[k];
+        if (o.status === 'old' && !o.hidden && !o.added) addOther(k);
+      });
+      save();
+      render();
+      return;
+    }
     var dom = b.getAttribute('data-domain');
     if (dom && state.others && state.others[dom]) {
       var kind = b.getAttribute('data-act');
@@ -594,6 +605,15 @@
     $('check-btn').addEventListener('click', checkNow);
     $('forget-btn').addEventListener('click', forget);
     $('tracker').addEventListener('click', act);
+    var setYears = function (y) {
+      var d = new Date(); d.setFullYear(d.getFullYear() - y);
+      $('since').value = d.toISOString().slice(0, 10);
+    };
+    setYears(2);
+    $('since').max = new Date().toISOString().slice(0, 10);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-years]'), function (b) {
+      b.addEventListener('click', function () { setYears(Number(b.getAttribute('data-years'))); });
+    });
     $('view-toggle').addEventListener('click', function (e) {
       var b = e.target.closest('[data-view]');
       if (!b) return;
