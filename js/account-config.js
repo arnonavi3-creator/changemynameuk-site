@@ -6,5 +6,5 @@
    before, saving only in the visitor's browser. */
 window.CMN_SUPABASE = {
   url: 'https://tgsoricyjpvtaqgewfip.supabase.co',
-  key: ''
+  key: 'sb_publishable_v4jfXPCJhIcs4sCGroF2hg_s_kzZ9AK'
 };
