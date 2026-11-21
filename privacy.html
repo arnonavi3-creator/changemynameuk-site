@@ -38,8 +38,8 @@
 </header>
 <main id="main" class="wrap narrow doc">
   <h1>Privacy notice</h1>
-  <p>Last updated: 15 November 2026</p>
-  <p>This notice explains how we use your information when you use our free checklist, joined our waitlist, offer to talk to us, or apply for our beta. We'll publish a full privacy notice for customers before the paid service launches.</p>
+  <p>Last updated: 21 November 2026</p>
+  <p>This notice explains how we use your information when you use our free checklist or the inbox scanner beta, joined our waitlist, offer to talk to us, or apply for our beta. We'll publish a full privacy notice for customers before the paid service launches.</p>
 
   <h2>Who we are</h2>
   <p>Change My Name UK is run by Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK, who is the data controller for your information. We plan to set up a limited company to run the service, and we'll update this notice when we do. ICO registration number: to be added. You can contact us at <a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a>.</p>
@@ -47,6 +47,22 @@
   <h2>The free checklist</h2>
   <p>The checklist runs in your web browser. Your answers, and the items you tick off, are saved only on your own device (in your browser's local storage) so the list is still there when you come back. They are not sent to us unless you choose to sign in to save them to an account (see "If you create an account" below) or submit one of the forms below. You can clear them at any time by clearing your browser's site data. If you copy a link to your list, the link contains your answers (not your name or email), so only share it with people you're happy to see them.</p>
   <p>If your reason for changing your name is something other than marriage or divorce, we don't ask what it is.</p>
+
+  <h2 id="gmail">The inbox scanner (private beta)</h2>
+  <p>Invited beta testers can connect a Gmail account so we can find the organisations that have their name, and later spot the emails confirming the change. This is how it works:</p>
+  <ul>
+    <li><strong>The permission we ask for:</strong> read-only access to your Gmail (Google's <code>gmail.readonly</code> permission). Google's screen will say the app can read your email. We cannot send, change or delete anything.</li>
+    <li><strong>What the scanner actually reads:</strong> it asks Gmail for two things, from the date you choose (for example your wedding or divorce date): emails sent by organisations on our list (such as banks, energy companies and government services), and, if you enter your old surname, emails that mention it. It leaves out your sent mail, chats, and social network and forum emails. For the emails it finds, it reads who each is from and to, the subject line and the date. Emails from personal addresses (such as Gmail, Hotmail or iCloud addresses) and from your own workplace are skipped. It then opens the most recent email from each organisation to see which name it uses, for example "Dear Mrs Rivers". It ignores attachments.</li>
+    <li><strong>Where it happens:</strong> all of this runs in your web browser, on the scanner page. Your emails are not sent to us or to anyone else, and we cannot see them. Our website is set up so the page can only talk to Google and to this site.</li>
+    <li><strong>What is saved:</strong> the list of organisations found, how many emails came from each and when, your old and new surnames if you enter them, the name each organisation uses (such as the "Dear …" line, up to 60 characters), the names and web addresses of other companies found still using your old surname, what you've marked as asked or done, and the subject line of any email that confirmed your new name. This is saved only in your browser's local storage on that device. We do not receive it. The text of your emails is never saved.</li>
+    <li><strong>Asking us for help with your list:</strong> only if you tick the box and click "Send my list", we receive the organisations that still need updating (each one's name, web address, whether its latest email uses your old or new name, and the greeting it used, for example "Dear Mrs Taylor"), your old and new surname, and the email address you give us. We use this only to help you change your name with those organisations, and to reply to you. Nothing else from your emails is sent. Netlify stores it for us (see "Who we share it with"). We keep it for up to 12 months, and you can ask us to delete it at any time by emailing hello@changemynameuk.com.</li>
+    <li><strong>Suggesting an organisation:</strong> if you click "Suggest it for everyone's list", we receive that organisation's name and web address (for example "Riverside Dental, riversidedental.co.uk") so we can add it to our list for everyone. Nothing else is sent: not your name, your email address or anything from your emails. Netlify stores these suggestions for us (see "Who we share it with").</li>
+    <li><strong>Reminders:</strong> "Remind me in a week" makes a calendar file on your device for you to open in your own calendar. Nothing is sent to us.</li>
+    <li><strong>Your Google sign-in:</strong> Google gives the page a temporary access key that lasts about an hour. It is kept in the page's memory only, never saved and never sent to us. During the beta, Google ends access 7 days after you agree, and you can reconnect if you want to keep checking.</li>
+    <li><strong>Removing it:</strong> the "Disconnect Gmail and delete this tracker" button removes access and deletes the saved tracker from your browser. You can also remove access at any time at <a href="https://myaccount.google.com/permissions" rel="noopener">myaccount.google.com/permissions</a>.</li>
+    <li><strong>Lawful basis:</strong> your consent, which you give on Google's permission screen. You can withdraw it at any time as above.</li>
+  </ul>
+  <p>Change My Name UK's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. We use Gmail data only to show you your organisations, the name each one uses, and their confirmations. We never use it for advertising, never sell it, never let people read it, and never use it to train AI models.</p>
 
   <h2>What we collect when you send us a form</h2>
   <div class="tbl"><table>
