@@ -211,6 +211,58 @@
       .catch(function () { setError('Sorry, that didn\'t send. Please try again.'); });
   }
 
+  /* ---------- Asking us for help (only when the person chooses to send) ---------- */
+
+  /* The organisations that still need updating, as they'd be sent. */
+  function helpItems() {
+    return Object.keys(state.orgs).filter(function (id) {
+      var s = state.orgs[id];
+      return s.kept && !s.hidden && !s.confirmed;
+    }).map(function (id) {
+      var o = org(id);
+      var nm = nameOf(state.orgs[id]);
+      return {
+        name: o.name,
+        domain: (o.domains || [])[0] || '',
+        nameUsed: nm.status === 'old' ? 'old name' : nm.status === 'new' ? 'new name' : 'not sure',
+        greeting: nm.label || ''
+      };
+    }).sort(function (a, b) { return a.name.localeCompare(b.name); });
+  }
+
+  function helpLine(it) {
+    return it.name + (it.domain ? ' (' + it.domain + ')' : '') + ': ' + it.nameUsed + (it.greeting ? ', "' + it.greeting + '"' : '');
+  }
+
+  function helpError(msg) { $('help-error').textContent = msg || ''; $('help-error').hidden = !msg; }
+
+  function sendHelp() {
+    var items = helpItems();
+    var email = $('help-email').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { helpError('Please enter your email so we can reply.'); return; }
+    if (!$('help-consent').checked || !items.length) return;
+    var done = function () { state.helpSentAt = Date.now(); state.helpSentCount = items.length; save(); render(); };
+    if (state.demo) { done(); return; }
+    $('help-send').disabled = true;
+    var body = ['form-name=scan-results', 'email=' + encodeURIComponent(email),
+      'old_surname=' + encodeURIComponent(state.oldSurname || ''), 'new_surname=' + encodeURIComponent(state.newSurname || ''),
+      'count=' + items.length, 'organisations=' + encodeURIComponent(items.map(helpLine).join('\n'))].join('&');
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+      .then(function (r) { if (!r.ok) throw new Error(); helpError(''); done(); })
+      .catch(function () { $('help-send').disabled = false; helpError('Sorry, that didn\'t send. Please try again.'); });
+  }
+
+  function renderHelp() {
+    var items = helpItems();
+    $('help').hidden = !items.length && !state.helpSentAt;
+    $('help-list').innerHTML = items.map(function (it) { return '<li>' + esc(helpLine(it)) + '</li>'; }).join('');
+    if (!$('help-email').value && ownEmail) $('help-email').value = ownEmail;
+    $('help-send').disabled = !$('help-consent').checked || !items.length;
+    $('help-send').textContent = state.helpSentAt ? 'Send my updated list' : 'Send my list (' + items.length + ')';
+    $('help-sent').hidden = !state.helpSentAt;
+    if (state.helpSentAt) $('help-sent').textContent = (state.demo ? 'Sample only, nothing was sent. ' : '') + 'Sent ' + state.helpSentCount + ' organisations on ' + fmtDate(state.helpSentAt) + '. We\'ll be in touch by email.';
+  }
+
   /* A reminder in your own calendar, made on this device (nothing is sent). */
   function remindMe(id) {
     var o = org(id);
@@ -533,6 +585,8 @@
         '</div></li>';
     }).join('');
 
+    renderHelp();
+
     $('hidden-wrap').hidden = !hidden.length;
     $('hidden-count').textContent = hidden.length;
     $('hidden-list').innerHTML = hidden.map(function (id) {
@@ -605,6 +659,8 @@
     $('check-btn').addEventListener('click', checkNow);
     $('forget-btn').addEventListener('click', forget);
     $('tracker').addEventListener('click', act);
+    $('help-consent').addEventListener('change', function () { $('help-send').disabled = !this.checked || !helpItems().length; });
+    $('help-send').addEventListener('click', sendHelp);
     var setYears = function (y) {
       var d = new Date(); d.setFullYear(d.getFullYear() - y);
       $('since').value = d.toISOString().slice(0, 10);

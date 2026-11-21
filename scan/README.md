@@ -38,3 +38,6 @@ Drop `--sample` to publish every organisation's name and sender domains (no how-
 - The first scan stops at 8,000 matching emails.
 - The name check reads only the latest email per organisation, and needs the surnames entered on the first screen.
 - Organisations that email from a third-party domain (a mailing provider) aren't matched yet.
+
+## Asking for help (21 Nov 2026, Avi's request)
+Below the tracker, "Want help updating these?" lists exactly what would be sent: each organisation still needing an update (name, first domain, old/new/not sure, and the greeting its latest email used), plus old and new surname and an email the person types (prefilled from their Gmail address). Nothing is sent until they tick the consent box and click "Send my list". It posts to the Netlify form `scan-results`. The sample inbox never sends. This is the one place Gmail-derived data leaves the browser, so it matters for Google's review (see the research doc) and the privacy policy.

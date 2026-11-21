@@ -38,7 +38,7 @@
 
     <div class="scan-promise">
       <div><b>Only organisations</b>We open emails from organisations on our list, and from other companies that still use your old surname, to see which name they use. Never emails from people.</div>
-      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us, and we can't read it.</div>
+      <div><b>Stays on your device</b>The scan runs on this page, in your browser. Nothing from your inbox is sent to us, unless you choose to send us your list for help.</div>
       <div><b>You're in control</b>Remove access at any time with one click, here or in your Google account.</div>
     </div>
 
@@ -132,6 +132,24 @@
       </details>
     </div>
 
+    <section id="help" class="help-card mt" hidden>
+      <h2>Want help updating these?</h2>
+      <p>Send this list to us and we'll help you work through it. We'll only send what you see below: each organisation's name and web address, and the name its latest email uses. Nothing else from your emails is sent.</p>
+      <div id="help-form">
+        <ul class="help-list" id="help-list"></ul>
+        <div class="scan-field">
+          <label for="help-email">Your email, so we can reply</label>
+          <input type="email" id="help-email" autocomplete="email">
+        </div>
+        <label class="check-line"><input type="checkbox" id="help-consent"> I agree to send this list, my old and new surname and my email to Change My Name UK, to help me change my name. <a href="/privacy.html#gmail">How we use it</a></label>
+        <div class="scan-actions">
+          <button type="button" id="help-send" disabled>Send my list</button>
+        </div>
+        <p class="scan-error" id="help-error" role="alert" hidden></p>
+      </div>
+      <p class="org-status done" id="help-sent" hidden></p>
+    </section>
+
     <div class="tracker-foot">
       <p>Your tracker is saved only in this browser. Missing someone? The <a href="/check/">checklist</a> covers places that don't email you.</p>
       <button type="button" class="ghost-btn small" id="forget-btn">Disconnect Gmail and delete this tracker</button>
@@ -170,6 +188,13 @@
 
 <!-- Netlify registers this form at deploy time. The page posts to it only when
      someone clicks "Suggest it for everyone's list": an organisation's name and web address. -->
+<form name="scan-results" data-netlify="true" hidden>
+  <input type="email" name="email">
+  <input type="text" name="old_surname">
+  <input type="text" name="new_surname">
+  <input type="text" name="count">
+  <textarea name="organisations"></textarea>
+</form>
 <form name="org-suggestion" data-netlify="true" hidden>
   <input type="text" name="domain">
   <input type="text" name="name">

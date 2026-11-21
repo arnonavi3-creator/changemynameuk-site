@@ -60,3 +60,12 @@ button:disabled:hover { background: var(--accent); border-color: var(--accent); 
 .view-toggle { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; }
 #done-wrap { margin-top: 24px; }
 #done-wrap summary { font-weight: 600; color: var(--ink); cursor: pointer; }
+.help-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+.help-card h2 { margin-top: 0; }
+.help-list { margin: 0 0 18px; padding-left: 18px; font-size: 15px; max-height: 260px; overflow-y: auto; }
+.check-line { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; margin: 0 0 14px; }
+.check-line input { margin-top: 3px; flex: none; }
+.help-card label[for] { display: block; font-weight: 600; margin: 0 0 6px; }
+.help-card input[type="email"] { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); width: 100%; max-width: 320px; }
+.check-line { display: block; padding-left: 28px; text-indent: -28px; }
+.check-line input { margin: 0 10px 0 0; vertical-align: -2px; }
