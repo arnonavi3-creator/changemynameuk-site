@@ -470,6 +470,13 @@
     applyConditions();
     render(state.answers, false);
   } else {
+    /* Pages can pre-select the first answer, e.g. /check/?reason=divorce.
+       The visitor still sees the question and can change it. */
+    var pre = (location.search.match(/[?&]reason=(marriage|divorce|other)\b/) || [])[1];
+    if (pre) {
+      var opt = quiz.querySelector('input[name="reason"][value="' + pre + '"]');
+      if (opt) { opt.checked = true; applyConditions(); }
+    }
     show(0);
   }
 })();
