@@ -1,7 +1,8 @@
 /* Name change questionnaire and personalised checklist.
    Everything runs in the browser. Answers and ticks are kept in this
-   device's localStorage, and are only sent to us if the visitor submits
-   the call or beta form after clicking through. */
+   device's localStorage, and are only sent to us if the visitor signs in
+   to save them to an account (js/account.js), or submits the call or beta
+   form after clicking through. */
 (function () {
   'use strict';
 
@@ -348,6 +349,7 @@
     });
     resultList.innerHTML = html;
     updateProgress();
+    pushSoon();
     if (scroll) { document.getElementById('result-title').focus({ preventScroll: true }); result.scrollIntoView({ block: 'start' }); }
   }
 
@@ -358,6 +360,7 @@
     e.target.closest('.todo-item').classList.toggle('done', e.target.checked);
     save();
     updateProgress();
+    pushSoon();
   });
   function updateProgress() {
     var boxes = document.querySelectorAll('#result-list input[type="checkbox"]');
@@ -404,6 +407,55 @@
     } catch (err) { /* ignore */ }
   }
   document.querySelectorAll('.call-link, #beta-link').forEach(function (el) { el.addEventListener('click', carry); });
+
+  /* ---------- account (optional): save to the database when signed in ---------- */
+  var acct = window.CMNAccount;
+  var pushTimer = null;
+  function signedIn() { return acct && acct.user(); }
+  function pushSoon() {
+    if (!signedIn() || !state.answers || !state.answers.reason) return;
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(function () {
+      var a = state.answers;
+      var items = a.reason === 'marriage' && a.name === 'keep' ? [] : buildItems(a);
+      acct.saveChecklist(a, items, state.ticks).catch(function () { /* kept on this device; saved next time */ });
+    }, 800);
+  }
+  /* First sign-in on this device: keep what's here and add anything saved
+     in the account. After that the account is the source of truth. */
+  function pull(user) {
+    if (!user) return;
+    var showing = !result.hidden || !(state.answers && state.answers.reason);
+    acct.loadChecklist().then(function (server) {
+      var first = state.syncedUser !== user.id;
+      if (server) {
+        var hasLocal = state.answers && state.answers.reason;
+        if (server.answers && server.answers.reason && (!hasLocal || !first)) state.answers = server.answers;
+        var ticks = {};
+        server.rows.forEach(function (r) { if (r.status === 'done' || r.status === 'confirmed') ticks[r.item_key] = 1; });
+        if (first) Object.keys(ticks).forEach(function (k) { state.ticks[k] = 1; });
+        else state.ticks = ticks;
+      }
+      state.syncedUser = user.id;
+      save();
+      if (state.answers && state.answers.reason && showing) {
+        fillForm(state.answers);
+        applyConditions();
+        render(state.answers, false);
+      } else {
+        pushSoon();
+      }
+    }).catch(function () { /* offline: carry on with this device's copy */ });
+  }
+  if (acct) {
+    acct.mount(document.getElementById('acct-box'), {
+      title: 'Save your checklist',
+      blurb: 'and pick it up on your phone or laptop. We\'ll email you a link to sign in.',
+      signedIn: function (email) { return 'Your checklist and ticks are saved to your account (' + email + ').'; }
+    });
+    acct.ready.then(pull);
+    acct.onChange(pull);
+  }
 
   /* ---------- start ---------- */
   var fromLink = null;

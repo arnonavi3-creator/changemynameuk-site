@@ -5,6 +5,7 @@ Website for Change My Name UK (run by Avi Arnon as a sole trader until the compa
 ## Pages
 
 - `/` home (lead generation for research calls), `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit)
+- `/admin/` customer progress for Avi (noindex, admins only). Customer accounts with emailed sign-in links save the checklist to a Supabase database when someone signs in; switched off until `js/account-config.js` has keys. Setup and data model: `supabase/README.md`
 - `/guides/` and 10 guides under it
 - `/about/`, `/help/`, `privacy.html`, `thanks.html`
 - `/pricing/`, `/how-it-works/`, `/free-guide/` and `/terms/` were removed in Nov 2026 while the site is used for research; `netlify.toml` redirects them

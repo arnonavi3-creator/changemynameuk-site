@@ -485,3 +485,21 @@ p.hint { margin: 0 0 8px; }
 .cta-band .cta-alt a { color: var(--accent-ink); }
 .home-strip { background: var(--surface); border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 15px; text-align: center; }
 .home-strip a { font-weight: 600; }
+/* ---------- Accounts: sign-in box (js/account.js) ---------- */
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+button.link-btn { background: none; border: 0; padding: 4px 2px; color: var(--muted); font-weight: 500; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+button.link-btn:hover { background: none; color: var(--ink); }
+.acct-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; margin: 18px 0 0; font-size: 16px; }
+.acct-box[hidden] { display: none; }
+.acct-box p { margin: 0; }
+.acct-box .fine { margin-top: 8px; }
+.acct-title { margin-bottom: 10px !important; }
+.acct-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.acct-row input[type="email"] { flex: 1 1 220px; min-width: 0; font: inherit; font-size: 16px; padding: 11px 13px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); }
+.acct-row input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.acct-row button { flex: 0 0 auto; }
+.acct-in { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+.acct-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.acct-sync { font-size: 13px; color: var(--muted); }
+@media (max-width: 520px) { .acct-row button { width: 100%; } }
+@media print { .acct-box { display: none !important; } }

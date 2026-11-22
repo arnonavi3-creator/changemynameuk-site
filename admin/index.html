@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Customer progress | Change My Name UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/admin/admin.css">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name</span></a>
+    <nav class="main-nav" aria-label="Admin"><a href="/admin/" aria-current="page">Customers</a></nav>
+  </div>
+</header>
+
+<main id="main" class="wrap admin">
+  <p class="eyebrow mono">Admin only</p>
+  <h1>Customer progress</h1>
+
+  <div id="acct-box" class="acct-box" hidden></div>
+  <p id="off" class="fine" hidden>Accounts aren't switched on yet. Add the Supabase project address and publishable key to <code>js/account-config.js</code> (see <code>supabase/README.md</code>).</p>
+  <p id="not-admin" class="error" hidden>This account can't see customers. Ask for it to be added to the admins table (see <code>supabase/README.md</code>).</p>
+  <p id="load-error" class="error" role="alert" hidden></p>
+
+  <section id="list" hidden>
+    <div class="admin-tools">
+      <label class="sr" for="q">Search customers</label>
+      <input id="q" type="search" placeholder="Search by email or name">
+      <select id="stage-filter" aria-label="Filter by stage">
+        <option value="">All stages</option>
+        <option value="signed_up">Signed up</option>
+        <option value="checklist">Has a checklist</option>
+        <option value="scanned">Scanned inbox</option>
+        <option value="in_progress">In progress</option>
+        <option value="finished">Finished</option>
+        <option value="paused">Paused</option>
+      </select>
+      <span id="count" class="fine"></span>
+    </div>
+    <div class="tbl"><table class="admin-table">
+      <thead><tr><th>Customer</th><th>Reason</th><th>Stage</th><th>Progress</th><th>To do</th><th>Asked</th><th>Done</th><th>Confirmed</th><th>Last change</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+
+  <section id="detail" hidden>
+    <p><a href="#" id="back">All customers</a></p>
+    <div id="detail-body"></div>
+  </section>
+</main>
+<script src="/js/account-config.js"></script>
+<script src="/js/account.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
