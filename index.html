@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="/img/hero-couple-720.jpg">
@@ -48,28 +48,31 @@
 <body class="home">
 
 <a class="skip" href="#main">Skip to content</a>
-<header class="site">
+<header class="site site-centered">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name</span></a>
-    <nav class="main-nav" aria-label="Main">
+    <nav class="main-nav nav-left" aria-label="More">
       <a href="/guides/">Guides</a>
-      <a href="/about/">About</a>
       <a href="/help/">Help</a>
-      <a class="nav-cta" href="/check/">Free checklist</a>
+    </nav>
+    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name</span></a>
+    <nav class="main-nav nav-right" aria-label="Main">
+      <a href="/#how">How it works</a>
+      <a href="/guides/change-your-name-after-marriage/">Engaged / Wedding</a>
+      <a href="/going-back-to-your-name/">Divorce / Revert</a>
+      <a href="/about/">About</a>
+      <a class="nav-cta" href="/check/">Start free checklist</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-  <div class="home-strip"><div class="wrap">Divorced and still getting post in his name? <a href="/going-back-to-your-name/">We can help you go back to your own name &rarr;</a></div></div>
   <section class="hero2">
     <div class="wrap hero2-grid">
       <div class="hero2-copy">
-        <p class="eyebrow">Free UK name change checklist</p>
-        <h1>Your new name, sorted. Every place to tell, in the right order.</h1>
-        <p class="lede">Answer a few quick questions and get a free checklist made for you: passport, driving licence, HMRC, bank, employer, pension and the rest, with what each one needs and which to do first.</p>
-        <p class="hero-actions"><a class="button big" href="/check/">Get your free checklist</a> <a class="button big" href="/beta/">Want it done for you?</a></p>
-        <p class="fine"><a href="#how">See how it works</a></p>
+        <p class="trust-badge"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span><b>472 UK organisations</b> in our database, 173 checked against an official source</span></p>
+        <h1>Your name, sorted. Every place to tell, in the right order.</h1>
+        <p class="lede">Answer a few quick questions and get a free checklist made for you: passport, driving licence, HMRC, banks, employer, pension and the rest, with what each one needs and which to do first.</p>
+        <p class="hero-actions"><a class="button big" href="/check/">Change name after marriage</a> <a class="button big ghost" href="/check/?reason=divorce">Revert name after divorce</a></p>
         <ul class="reassure">
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Free, no sign-up</li>
           <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>About 3 minutes</li>
@@ -83,30 +86,26 @@
     </div>
   </section>
 
-  <section class="trust-band" aria-label="Why people trust it">
-    <div class="wrap trust-grid">
-      <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 20V7M12 7H8a2 2 0 1 1 0-4c3 0 4 4 4 4zM12 7h4a2 2 0 1 0 0-4c-3 0-4 4-4 4z"/></svg><div><b>Completely free</b><span>No sign-up and no catch</span></div></div>
-      <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7zM14 3v4h4M9 12h6M9 16h6"/></svg><div><b>Built on official guidance</b><span>GOV.UK rules, links to official forms</span></div></div>
-      <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div><b>Private by design</b><span>Checklist answers stay on your device</span></div></div>
-      <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg><div><b>Made by a real person</b><span>Email or talk to me any time</span></div></div>
-    </div>
-  </section>
-
-  <section class="covers">
+  <section class="paths" id="paths" aria-labelledby="paths-h">
     <div class="wrap">
-      <p class="eyebrow">What your checklist covers</p>
-      <h2>Most people need to tell 25 to 40 places. Your list shows yours.</h2>
-      <div class="icon-grid">
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/></svg><b>Passport</b><span>When to renew, and the honeymoon timing</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M13 10h5M13 14h4"/></svg><b>Driving licence</b><span>DVLA licence and car log book</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/></svg><b>HMRC and tax</b><span>Tax, National Insurance, benefits</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12h18"/></svg><b>Work and pension</b><span>Payroll, workplace and private pensions</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg><b>Banks and cards</b><span>Accounts, credit cards, savings, mortgage</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg><b>Health</b><span>GP, dentist, NHS records</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4zM10 20v-5h4v5"/></svg><b>Home and bills</b><span>Council tax, energy, water, broadband</span></div>
-        <div class="icon-card"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/></svg><b>Insurance and the rest</b><span>Car, home, life, mobile, loyalty cards</span></div>
+      <p class="eyebrow">Choose your path</p>
+      <h2 id="paths-h">Which of these sounds like you?</h2>
+      <div class="path-grid">
+        <a class="path-card path-wed" href="/check/">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>
+          <span class="path-tag">Newlyweds and brides-to-be</span>
+          <h3>Congratulations. Let's make it official.</h3>
+          <p>Planning ahead or already married, your list puts the passport and honeymoon timing first, then everything else, so no ticket or booking name clashes.</p>
+          <span class="go">Get my married-name checklist</span>
+        </a>
+        <a class="path-card path-div" href="/going-back-to-your-name/">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"/></svg>
+          <span class="path-tag">After divorce, going back to your name</span>
+          <h3>Your own name, back. Quietly and in the right order.</h3>
+          <p>No fuss and no judgement. We show which proof each organisation wants, so you only have to do it once.</p>
+          <span class="go">See how going back works</span>
+        </a>
       </div>
-      <p class="covers-note">For each one you'll see whether it's online, by post or in a branch, and which proof to send: your certificate, a deed poll or your new passport.</p>
     </div>
   </section>
 
@@ -117,12 +116,33 @@
       <ol class="how-steps">
         <li><span class="num">1</span><b>Answer a few questions</b><p>Why you're changing your name, where you live, what documents you have and which accounts you hold.</p></li>
         <li><span class="num">2</span><b>Get your checklist</b><p>Every place to update, grouped into simple steps in the right order, with links to the official forms.</p></li>
-        <li><span class="num">3</span><b>Tick things off as you go</b><p>Your progress is saved on your device. Print it, save it as a PDF or keep a link.</p></li>
+        <li><span class="num">3</span><b>Update DVLA, HMRC and your banks</b><p>Work down the list, ticking things off. Your progress is saved on your device. Print it, save it as a PDF or keep a link.</p></li>
       </ol>
       <p class="center"><a class="button big" href="/check/">Start my free checklist</a></p>
     </div>
   </section>
 
+  <section class="inst-bar" aria-label="Organisations your checklist covers">
+    <div class="wrap">
+      <p class="inst-h">Your checklist covers the organisations that matter</p>
+      <ul class="inst-list">
+        <li>HM Passport Office</li>
+        <li>DVLA</li>
+        <li>HMRC</li>
+        <li>HM Land Registry</li>
+        <li>Banks and building societies</li>
+        <li>Employers and pensions</li>
+        <li>NHS and your GP</li>
+        <li>Energy, water and council tax</li>
+      </ul>
+      <p class="inst-note">Built on official GOV.UK guidance, with links to the official forms. Change My Name UK is independent and not part of any of these organisations.</p>
+    </div>
+  </section>
+
+  <!-- Reviews: add a .reviews section here once there are real, consented reviews.
+       Markup: <section class="reviews"><div class="wrap"><h2>...</h2><div class="review-grid">
+       <figure class="review"><blockquote>Quote</blockquote><figcaption><b>Sarah M., Surrey</b><span class="verified">Verified</span></figcaption></figure>
+       ...</div></div></section> -->
   <section class="story">
     <div class="wrap">
       <div class="story-card">
@@ -173,12 +193,18 @@
   </section>
 
   <section class="faq">
-    <div class="wrap narrow">
-      <h2>Questions</h2>
-      <details><summary>Does it cost anything to change my name?</summary><p>Changing your name is free with almost every organisation. The main cost is a new passport (£102 online or £115.50 by post), paid directly to HM Passport Office. Our checklist is free too.</p></details>
-      <details><summary>Do I need a deed poll?</summary><p>Not if you're taking your partner's surname or double-barrelling both surnames, because your marriage or civil partnership certificate is enough. You need one for a new combined surname or a first name change. <a href="/guides/do-i-need-a-deed-poll/">Read more</a>.</p></details>
-      <details><summary>Is the checklist only for marriage?</summary><p>No. It also covers going back to a previous name after a divorce, and changing your name for any other reason.</p></details>
-      <details><summary>Who's behind this?</summary><p>Me, Avi Arnon. I'm getting married and going through the same name change maze, so I'm building the tool I wish we had. <a href="/about/">More about me</a>.</p></details>
+    <div class="wrap">
+      <p class="eyebrow">Common questions</p>
+      <h2>The UK rules, in plain English</h2>
+      <div class="faq-grid">
+        <details><summary>Do I need a Deed Poll after getting married?</summary><p>Not if you're taking your partner's surname or double-barrelling both surnames, because your Marriage Certificate (or civil partnership certificate) is enough. You need one for a new combined surname or a first name change. <a href="/guides/do-i-need-a-deed-poll/">Read more</a>.</p></details>
+        <details><summary>What is the difference between a Deed Poll and a Marriage Certificate?</summary><p>A Marriage Certificate is the official record that links your names, so most organisations accept it as proof. A Deed Poll is a document you sign to declare a name change that no certificate covers. Which one you need depends on the name you're moving to.</p></details>
+        <details><summary>What do I need to go back to my previous name after divorce?</summary><p>Usually your Final Order (called a Decree Absolute before April 2022) together with your Marriage Certificate, which shows how the names connect. Each organisation sets its own rules, and your checklist shows what each one asks for. <a href="/going-back-to-your-name/">More on going back</a>.</p></details>
+        <details><summary>Can I use a Deed Poll to go back instead?</summary><p>Yes, some people prefer one, and it's useful if you don't have your divorce papers to hand. An unenrolled Deed Poll needs two witnesses aged 18 or over. <a href="/guides/deed-poll-after-divorce/">Read the guide</a>.</p></details>
+        <details><summary>Does it cost anything to change my name?</summary><p>Changing your name is free with almost every organisation. The main cost is a new passport (£102 online or £115.50 by post), paid directly to HM Passport Office. Our checklist is free too.</p></details>
+        <details><summary>Is the checklist only for marriage?</summary><p>No. It also covers going back to a previous name after a divorce, and changing your name for any other reason.</p></details>
+        <details><summary>Who's behind this?</summary><p>Me, Avi Arnon. I'm getting married and going through the same name change maze, so I'm building the tool I wish we had. <a href="/about/">More about me</a>.</p></details>
+      </div>
     </div>
   </section>
 
@@ -219,6 +245,11 @@
         <a href="/privacy.html">Privacy notice</a>
       </div>
     </div>
+    <ul class="seals">
+      <li>Checklist answers stay on your device</li>
+      <li>No sign-up for the checklist</li>
+      <li>Cookie-free visitor counts</li>
+    </ul>
     <p>Change My Name UK is run by Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK.</p>
     <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
   </div>
