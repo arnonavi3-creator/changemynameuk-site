@@ -8,8 +8,8 @@
   --muted: #4B5670;       /* Slate navy */
   --accent: #1B2A4A;      /* Deep Oxford Navy (primary) */
   --accent-ink: #FAF9F6;
-  --cta: #C5A059;         /* Champagne gold: main buttons */
-  --cta-ink: #1B2A4A;
+  --cta: #B83A62;         /* Rose: main buttons */
+  --cta-ink: #FFFFFF;
   --wax: #9E5A63;         /* Deep Rose Wood: eyebrows, handwritten notes */
   --sage: #E8EFE9;        /* Soft Sage */
   --blush: #F9F0EE;       /* Muted Blush */
@@ -602,3 +602,36 @@ header.site-centered .wrap { gap: 40px; }
 .hero-actions .button:first-child { grid-column: 1 / -1; justify-self: start; }
 @media (max-width: 1100px) { header.site-centered .wrap { gap: 8px; } }
 @media (max-width: 600px) { .hero-actions { grid-template-columns: minmax(0, 1fr); } .hero-actions .button:first-child { justify-self: stretch; } }
+
+/* Wordmark: ChangeMyName, with My in rose */
+.brand { gap: 0; font-family: "Fraunces", var(--display); font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.brand-name { font-family: "Fraunces", var(--display); }
+.brand-my { color: var(--wax); }
+.brand-mark { display: none; }
+@media (max-width: 700px) { .brand { font-size: 24px; } }
+
+/* Wider layout, and a Hitched-style header: logo left, all links right, larger type */
+.wrap { max-width: 1280px; padding: 0 32px; }
+.hero2 h1 { font-size: clamp(36px, 4.8vw, 60px); }
+header.site { padding: 18px 0; }
+header.site-centered .wrap { max-width: 1360px; }
+@media (min-width: 901px) {
+  header.site-centered .wrap { display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: center; gap: 32px; }
+  header.site-centered .brand { order: -1; justify-self: auto; font-size: 34px; margin-right: auto; }
+  header.site-centered .nav-left, header.site-centered .nav-right { display: flex; justify-content: flex-end; }
+  header.site-centered .main-nav { font-size: 17px; font-weight: 500; gap: 4px 26px; }
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  header.site-centered .main-nav { font-size: 16px; gap: 4px 18px; }
+  header.site-centered .brand { font-size: 30px; }
+}
+@media (max-width: 900px) { header.site-centered .main-nav { font-size: 16px; } }
+
+/* Bigger and broader, closer to Hitched on large screens */
+.wrap { max-width: 1440px; padding: 0 40px; }
+body { font-size: 18px; }
+.lede, .hero2 .lede { font-size: 21px; }
+.hero2 h1 { font-size: clamp(36px, 4.8vw, 68px); }
+header.site-centered .wrap { max-width: 1560px; }
+header.site-centered .main-nav { font-size: 18px; }
+@media (max-width: 760px) { .wrap { padding: 0 20px; } body { font-size: 17px; } }

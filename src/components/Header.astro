@@ -18,7 +18,7 @@ const right = [
     <nav class="main-nav nav-left" aria-label="Main">
       {left.map((l) => <a href={l.href} aria-current={l.href === current ? 'page' : undefined}>{l.label}</a>)}
     </nav>
-    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name</span></a>
+    <a class="brand" href="/" aria-label="Change My Name UK, home"><span class="brand-name">Change<span class="brand-my">My</span>Name</span></a>
     <nav class="main-nav nav-right" aria-label="More">
       {right.map((l) => <a href={l.href} aria-current={l.href === current ? 'page' : undefined}>{l.label}</a>)}
     </nav>
