@@ -1,0 +1,68 @@
+---
+// Layout for every guide in src/content/guides/.
+import Base from './Base.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { guide: CollectionEntry<'guides'> }
+const { guide } = Astro.props;
+const g = guide.data;
+const site = 'https://changemynameuk.com';
+const path = `/guides/${guide.id}/`;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: g.title,
+  description: g.description,
+  mainEntityOfPage: site + path,
+  image: `${site}/img/og-image.png`,
+  inLanguage: 'en-GB',
+  datePublished: g.published,
+  dateModified: g.updated,
+  author: { '@type': 'Person', name: 'Avi Arnon', url: `${site}/about/` },
+  publisher: { '@type': 'Organization', name: 'Change My Name UK', url: `${site}/` },
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: `${site}/guides/` },
+    { '@type': 'ListItem', position: 3, name: g.title, item: site + path },
+  ],
+};
+const schemas = [article, breadcrumbs].map((s) => JSON.stringify(s, null, 1));
+if (g.extraSchema) schemas.push(JSON.stringify(JSON.parse(g.extraSchema), null, 1));
+---
+<Base title={g.metaTitle} description={g.description} path={path} ogTitle={g.ogTitle} ogType="article" navCurrent={path}>
+  <Fragment slot="head">
+    {schemas.map((s) => <script is:inline type="application/ld+json" set:html={s} />)}
+  </Fragment>
+<main id="main" class="wrap narrow doc">
+  <p class="crumbs"><a href="/guides/">Guides</a></p>
+  <h1>{g.title}</h1>
+  <p class="lede" set:html={g.lede} />
+  <slot />
+<div class="sources">
+  <p><strong>Official sources</strong> (last checked {g.sourcesChecked})</p>
+  <ul>
+    {g.sources.map((s) => <li><a href={s.url} rel="noopener">{s.label}</a></li>)}
+  </ul>
+</div>
+{g.related && (
+<nav class="related" aria-label="Related guides">
+  <h2>{g.relatedHeading ?? 'Related guides'}</h2>
+  <ul>
+    {g.related.map((r) => <li><a href={r.href}>{r.label}</a> <span>{r.note}</span></li>)}
+  </ul>
+  <p><a href="/guides/">All name change guides</a></p>
+</nav>
+)}
+<div class="cta-box">
+  <h2>{g.cta.heading}</h2>
+  <p set:html={g.cta.text} />
+  <p><a class="button" href={g.cta.href}>{g.cta.button}</a></p>
+  {g.cta.note && <p set:html={g.cta.note} />}
+</div>
+</main>
+</Base>
