@@ -5,9 +5,21 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "subframe:sync": "npx @subframe/cli@latest sync --all"
   },
   "dependencies": {
-    "astro": "5.18.2"
+    "@astrojs/react": "^4.4.2",
+    "@subframe/core": "^1.155.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "5.18.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
   }
 }

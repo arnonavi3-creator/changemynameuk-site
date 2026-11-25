@@ -1,0 +1,36 @@
+---
+// Hidden test page (noindex, not in the sitemap or menus): shows the Subframe
+// theme and synced components, to check Subframe -> site sync works.
+import SubframeLayout from '@/layouts/SubframeLayout.astro';
+import { Button } from '@/ui';
+---
+<SubframeLayout title="Design preview | Change My Name UK" noindex>
+  <main class="mx-auto flex w-full max-w-[1080px] flex-col gap-10 px-4 py-16">
+    <div class="flex flex-col gap-3">
+      <span class="text-monospace-body font-monospace-body uppercase text-wax">Subframe sync check</span>
+      <h1 class="text-heading-1 font-heading-1 text-default-font mobile:text-heading-2 mobile:font-heading-2">Your name, changed everywhere</h1>
+      <p class="max-w-[680px] text-lede font-lede text-subtext-color">This page is built from the Subframe project "Change My Name UK". If the colours, fonts and buttons below match Subframe, sync is working.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4">
+      <Button>Get my free checklist</Button>
+      <Button variant="ghost">How it works</Button>
+      <Button size="big">Big button</Button>
+      <div class="rounded-md bg-navy p-4"><Button variant="light">Light button</Button></div>
+    </div>
+    <div class="grid grid-cols-3 gap-4 mobile:grid-cols-1">
+      <div class="flex flex-col gap-2 rounded-md border border-solid border-neutral-border bg-stone p-6 shadow-default">
+        <h3 class="text-heading-3 font-heading-3 text-default-font">Card on stone</h3>
+        <p class="text-body font-body text-subtext-color">Rounded 12px, soft shadow, 1px border.</p>
+      </div>
+      <div class="flex flex-col gap-2 rounded-md bg-sage p-6">
+        <h3 class="text-heading-3 font-heading-3 text-default-font">Sage panel</h3>
+        <p class="text-body font-body text-subtext-color">For calm, reassuring notes.</p>
+      </div>
+      <div class="flex flex-col gap-2 rounded-md bg-blush p-6">
+        <h3 class="text-heading-3 font-heading-3 text-default-font">Blush panel</h3>
+        <p class="text-hand font-hand text-wax">A handwritten note</p>
+      </div>
+    </div>
+    <p class="text-logo font-logo text-navy">Change<span class="text-wax">My</span>Name</p>
+  </main>
+</SubframeLayout>

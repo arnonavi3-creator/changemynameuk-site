@@ -1,0 +1,41 @@
+---
+// The <head> tags every page shares: title, description, canonical address,
+// link previews (Open Graph) and noindex. Used by Base.astro and SubframeLayout.astro.
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+  ogTitle?: string;
+  ogType?: 'website' | 'article';
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+const {
+  title, description, path, ogTitle, ogType = 'website',
+  ogImageAlt = 'Change My Name UK: a free checklist of every place to update when you change your name',
+  noindex = false,
+} = Astro.props;
+const site = 'https://changemynameuk.com';
+const url = path ? site + path : undefined;
+---
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{description && <meta name="description" content={description}>}
+{url && <link rel="canonical" href={url}>}
+{url && (
+  <>
+    <meta property="og:type" content={ogType}>
+    <meta property="og:site_name" content="Change My Name UK">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:title" content={ogTitle ?? title}>
+    {description && <meta property="og:description" content={description}>}
+    <meta property="og:url" content={url}>
+    <meta property="og:image" content={`${site}/img/og-image.png`}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content={ogImageAlt}>
+    <meta name="twitter:card" content="summary_large_image">
+  </>
+)}
+{noindex && <meta name="robots" content="noindex">}
