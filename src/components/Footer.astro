@@ -1,0 +1,46 @@
+---
+// Site footer. `seals` adds the three privacy promises (home page).
+// `goingBack` adds the "Going back to your name" guide link.
+interface Props { seals?: boolean; goingBack?: boolean }
+const { seals = false, goingBack = false } = Astro.props;
+---
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div class="foot-brand">
+        <a class="brand" href="/"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="32" height="32"><span class="brand-name">Change My Name</span></a>
+        <p>A free, friendly guide to changing your name in the UK, made by someone going through it too.</p>
+      </div>
+      <div>
+        <p class="foot-h">Free tools</p>
+        <a href="/check/">Name change checklist</a>
+        <a href="/call/">Talk to me (£7 voucher)</a>
+        <a href="/beta/">Join the beta</a>
+      </div>
+      <div>
+        <p class="foot-h">Guides</p>
+        <a href="/guides/change-your-name-after-marriage/">Change your name after marriage</a>
+        <a href="/guides/honeymoon-passport/">Honeymoon passport</a>
+        <a href="/guides/do-i-need-a-deed-poll/">Do I need a deed poll?</a>
+        <a href="/guides/who-to-tell-checklist/">Who to tell checklist</a>
+        {goingBack && <a href="/going-back-to-your-name/">Going back to your name</a>}
+        <a href="/guides/">All guides</a>
+      </div>
+      <div>
+        <p class="foot-h">About</p>
+        <a href="/about/">About me</a>
+        <a href="/help/">Help and contact</a>
+        <a href="/privacy.html">Privacy notice</a>
+      </div>
+    </div>
+    {seals && (
+      <ul class="seals">
+        <li>Checklist answers stay on your device</li>
+        <li>No sign-up for the checklist</li>
+        <li>Cookie-free visitor counts</li>
+      </ul>
+    )}
+    <p>Change My Name UK is run by Avi Arnon, a sole trader, of 3 Myddelton Passage, London EC1R 1XW, UK.</p>
+    <p><a href="mailto:hello@changemynameuk.com">hello@changemynameuk.com</a></p>
+  </div>
+</footer>

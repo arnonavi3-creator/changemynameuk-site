@@ -1,0 +1,112 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title={"Join the Beta: We Change Your Name for You | Change My Name UK"}
+  description={"Apply for a beta place on our done-for-you UK name change service. We find every organisation, prepare every form and letter, and track it until every record is done."}
+  path={"/beta/"}
+  ogTitle={"Join the Beta: We Change Your Name for You"}
+>
+<main id="main" class="wrap narrow">
+  <div class="page-head">
+    <h1>Join the beta: we change your name for you</h1>
+    <p class="lede">We're looking for a small group of people to try our done-for-you service before it launches. Instead of a checklist, you get someone doing the work with you, and your feedback shapes the service.</p>
+  </div>
+
+  <div class="story-card small">
+    <div class="story-photo"><img src="/img/avi.jpg" alt="Avi Arnon and partner at sunset" width="480" height="480" loading="lazy"></div>
+    <div>
+      <p>I'm Avi. I'm building this because my partner and I need it too. I'd love a small group of people to try it with me and tell me honestly what works.</p>
+      <p class="signature">Avi</p>
+    </div>
+  </div>
+
+  <h2>What we'll do</h2>
+  <ol class="steps">
+    <li><b>Find every place that has your name</b><span>From a short call or form, plus the accounts you tell us about, we build your full list: government, banks, work, pensions, insurance, home and the rest.</span></li>
+    <li><b>Prepare every form and letter</b><span>Passport and DVLA forms filled in, and a change of name letter for each organisation that needs one, ready to sign.</span></li>
+    <li><b>Contact organisations for you, where they allow it</b><span>Some organisations only accept a change from you, and the passport office and DVLA need your own signature and original documents. For those, we get everything ready so you just sign and post.</span></li>
+    <li><b>Track it until every record is done</b><span>We keep a live list, chase anything that's stuck, and remind you when something needs you.</span></li>
+  </ol>
+
+  <div class="cta-box">
+    <p><b>What we ask in return:</b> honest feedback, including a short call during and after. Beta places are limited.</p>
+  </div>
+
+  <h2 class="mt" id="apply">Apply for a beta place</h2>
+  <form id="beta-form" class="signup" name="beta" method="POST" action="/beta/thanks/" data-netlify="true" netlify-honeypot="company">
+    <input type="hidden" name="form-name" value="beta">
+    <input type="hidden" name="checklist_answers" value="">
+    <input type="hidden" name="source" value="beta-page">
+    <p class="hidden"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+    <p class="fine" id="beta-carried" hidden>We've brought across your checklist answers, so you don't need to type them again.</p>
+
+    <div class="field">
+      <label for="b-name">First name</label>
+      <div class="row"><input id="b-name" type="text" name="first_name" autocomplete="given-name" required></div>
+    </div>
+    <div class="field">
+      <label for="b-email">Email</label>
+      <div class="row"><input id="b-email" type="email" name="email" autocomplete="email" required placeholder="you@example.com"></div>
+    </div>
+    <div class="field">
+      <label for="b-reason">Why are you changing your name?</label>
+      <div class="row">
+        <select id="b-reason" name="reason" required>
+          <option value="">Choose one</option>
+          <option value="marriage">Marriage or civil partnership</option>
+          <option value="divorce">Divorce or end of a civil partnership</option>
+          <option value="other">Another reason</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="b-nation">Where in the UK do you live?</label>
+      <div class="row">
+        <select id="b-nation" name="nation" required>
+          <option value="">Choose one</option>
+          <option value="england">England</option>
+          <option value="wales">Wales</option>
+          <option value="scotland">Scotland</option>
+          <option value="ni">Northern Ireland</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="b-date">Wedding date, or when you'd like to start <span class="optional">(optional)</span></label>
+      <div class="row"><input id="b-date" type="date" name="start_date"></div>
+    </div>
+    <fieldset>
+      <legend>How much help would you want?</legend>
+      <label class="opt"><input type="radio" name="help_level" value="everything" required> Do as much as you can for me</label>
+      <label class="opt"><input type="radio" name="help_level" value="prepare"> Prepare the forms and letters, and I'll send them</label>
+      <label class="opt"><input type="radio" name="help_level" value="unsure"> Not sure yet</label>
+    </fieldset>
+    <div class="field">
+      <label for="b-notes">Anything we should know? <span class="optional">(optional)</span></label>
+      <div class="row"><textarea id="b-notes" name="notes" rows="3" placeholder="For example, what's worrying you or what you've already done"></textarea></div>
+    </div>
+    <label class="consent"><input type="checkbox" name="call_consent" value="yes"> You can also contact me to arrange a short call about my name change, even if I don't get a beta place.</label>
+    <button type="submit">Apply for the beta</button>
+    <p class="fine">We'll use your details to contact you about the beta, and only for anything else you've ticked. See our <a href="/privacy.html">privacy notice</a>.</p>
+  </form>
+
+  <p class="mt">Prefer to do it yourself? <a href="/check/">Get your free personalised checklist</a>.</p>
+</main>
+<script is:inline>
+(function () {
+  var f = document.getElementById('beta-form');
+  var data = null;
+  try { data = JSON.parse(sessionStorage.getItem('cmn-from-checklist')); } catch (e) { data = null; }
+  var pre = (location.search.match(/[?&]reason=(marriage|divorce|other)\b/) || [])[1];
+ if (pre && !f.reason.value) f.reason.value = pre;
+ if (!data) return;
+  f.checklist_answers.value = data.answers || '';
+  f.source.value = 'checklist';
+  if (data.reason) f.reason.value = data.reason;
+  if (data.nation) f.nation.value = data.nation;
+  if (data.wedding) f.start_date.value = data.wedding;
+  document.getElementById('beta-carried').hidden = false;
+})();
+</script>
+</Base>

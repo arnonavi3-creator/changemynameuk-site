@@ -1,0 +1,26 @@
+---
+// Site header. `current` is the page's own nav link (gets aria-current).
+interface Props { current?: string }
+const { current } = Astro.props;
+const left = [
+  { href: '/guides/', label: 'Guides' },
+  { href: '/#how', label: 'How it works' },
+  { href: '/guides/change-your-name-after-marriage/', label: 'Engaged / Wedding' },
+];
+const right = [
+  { href: '/going-back-to-your-name/', label: 'Divorce / Revert' },
+  { href: '/about/', label: 'About' },
+  { href: '/help/', label: 'Help' },
+];
+---
+<header class="site site-centered">
+  <div class="wrap">
+    <nav class="main-nav nav-left" aria-label="Main">
+      {left.map((l) => <a href={l.href} aria-current={l.href === current ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <a class="brand" href="/" aria-label="Change My Name UK, home"><img class="brand-mark" src="/img/logo-mark.svg" alt="" width="36" height="36"><span class="brand-name">Change My Name</span></a>
+    <nav class="main-nav nav-right" aria-label="More">
+      {right.map((l) => <a href={l.href} aria-current={l.href === current ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>

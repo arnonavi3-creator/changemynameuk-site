@@ -1,0 +1,72 @@
+---
+// Every page uses this layout: <head> tags, header, footer.
+// Page content goes in the default slot. Extra <head> tags (structured data,
+// preloads) go in slot="head"; page scripts go in slot="scripts".
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;            // full <title>
+  description?: string;
+  path?: string;            // e.g. "/about/" (canonical and og:url)
+  ogTitle?: string;
+  ogType?: 'website' | 'article';
+  ogImageAlt?: string;
+  noindex?: boolean;
+  bodyClass?: string;
+  navCurrent?: string;      // header link to mark as the current page
+  footerSeals?: boolean;
+  footerGoingBack?: boolean;
+}
+const {
+  title, description, path, ogTitle, ogType = 'website',
+  ogImageAlt = 'Change My Name UK: a free checklist of every place to update when you change your name',
+  noindex = false, bodyClass, navCurrent, footerSeals = false, footerGoingBack = false,
+} = Astro.props;
+const site = 'https://changemynameuk.com';
+const url = path ? site + path : undefined;
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{description && <meta name="description" content={description}>}
+{url && <link rel="canonical" href={url}>}
+{url && (
+  <>
+    <meta property="og:type" content={ogType}>
+    <meta property="og:site_name" content="Change My Name UK">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:title" content={ogTitle ?? title}>
+    {description && <meta property="og:description" content={description}>}
+    <meta property="og:url" content={url}>
+    <meta property="og:image" content={`${site}/img/og-image.png`}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content={ogImageAlt}>
+    <meta name="twitter:card" content="summary_large_image">
+  </>
+)}
+{noindex && <meta name="robots" content="noindex">}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<slot name="head" />
+<script is:inline defer src="/js/analytics.js"></script>
+</head>
+<body class={bodyClass}>
+
+<a class="skip" href="#main">Skip to content</a>
+<Header current={navCurrent} />
+
+<slot />
+
+<Footer seals={footerSeals} goingBack={footerGoingBack} />
+
+<slot name="scripts" />
+</body>
+</html>
