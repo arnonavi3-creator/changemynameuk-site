@@ -602,3 +602,10 @@ header.site-centered .wrap { gap: 40px; }
 .hero-actions .button:first-child { grid-column: 1 / -1; justify-self: start; }
 @media (max-width: 1100px) { header.site-centered .wrap { gap: 8px; } }
 @media (max-width: 600px) { .hero-actions { grid-template-columns: minmax(0, 1fr); } .hero-actions .button:first-child { justify-self: stretch; } }
+
+/* Wordmark: ChangeMyName, with My in rose */
+.brand { gap: 0; font-family: "Fraunces", var(--display); font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.brand-name { font-family: "Fraunces", var(--display); }
+.brand-my { color: var(--wax); }
+.brand-mark { display: none; }
+@media (max-width: 700px) { .brand { font-size: 24px; } }
