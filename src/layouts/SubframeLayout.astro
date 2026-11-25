@@ -1,0 +1,35 @@
+---
+// Layout for pages designed in Subframe. Same <head> tags, fonts and analytics
+// as Base.astro, but Tailwind + the Subframe theme instead of public/style.css,
+// so the Subframe design shows exactly as drawn. The page supplies its own
+// header and footer (designed in Subframe too) in the default slot.
+import SeoHead from '../components/SeoHead.astro';
+import '../styles/subframe.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+  ogTitle?: string;
+  ogType?: 'website' | 'article';
+  ogImageAlt?: string;
+  noindex?: boolean;
+}
+const props = Astro.props;
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+<SeoHead {...props} />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<slot name="head" />
+<script is:inline defer src="/js/analytics.js"></script>
+</head>
+<body>
+<slot />
+<slot name="scripts" />
+</body>
+</html>

@@ -12,6 +12,17 @@ Website for Change My Name UK (run by Avi Arnon as a sole trader until the compa
 
 Run it locally: `npm install`, then `npm run dev` (preview at http://localhost:4321) or `npm run build` (writes `dist/`).
 
+## Designing in Subframe
+
+The design lives in the Subframe project **Change My Name UK** (https://app.subframe.com/00773a7ca3a0). The words stay in this repository.
+
+- `src/ui/`: the Subframe theme (`theme.css`) and components (`components/*`), written by the Subframe CLI. **Don't edit these by hand**: the next sync overwrites them. To add behaviour to a component, edit its `index.tsx` wrapper and put `// @subframe/sync-disable` in it.
+- `src/layouts/SubframeLayout.astro`: layout for pages designed in Subframe. Same head tags, fonts and analytics as `Base.astro` (both use `src/components/SeoHead.astro`), but it loads Tailwind and the Subframe theme instead of `public/style.css`, so the page looks exactly as drawn. Pages still on `Base.astro` are untouched by Tailwind.
+- `src/designs/`: page sections built from Subframe page designs (React + Tailwind). The page's text is passed in from the `.astro` page or a file in `src/content/`, so copy can be changed without touching the design.
+- `/design-preview/`: hidden test page (noindex, not in the sitemap) showing the theme and components.
+
+To pull the latest theme and components: `npm run subframe:sync` (asks for a Subframe token the first time). Pages are not synced by the CLI: a page designed in Subframe is rebuilt here by Claude from the design (Subframe connector), keeping the same address, forms (`data-netlify`, hidden fields) and head tags. Components render to plain HTML at build time; no React is sent to visitors unless a component is marked `client:load`.
+
 ## Pages
 
 - `/` home (lead generation for research calls), `/check/` free personalised name change checklist (questionnaire and ordered checklist, logic in `check/checklist.js`, runs in the browser; answers and ticks stay in the visitor's localStorage), `/call/` research call sign-up (£7 voucher), `/beta/` beta application for the done-for-you service (`/beta/thanks/` after submit)

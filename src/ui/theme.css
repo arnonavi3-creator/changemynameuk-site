@@ -1,0 +1,201 @@
+@theme {
+  /* Default Colors */
+  --color-brand-primary: rgb(184 58 98);
+  --color-subtext-color: rgb(75 86 112);
+  --color-neutral-border: rgb(230 225 216);
+  --color-white: rgb(255 255 255);
+  --color-cream: rgb(250 249 246);
+  --color-stone: rgb(245 243 239);
+  --color-navy: rgb(27 42 74);
+  --color-wax: rgb(158 90 99);
+  --color-sage: rgb(232 239 233);
+  --color-blush: rgb(249 240 238);
+
+  /* brand */
+  --color-brand-50: rgb(251 241 244);
+  --color-brand-100: rgb(246 223 230);
+  --color-brand-200: rgb(237 191 205);
+  --color-brand-300: rgb(224 150 174);
+  --color-brand-400: rgb(207 106 139);
+  --color-brand-500: rgb(194 76 114);
+  --color-brand-600: rgb(184 58 98);
+  --color-brand-700: rgb(154 47 81);
+  --color-brand-800: rgb(124 39 66);
+  --color-brand-900: rgb(94 30 51);
+
+  /* neutral */
+  --color-neutral-0: rgb(255 255 255);
+  --color-neutral-50: rgb(250 249 246);
+  --color-neutral-100: rgb(245 243 239);
+  --color-neutral-200: rgb(230 225 216);
+  --color-neutral-300: rgb(211 204 192);
+  --color-neutral-400: rgb(169 167 159);
+  --color-neutral-500: rgb(122 127 140);
+  --color-neutral-600: rgb(75 86 112);
+  --color-neutral-700: rgb(54 65 92);
+  --color-neutral-800: rgb(38 50 79);
+  --color-neutral-900: rgb(27 42 74);
+  --color-neutral-950: rgb(18 28 51);
+
+  /* error */
+  --color-error-50: rgb(251 239 240);
+  --color-error-100: rgb(245 218 221);
+  --color-error-200: rgb(234 181 187);
+  --color-error-300: rgb(218 138 148);
+  --color-error-400: rgb(194 96 108);
+  --color-error-500: rgb(168 67 79);
+  --color-error-600: rgb(142 47 59);
+  --color-error-700: rgb(118 38 50);
+  --color-error-800: rgb(94 30 40);
+  --color-error-900: rgb(70 22 30);
+
+  /* success */
+  --color-success-50: rgb(242 246 243);
+  --color-success-100: rgb(232 239 233);
+  --color-success-200: rgb(207 222 210);
+  --color-success-300: rgb(174 200 179);
+  --color-success-400: rgb(134 172 141);
+  --color-success-500: rgb(98 144 107);
+  --color-success-600: rgb(74 118 83);
+  --color-success-700: rgb(59 94 66);
+  --color-success-800: rgb(45 72 51);
+  --color-success-900: rgb(32 51 36);
+
+  /* warning */
+  --color-warning-50: rgb(251 246 236);
+  --color-warning-100: rgb(245 234 210);
+  --color-warning-200: rgb(235 213 166);
+  --color-warning-300: rgb(223 189 120);
+  --color-warning-400: rgb(210 166 89);
+  --color-warning-500: rgb(197 160 89);
+  --color-warning-600: rgb(166 130 62);
+  --color-warning-700: rgb(133 103 50);
+  --color-warning-800: rgb(101 78 39);
+  --color-warning-900: rgb(70 54 27);
+
+  /* default */
+  --color-default-background: rgb(250 249 246);
+  --color-default-font: rgb(27 42 74);
+
+  /* Fonts */
+  --text-caption: 12px;
+  --text-caption--font-weight: 400;
+  --text-caption--letter-spacing: 0em;
+  --text-caption--line-height: 16px;
+  --text-caption-bold: 12px;
+  --text-caption-bold--font-weight: 600;
+  --text-caption-bold--letter-spacing: 0em;
+  --text-caption-bold--line-height: 16px;
+  --text-small: 15px;
+  --text-small--font-weight: 400;
+  --text-small--letter-spacing: 0em;
+  --text-small--line-height: 23px;
+  --text-body: 17px;
+  --text-body--font-weight: 400;
+  --text-body--letter-spacing: 0em;
+  --text-body--line-height: 28px;
+  --text-body-bold: 17px;
+  --text-body-bold--font-weight: 600;
+  --text-body-bold--letter-spacing: 0em;
+  --text-body-bold--line-height: 28px;
+  --text-lede: 19px;
+  --text-lede--font-weight: 400;
+  --text-lede--letter-spacing: 0em;
+  --text-lede--line-height: 30px;
+  --text-heading-3: 21px;
+  --text-heading-3--font-weight: 600;
+  --text-heading-3--letter-spacing: -0.01em;
+  --text-heading-3--line-height: 26px;
+  --text-heading-2: 34px;
+  --text-heading-2--font-weight: 500;
+  --text-heading-2--letter-spacing: -0.02em;
+  --text-heading-2--line-height: 38px;
+  --text-heading-1: 56px;
+  --text-heading-1--font-weight: 500;
+  --text-heading-1--letter-spacing: -0.02em;
+  --text-heading-1--line-height: 63px;
+  --text-monospace-body: 12px;
+  --text-monospace-body--font-weight: 500;
+  --text-monospace-body--letter-spacing: 0.05000000000000001em;
+  --text-monospace-body--line-height: 17px;
+  --text-logo: 26px;
+  --text-logo--font-weight: 600;
+  --text-logo--letter-spacing: -0.01em;
+  --text-logo--line-height: 30px;
+  --text-hand: 24px;
+  --text-hand--font-weight: 500;
+  --text-hand--letter-spacing: 0em;
+  --text-hand--line-height: 28px;
+
+  /* Font families */
+  --font-caption: "Plus Jakarta Sans";
+  --font-caption-bold: "Plus Jakarta Sans";
+  --font-small: "Plus Jakarta Sans";
+  --font-body: "Plus Jakarta Sans";
+  --font-body-bold: "Plus Jakarta Sans";
+  --font-lede: "Plus Jakarta Sans";
+  --font-heading-3: "Playfair Display";
+  --font-heading-2: "Playfair Display";
+  --font-heading-1: "Playfair Display";
+  --font-monospace-body: "IBM Plex Mono";
+  --font-logo: Fraunces;
+  --font-hand: Caveat;
+
+  /* Box shadows */
+  --shadow-sm: 0px 1px 2px 0px rgb(60 40 20 / 0.04);
+  --shadow-default: 0px 1px 2px 0px rgb(60 40 20 / 0.04),
+    0px 4px 20px 0px rgb(60 40 20 / 0.05);
+  --shadow-md: 0px 1px 2px 0px rgb(60 40 20 / 0.04),
+    0px 4px 20px 0px rgb(60 40 20 / 0.05);
+  --shadow-lg: 0px 2px 4px 0px rgb(60 40 20 / 0.05),
+    0px 10px 30px 0px rgb(60 40 20 / 0.08);
+  --shadow-overlay: 0px 2px 4px 0px rgb(60 40 20 / 0.05),
+    0px 10px 30px 0px rgb(60 40 20 / 0.08);
+
+  /* Border radiuses */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-default: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-112: 28rem;
+  --spacing-144: 36rem;
+  --spacing-192: 48rem;
+  --spacing-256: 64rem;
+  --spacing-320: 80rem;
+}
+
+/* Container */
+@utility container {
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media (width >= theme(--breakpoint-sm)) {
+    padding-left: calc((100vw + 16px - 640px) / 2);
+    padding-right: calc((100vw + 16px - 640px) / 2);
+  }
+
+  @media (width >= theme(--breakpoint-md)) {
+    padding-left: calc((100vw + 16px - 768px) / 2);
+    padding-right: calc((100vw + 16px - 768px) / 2);
+  }
+
+  @media (width >= theme(--breakpoint-lg)) {
+    padding-left: calc((100vw + 16px - 1024px) / 2);
+    padding-right: calc((100vw + 16px - 1024px) / 2);
+  }
+
+  @media (width >= theme(--breakpoint-xl)) {
+    padding-left: calc((100vw + 16px - 1280px) / 2);
+    padding-right: calc((100vw + 16px - 1280px) / 2);
+  }
+
+  @media (width >= theme(--breakpoint-2xl)) {
+    padding-left: calc((100vw + 16px - 1536px) / 2);
+    padding-right: calc((100vw + 16px - 1536px) / 2);
+  }
+}
+
+@custom-variant mobile (@media (max-width: 767px));

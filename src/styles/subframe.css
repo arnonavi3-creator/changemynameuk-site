@@ -1,0 +1,15 @@
+/* Styles for pages designed in Subframe (loaded only by SubframeLayout.astro).
+   theme.css is written by the Subframe CLI; don't edit it by hand. */
+@import "tailwindcss" source(none);
+@import "../ui/theme.css";
+
+/* Only look for Tailwind classes in Subframe code and the pages that use it. */
+@source "../ui";
+@source "../designs";
+@source "../layouts/SubframeLayout.astro";
+@source "../pages";
+
+@layer base {
+  html { background: var(--color-default-background); color: var(--color-default-font); }
+  body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+}
